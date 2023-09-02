@@ -1,0 +1,51 @@
+.footer {
+    background-color: var(--grey-4);
+    padding-bottom: 32px;
+    padding-top: 32px;
+    margin-top: auto;
+}
+.hLgegR {
+    width: 100%;
+    display: grid;
+    gap: 13px;
+    grid-template-columns: 37px minmax(0px, 1fr);
+}
+.kFsvSZ {
+    font-size: 14px;
+    line-height: 18px;
+}
+.kVOujD .links.-first {
+    font-weight: 600;
+    font-size: 16px;
+}
+.kVOujD .links {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+.kVOujD .links.-first a {
+    color: var(--default);
+    display: block;
+}
+@media (min-width: 992px){
+    .kVOujD .links a {
+        margin-bottom: 0px;
+    }
+    
+}
+.kVOujD .links a {
+    color: var(--default);
+    margin-bottom: 32px;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: block;
+}
+.kVOujD .links.-second a {
+    color: var(--default);
+    font-size: 14px;
+    display: block;
+}
+.kVOujD .links.-third a {
+    text-decoration: underline;
+    color: var(--grey-2);
+    font-size: 12px;
+}

@@ -1,0 +1,217 @@
+@media (min-width: 768px){
+.fXjqxr {
+    margin-bottom: 64px;
+}
+}
+.fXjqxr {
+    margin-bottom: 48px;
+}
+.fXjqxr .mentor {
+    display: flex;
+    margin-bottom: 32px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+@media (min-width: 768px){
+.eXeELN {
+    line-height: 28px;
+    font-size: 24px;
+}
+}
+.eXeELN {
+    line-height: 1.2;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--adp-grad-2);
+}
+.fXjqxr .mentor__actions {
+    display: none;
+}
+@media (min-width: 768px){
+    .fXjqxr .mentor__actions {
+        display: flex;
+    }
+    }
+@media (min-width: 768px){
+.egZZaN {
+    display: grid;
+}
+}
+.egZZaN {
+    grid-auto-flow: column;
+    -webkit-box-align: center;
+    align-items: center;
+    gap: 24px;
+    display: none;
+}
+.iuoDZQ {
+    height: 32px !important;
+    border-radius: 8px !important;
+}
+.egZZaN .togglers {
+    grid-auto-flow: column;
+    gap: 12px;
+    display: grid;
+}
+.egZZaN .togglers .toggler {
+    border: solid 1px var(--grey-2);
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    height: 32px;
+    width: 32px;
+}
+.dmYQRy * {
+    user-select: none;
+}
+@media (min-width: 320px){
+    .epLwlm {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+@media (min-width: 500px){
+    .epLwlm {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 768px){
+    .epLwlm {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1200px){
+    .epLwlm {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+.epLwlm {
+    gap: 20px;
+    display: grid;
+}
+.dGxpIk {
+    opacity: 1;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    max-width: 100%;
+    border-radius: 16px;
+    text-decoration: none;
+    flex-direction: column;
+    transition: opacity 400ms ease 0s, transform 400ms ease 0s;
+    border: solid 1px var(--grey-5);
+}
+.dGxpIk .mentor-avatar {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: 16.688rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--grey-3);
+}
+.dGxpIk .image-dimmer {
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    width: 100%;
+    z-index: 9;
+    height: 100%;
+    position: absolute;
+    border-radius: 0.5rem;
+    transition-delay: 60ms;
+    transition-duration: 0.1s;
+    transition-property: opacity;
+    background: rgba(0, 0, 0, 0.4);
+}
+.dGxpIk .mentor-avatar img {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    vertical-align: middle;
+    object-position: center center;
+    transition-duration: 0.15s;
+    transition-property: transform;
+    transition-timing-function: ease-out;
+}
+.bJvagg {
+    width: 100%;
+    display: grid;
+    gap: 0.5rem;
+}
+.cCBfKf {
+    line-height: 24px;
+    font-size: 16px;
+}
+@media (min-width: 992px){
+    .dGxpIk .preview__content__job {
+        max-width: 16rem;
+    }
+}
+
+.dGxpIk .preview__content__job {
+    width: 100%;
+}
+.dGxpIk .preview__content__job .item:first-child {
+    margin-top: 0px;
+}
+.dGxpIk .preview__content__job .item {
+    display: flex;
+    margin-top: 4px;
+}
+.dGxpIk .preview__content__job .item svg {
+    flex: 0 0 18px;
+}
+.dGxpIk .line-clamp {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.kFsvSZ {
+    font-size: 14px;
+    line-height: 18px;
+}
+.kFsvSZ {
+    font-size: 14px;
+    line-height: 18px;
+}
+.dGxpIk .preview__content__metadata {
+    border-radius: 0.5rem;
+}
+.fwahpz {
+    font-size: 12px;
+    line-height: 16px;
+}
+.kFsvSZ {
+    font-size: 14px;
+    line-height: 18px;
+}
+.dGxpIk .available-asap {
+    bottom: 0.75rem;
+    color: rgb(101, 255, 139);
+    padding: 0.5rem;
+    background: rgba(19, 19, 19, 0.8);
+}
+.dGxpIk .available-asap, .dGxpIk .top-rated {
+    z-index: 10;
+    left: 0.75rem;
+    line-height: 16px;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+}
+.dGxpIk .available-asap svg, .dGxpIk .top-rated svg {
+    stroke-width: 1.5 !important;
+    opacity: 1 !important;
+}
+.fDuWxS .carousel-control-next, .fDuWxS .carousel-control-prev {
+    display: none;
+}

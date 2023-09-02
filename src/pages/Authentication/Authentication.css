@@ -1,0 +1,51 @@
+.fJHraE {
+  width: 100%;
+  margin: 0px auto;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  max-width: 500px;
+}
+@media (min-width: 992px) {
+  .cRlQbk {
+    padding-top: 113px;
+  }
+}
+.eetzUf {
+  position: relative;
+  margin: 0px auto;
+  height: 76px;
+  width: 76px;
+}
+.eetzUf svg {
+  position: relative;
+  z-index: 1;
+}
+.jcuFgw {
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: 26px;
+}
+@media (min-width: 768px) {
+  .jcuFgw {
+    line-height: 36px;
+    font-size: 32px;
+  }
+}
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+}
+.mt-4,
+.my-4 {
+  margin-top: 1.5rem !important;
+}
+
+a {
+  background-color: initial;
+  color: #0a1a7b;
+  text-decoration: none !important;
+}
+.hzgUZB {
+    font-size: 14px;
+    padding:15px 0px;
+}

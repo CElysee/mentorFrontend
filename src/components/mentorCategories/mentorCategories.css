@@ -1,0 +1,178 @@
+.eWqOrw {
+    background: rgb(240, 246, 249);
+    padding: 3.75rem;
+}
+@media (min-width: 768px){
+.jcuFgw {
+    line-height: 36px;
+    font-size: 32px;
+}
+}
+.jcuFgw {
+    line-height: 1.2;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--adp-grad-2);
+}
+@media (min-width: 768px){
+.fJiOdH {
+    line-height: 24px;
+    font-size: 19px;
+}
+}
+.fJiOdH {
+    line-height: 1.2;
+    font-size: 18px;
+}
+.eWqOrw .topics {
+    gap: 1.5rem 2.5rem;
+    max-width: 890px;
+    top: 0px;
+}
+.hPEWPj {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.kwaiZf {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.gtRCNI {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.ifqJej {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.iyBrEs {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.gOgGAt {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.fbYZlV {
+    display: flex;
+    background: var(--white);
+    box-shadow: rgba(142, 151, 158, 0.15) 0px 4px 19px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    column-gap: 1rem;
+    cursor: pointer;
+}
+.hPEWPj .icon {
+    background: rgba(122, 10, 234, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.hPEWPj .title {
+    white-space: nowrap;
+}
+@media (min-width: 768px){
+.eXeELN {
+    line-height: 28px;
+    font-size: 24px;
+}
+}
+.eXeELN {
+    line-height: 1.2;
+    font-weight: 700;
+    font-size: 20px;
+    color: #0E4749 !important;
+}
+.mentor-count {
+    color: var(--grey-2);
+}
+.kFsvSZ {
+    font-size: 14px;
+    line-height: 18px;
+}
+.kwaiZf .icon {
+    background: rgba(20, 84, 250, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.gtRCNI .icon {
+    background: rgba(0, 154, 6, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.ifqJej .icon {
+    background: rgba(0, 172, 234, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.iyBrEs .icon {
+    background: rgba(255, 147, 20, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.gOgGAt .icon {
+    background: rgba(129, 22, 180, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.fbYZlV .icon {
+    background: rgba(11, 158, 168, 0.1);
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+}
+.eWqOrw .topics-mobile-wrapper {
+    width: 100vw;
+}
+.eWqOrw .topics {
+    gap: 1.5rem 2.5rem;
+    max-width: 890px;
+    top: 0px;
+}
+.ixYITb {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.bVwUif {
+    height: 60px;
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border-radius: 8px !important;
+}
