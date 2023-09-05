@@ -27,7 +27,7 @@ function SignUp() {
       await delay(1000);
       navigate('/setUpMember', {
         state: {
-          userRole: 'Mentor'
+          userRole: 'mentor'
         }
       });
     };
@@ -35,7 +35,7 @@ function SignUp() {
       await delay(1000);
       navigate('/setUpMember', {
         state: {
-          userRole: 'Mentee'
+          userRole: 'mentee'
         }
       });
     };

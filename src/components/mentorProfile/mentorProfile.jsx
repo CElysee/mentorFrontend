@@ -143,7 +143,7 @@ function mentorProfile() {
             </div>
             <div className="About__Social-sc-tmc6zy-1 lbfmew mb-4">
               <a
-                href="https://linkedin.com/in/hangwj"
+                href="#"
                 className="social__item d-flex"
               >
                 <svg
@@ -161,7 +161,7 @@ function mentorProfile() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/hangwj"
+                href="#"
                 className="social__item d-flex"
               >
                  <svg

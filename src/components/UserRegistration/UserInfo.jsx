@@ -134,7 +134,6 @@ function UserInfo(props) {
           id="profile_picture"
           className="d-none"
           accept="image/*"
-          onChange={handleChange}
         />
       </div>
       <div className="form-group">

@@ -42,7 +42,7 @@ function ThankYou() {
                   <Link
                     style={{ display: "inline-block" }}
                     className="teal-text hzgUZB sc-jlZhew text-truncate px-4 btn--default btn"
-                    to={'/login'}
+                    to={'/signIn'}
                   >
                     Login
                   </Link>

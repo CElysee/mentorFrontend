@@ -7,6 +7,8 @@ import Bio from "./Bio";
 import Credentials from "./Credentials";
 import axiosInstance from "../../axiosInstance";
 import RiseLoader from "react-spinners/RiseLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const override = {
   display: "block",
@@ -16,10 +18,19 @@ const override = {
 };
 
 function UserRegistration() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const steps = [<UserInfo />, <Expertise />, <Bio />, <Credentials />];
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
+  const [responseError, setResponseError] = useState("")
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  const notifyError = () => toast.error(responseError, {
+    icon: "😬"
+  });
+  const notifySuccess = () => toast.success(responseError, {
+    icon: "👏"
+  });
 
   const location = useLocation();
   // setState to track current step
@@ -157,54 +168,54 @@ function UserRegistration() {
     const profilePictureFile = dataForm.get("profile_picture");
     const profilePictureFileName = profilePictureFile.name;
 
-    let signUpData = JSON.stringify({
-      name: userDetails.name,
-      email: userDetails.email,
-      username: userDetails.email,
-      password: userDetails.password,
-      role: location.state.userRole,
-      gender: userDetails.gender,
-      company: userDetails.company,
-      company_title: userDetails.company_title,
-      website: userDetails.website,
-      social_twitter: userDetails.social_twitter,
-      social_linkedin: userDetails.social_linkedin,
-      bio: userDetails.bio,
-      phone_number: userDetails.phone_number,
-      profile_picture: userDetails.profile_picture,
-      cover_photo: profilePictureFileName,
-      is_active: true,
-      country_id: userDetails.country_id,
-      expertise_id: userDetails.expertise,
-      languages_id: userDetails.languages,
-      industry_id: userDetails.industry,
-      interest_id: userDetails.interest,
-    });
+    // let signUpData = JSON.stringify({
+    //   name: userDetails.name,
+    //   email: userDetails.email,
+    //   username: userDetails.email,
+    //   password: userDetails.password,
+    //   role: location.state.userRole,
+    //   gender: userDetails.gender,
+    //   company: userDetails.company,
+    //   company_title: userDetails.company_title,
+    //   website: userDetails.website,
+    //   social_twitter: userDetails.social_twitter,
+    //   social_linkedin: userDetails.social_linkedin,
+    //   bio: userDetails.bio,
+    //   phone_number: userDetails.phone_number,
+    //   profile_picture: userDetails.profile_picture,
+    //   cover_photo: profilePictureFileName,
+    //   is_active: true,
+    //   country_id: userDetails.country_id,
+    //   expertise_id: userDetails.expertise,
+    //   languages_id: userDetails.languages,
+    //   industry_id: userDetails.industry,
+    //   interest_id: userDetails.interest,
+    // });
 
     const dataSignUp = new FormData();
-    dataSignUp.append('name', userDetails.name);
-    dataSignUp.append('email', userDetails.email);
-    dataSignUp.append('username', userDetails.email);
-    dataSignUp.append('password', userDetails.password);
-    dataSignUp.append('role', location.state.userRole);
-    dataSignUp.append('gender', userDetails.gender);
-    dataSignUp.append('website', userDetails.company);
-    dataSignUp.append('company', userDetails.company);
-    dataSignUp.append('company_title', userDetails.company_title);
-    dataSignUp.append('social_twitter', userDetails.social_twitter);
-    dataSignUp.append('social_linkedin', userDetails.social_linkedin);
-    dataSignUp.append('bio', userDetails.bio);
-    dataSignUp.append('phone_number', userDetails.phone_number);
-    dataSignUp.append('profile_picture', userDetails.profile_picture);
-    dataSignUp.append('country_id', userDetails.country_id);
-    dataSignUp.append('expertise_id', userDetails.expertise);
-    dataSignUp.append('languages_id', userDetails.languages);
-    dataSignUp.append('industry_id', userDetails.industry);
-    dataSignUp.append('interest_id', userDetails.interest);
+    dataSignUp.append("name", userDetails.name);
+    dataSignUp.append("email", userDetails.email);
+    dataSignUp.append("username", userDetails.email);
+    dataSignUp.append("password", userDetails.password);
+    dataSignUp.append("role", location.state.userRole);
+    dataSignUp.append("gender", userDetails.gender);
+    dataSignUp.append("website", userDetails.company);
+    dataSignUp.append("company", userDetails.company);
+    dataSignUp.append("company_title", userDetails.company_title);
+    dataSignUp.append("social_twitter", userDetails.social_twitter);
+    dataSignUp.append("social_linkedin", userDetails.social_linkedin);
+    dataSignUp.append("bio", userDetails.bio);
+    dataSignUp.append("phone_number", userDetails.phone_number);
+    dataSignUp.append("profile_picture", userDetails.profile_picture);
+    dataSignUp.append("country_id", userDetails.country_id);
+    dataSignUp.append("expertise_id", userDetails.expertise);
+    dataSignUp.append("languages_id", userDetails.languages);
+    dataSignUp.append("industry_id", userDetails.industry);
+    dataSignUp.append("interest_id", userDetails.interest);
 
     // console.log(signUpData)
-    console.log(Object.fromEntries(dataSignUp.entries()))
-
+    // console.log(Object.fromEntries(dataSignUp.entries()));
+    
     try {
       const submitForm = await axiosInstance.post(
         "/auth/create_user_form",
@@ -212,38 +223,44 @@ function UserRegistration() {
         {
           headers: {
             // "Content-Type": "application/json",
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log(JSON.stringify(submitForm.data));
+      console.log(JSON.stringify(submitForm.data.message));
+      setResponseError(submitForm.data.message)
+      await delay(1000);
+      notifySuccess();
       setLoading(false);
-      navigate('/thankyou', {
-        state:{
-          name: userDetails.name
-        }
-      })
+      await delay(1000);
+      navigate("/thankyou", {
+        state: {
+          name: userDetails.name,
+        },
+      });
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
-        console.log(error.response.data);
+        console.log(error.response.data.detail);
         console.log(error.response.status);
         setLoading(false);
+        setResponseError(error.response.data.detail)
+        notifyError();
       } else if (error.request) {
         // The request was made but no response was received
         console.log(error.request);
         setLoading(false);
+        setResponseError(error.request)
+        notifyError();
       } else {
         // Something happened in setting up the request that triggered an error
         console.log("Error:", error.message);
         setLoading(false);
+        setResponseError(error.message)
+        notifyError();
       }
     }
   };
-
-  // useEffect(()=>{
-  //   console.log(userDetails)
-  // })
 
   return (
     <>
@@ -254,6 +271,7 @@ function UserRegistration() {
       <div className="h-100">
         <div width="1440" className="sc-iLWXdy bTdCxR">
           <div width="1440" className="sc-DWsrX bslUKk">
+            <ToastContainer autoClose={false} />
             <form
               className="py-lg-5 mx-auto"
               style={{ maxWidth: "382px" }}

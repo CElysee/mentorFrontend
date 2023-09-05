@@ -27,6 +27,9 @@ function Header() {
   const navigateToSignUp = () => {
     navigate("/sign-up");
   };
+  const navigateToSignIn = () => {
+    navigate("/signIn");
+  };
 
   return (
     <>
@@ -56,6 +59,7 @@ function Header() {
                   <button
                     type="button"
                     className="sc-jlZhew cKRinY text-truncate px-4 mr-0 btn--default-outline btn btn-default"
+                    onClick={navigateToSignIn}
                   >
                     Log in
                   </button>
