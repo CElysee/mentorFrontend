@@ -37,6 +37,7 @@ function UserInfo(props) {
         ...userDetails,
         profile_picture: e.target.files[0],
       });
+      console.log(userDetails.profile_picture)
     }
      else {
       setUserDetails({
@@ -134,6 +135,7 @@ function UserInfo(props) {
           id="profile_picture"
           className="d-none"
           accept="image/*"
+          onChange={handleChange} /* Handle value change */
         />
       </div>
       <div className="form-group">

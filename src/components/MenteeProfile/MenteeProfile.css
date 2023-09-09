@@ -6,7 +6,7 @@
 .ctkkI {
   width: 100%;
   margin: 0px auto;
-  padding: 0px 1.5rem;
+  /* padding: 0px 1.5rem; */
   max-width: calc(76.75rem);
 }
 .bCxVyC {
@@ -139,14 +139,7 @@
 .xYlXD {
   gap: 1rem;
   display: grid;
-  margin-bottom: 2rem;
-}
-@media (min-width: 768px) {
-  .xYlXD {
-    gap: 3rem;
-    margin-bottom: 1.5rem;
-    grid-template-columns: minmax(0px, 19.25rem) minmax(0px, 10.75rem);
-  }
+  /* margin-bottom: 0.5rem; */
 }
 .xYlXD .items {
   gap: 0.5rem;
@@ -286,13 +279,70 @@
   grid-template-columns: repeat(2, 1fr);
 }
 .kKdhCQ .icon-wrapper {
-    display: flex;
-    -moz-box-align: center;
-    align-items: center;
-    -moz-box-pack: center;
-    justify-content: center;
-    margin-right: 0.625rem;
-    border-radius: 0.5rem;
-    height: 2.75rem;
-    width: 2.75rem;
+  display: flex;
+  -moz-box-align: center;
+  align-items: center;
+  -moz-box-pack: center;
+  justify-content: center;
+  margin-right: 0.625rem;
+  border-radius: 0.5rem;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+.sc-fqkvVR img {
+  width: 30px;
+}
+.name__role img{
+  width: 25px;
+  margin-left: 10px;
+}
+/* .dMqjor {
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  position: absolute;
+  background-color: #e3e6ea;
+  color: rgb(255, 255, 255) !important;
+} */
+.eiqDca {
+  height: 50px;
+  background: var(--teal) !important;
+  border: var(--teal) !important;
+  color: rgb(255, 255, 255) !important;
+  border-radius: 8px !important;
+}
+.dMqjof{
+  height: 50px;
+  background-color: #e3e6ea;
+  border: var(--teal) !important;
+  color: #000 !important;
+  border-radius: 8px !important;
+}
+.btn-close {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  color: #000;
+  background: transparent url(/close\ button.svg) center/0.7em auto no-repeat;
+  border: 0;
+  border-radius: 1rem;
+  opacity: .5;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+  position: absolute;
+  background-color: #e3e6ea;
+  color: rgb(255, 255, 255) !important;
+}
+.epgYHv {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
+}
+.ddwiUs {
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 778px) {
+  .ddwiUs {
+    margin-bottom: 1.5rem;
   }
+}

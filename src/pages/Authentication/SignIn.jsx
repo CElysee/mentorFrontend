@@ -5,6 +5,7 @@ import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { isTokenExpired } from "../../../utils/tokenUtils";
 
 const override = {
   display: "block",
@@ -38,6 +39,10 @@ function SignIn() {
     });
   };
 
+  // const access_token = localStorage.getItem("access_token");
+  // const isExpired = isTokenExpired(access_token);
+
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -53,12 +58,12 @@ function SignIn() {
           }
         );
         const responseMsg = check_username.data.message;
-        console.log(JSON.stringify(check_username.data.message));
+        // console.log(JSON.stringify(check_username.data.message));
         notify(responseMsg, "error");
         setRedirectToSignUp(true);
       } catch (error) {
         // Handle error
-        console.error("Error:", error.response.data.detail);
+        // console.error("Error:", error.response.data.detail);
         setRequestPassword(true);
       } finally {
         setLoading(false);
@@ -78,7 +83,7 @@ function SignIn() {
             },
           }
         );
-        console.log(JSON.stringify(check_username.data));
+        // console.log(JSON.stringify(check_username.data));
         const userToken = check_username.data.access_token;
         const role = check_username.data.role;
         setUserRole(role);
@@ -88,15 +93,17 @@ function SignIn() {
         if (role === "admin") {
           navigate("/admin");
         } else if (role === "mentee") {
-          navigate("/menteedashboard");
+          navigate("/mentee/dashboard");
         } else if (role === "mentor") {
-          navigate("/mentordashboard");
+          navigate("/mentor/dashboard");
+        }else{
+          navigate("/signIn");
         }
       } catch (error) {
         // Handle error
         const responseMsg = error.response.data.detail;
-        console.error("Error:", error.response.data.detail);
-        console.log(error.response.status);
+        // console.error("Error:", error.response.data.detail);
+        // console.log(error.response.status);
       } finally {
         setLoading(false);
       }

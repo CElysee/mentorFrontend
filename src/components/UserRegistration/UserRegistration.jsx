@@ -25,13 +25,6 @@ function UserRegistration() {
   const [responseError, setResponseError] = useState("")
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  const notifyError = () => toast.error(responseError, {
-    icon: "😬"
-  });
-  const notifySuccess = () => toast.success(responseError, {
-    icon: "👏"
-  });
-
   const location = useLocation();
   // setState to track current step
   const [currentStep, setCurrentStep] = useState(1);
@@ -167,31 +160,7 @@ function UserRegistration() {
     // console.log(Object.fromEntries(dataForm.entries()));
     const profilePictureFile = dataForm.get("profile_picture");
     const profilePictureFileName = profilePictureFile.name;
-
-    // let signUpData = JSON.stringify({
-    //   name: userDetails.name,
-    //   email: userDetails.email,
-    //   username: userDetails.email,
-    //   password: userDetails.password,
-    //   role: location.state.userRole,
-    //   gender: userDetails.gender,
-    //   company: userDetails.company,
-    //   company_title: userDetails.company_title,
-    //   website: userDetails.website,
-    //   social_twitter: userDetails.social_twitter,
-    //   social_linkedin: userDetails.social_linkedin,
-    //   bio: userDetails.bio,
-    //   phone_number: userDetails.phone_number,
-    //   profile_picture: userDetails.profile_picture,
-    //   cover_photo: profilePictureFileName,
-    //   is_active: true,
-    //   country_id: userDetails.country_id,
-    //   expertise_id: userDetails.expertise,
-    //   languages_id: userDetails.languages,
-    //   industry_id: userDetails.industry,
-    //   interest_id: userDetails.interest,
-    // });
-
+    
     const dataSignUp = new FormData();
     dataSignUp.append("name", userDetails.name);
     dataSignUp.append("email", userDetails.email);
@@ -230,7 +199,7 @@ function UserRegistration() {
       console.log(JSON.stringify(submitForm.data.message));
       setResponseError(submitForm.data.message)
       await delay(1000);
-      notifySuccess();
+      notify(submitForm.data.message, "success");
       setLoading(false);
       await delay(1000);
       navigate("/thankyou", {
@@ -243,25 +212,41 @@ function UserRegistration() {
         // The request was made and the server responded with a status code
         console.log(error.response.data.detail);
         console.log(error.response.status);
-        setLoading(false);
-        setResponseError(error.response.data.detail)
-        notifyError();
+        if (error.response.statu === 201){
+          setLoading(false);
+          setResponseError(error.response.data.detail)
+          notify(error.response.data.detail, "success");
+        }else{
+          setLoading(false);
+          notify(error.response.data.detail, "error");
+        }
+        
       } else if (error.request) {
         // The request was made but no response was received
         console.log(error.request);
-        setLoading(false);
         setResponseError(error.request)
-        notifyError();
+        setLoading(false);
+        notify(error.request, "error");
       } else {
         // Something happened in setting up the request that triggered an error
         console.log("Error:", error.message);
         setLoading(false);
         setResponseError(error.message)
-        notifyError();
+        notify(error.request, "error");
       }
     }
   };
-
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message, {
+        icon: "👏",
+      });
+    } else if (type === "error") {
+      toast.error(message, {
+        icon: "😬",
+      });
+    }
+  };
   return (
     <>
       <div

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
@@ -16,8 +16,16 @@ import Profile from "../pages/MenteeDashboard/Profile";
 import Bookings from "../pages/MenteeDashboard/Bookings";
 import Connections from "../pages/MenteeDashboard/Connections";
 import Support from "../pages/MenteeDashboard/Support";
+import { isTokenExpired } from "../../utils/tokenUtils";
+// Retrieve the token from localStorage
 
 function Routers() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("access_token");
+  const isExpired = isTokenExpired(token);
+  if (isExpired) {
+    navigate("/signIn");
+  }
   return (
     <Routes>
       {/* <Route path='/' element={<Navigate to='/'/>} /> */}

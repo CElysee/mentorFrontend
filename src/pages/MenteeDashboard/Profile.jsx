@@ -1,12 +1,14 @@
-import React from 'react'
-import MenteeProfile from '../../components/MenteeProfile/MenteeProfile'
+import React, { useEffect, useState } from "react";
+import MenteeProfile from "../../components/MenteeProfile/MenteeProfile";
+
 
 function Profile() {
+// The empty array [] means this effect runs once on component mount
   return (
     <>
-    <MenteeProfile />
+      <MenteeProfile />
     </>
-  )
+  );
 }
 
-export default Profile
+export default Profile;
