@@ -146,3 +146,11 @@ textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus {
   background-color: rgb(48, 209, 88);
   border: 1px solid rgb(48, 209, 88);
 }
+.modal-dialog-centered.modal-dialog-scrollable {
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  -moz-box-pack: center;
+  justify-content: center;
+  height: 100%;
+}

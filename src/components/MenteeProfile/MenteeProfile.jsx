@@ -116,6 +116,7 @@ function MenteeProfile() {
 
   const handleModelOpen = () => {
     setIsModelOpen(true);
+    document.querySelector(".modal-backdrop").style.display = "block";
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -752,7 +753,7 @@ function MenteeProfile() {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog">
+                <div className="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
                   {isModelOpen && (
                     <>
                       <div className="modal-content">
@@ -776,36 +777,36 @@ function MenteeProfile() {
                             >
                               <a
                                 className="nav-item nav-link active"
-                                id="overview-tab"
+                                id="basic_info-tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#overview"
+                                data-bs-target="#basic_info"
                                 type="button"
                                 role="tab"
-                                aria-controls="overview"
+                                aria-controls="basic_info"
                                 aria-selected="true"
                               >
                                 <span>Basic Info</span>
                               </a>
                               <a
                                 className="nav-item nav-link"
-                                id="commendations-tab"
+                                id="experience-tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#commendations"
+                                data-bs-target="#experience"
                                 type="button"
                                 role="tab"
-                                aria-controls="profile"
+                                aria-controls="experience"
                                 aria-selected="false"
                               >
                                 <span>Experience</span>
                               </a>
                               <a
                                 className="nav-item nav-link"
-                                id="mentors-tab"
+                                id="bio-tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#mentors"
+                                data-bs-target="#bio"
                                 type="button"
                                 role="tab"
-                                aria-controls="mentors"
+                                aria-controls="bio"
                                 aria-selected="false"
                               >
                                 <span>Bio</span>
@@ -815,9 +816,9 @@ function MenteeProfile() {
                           <div className="tab-content" id="myTabContent">
                             <div
                               className="tab-pane fade show active"
-                              id="overview"
+                              id="basic_info"
                               role="tabpanel"
-                              aria-labelledby="overview-tab"
+                              aria-labelledby="basic_info-tab"
                             >
                               <form
                                 className="py-lg mx-auto"
@@ -853,11 +854,19 @@ function MenteeProfile() {
                             </div>
                             <div
                               className="tab-pane fade"
-                              id="commendations"
+                              id="experience"
                               role="tabpanel"
-                              aria-labelledby="commendations-tab"
+                              aria-labelledby="experience-tab"
                             >
                               2
+                            </div>
+                            <div
+                              className="tab-pane fade"
+                              id="bio"
+                              role="tabpanel"
+                              aria-labelledby="bio-tab"
+                            >
+                              3
                             </div>
                           </div>
                         </div>
