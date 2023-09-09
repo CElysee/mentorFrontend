@@ -4,7 +4,7 @@ import "./discoverMentors.css"
 function discoverMentors() {
   return (
     <>
-      <div className="Mentors__Wrapper-sc-uiznoc-2 fXjqxr">
+      <div className="Mentors__Wrapper-sc-uiznoc-2 fXjqxr container">
         <div className="container">
           <div className="mentor">
             <h3

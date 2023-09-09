@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function SideMenu() {
   const location = useLocation();
@@ -178,15 +178,13 @@ function SideMenu() {
       ),
     },
   ];
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(null);
-
+  const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem('access_token')
     setToken(null);
     setIsLoggedIn(false);
+    navigate("/signIn")
   };
-
   return (
     <>
       <div className="v2__sidenav">
