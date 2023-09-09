@@ -2,25 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Bio(props) {
-  const { userDetails, setUserDetails } = props;
-  Bio.propTypes = {
-    userDetails: PropTypes.object,
-    setUserDetails: PropTypes.func.isRequired,
-  };
-  const {company_title, company, bio, social_twitter, social_linkedin, website} = userDetails
-
   const handleChange  = (e) =>{
     const {name, value} = e.target
-    setUserDetails({
-      ...userDetails,
+    props.setProfileData({
+      ...props.profileData,
       [name]: value,
-    })
+    });
   }
   return (
     <>
-      <h2 className="sc-fqkvVR jcuFgw mb-32">
-        How would you like to be intro'd?
-      </h2>
       <div className="form-group">
         <label className="form-label" htmlFor="company_title">
           Your title
@@ -30,7 +20,7 @@ function Bio(props) {
           placeholder="Eg. Product Designer, Student etc. "
           type="text"
           className="form-control"
-          value={company_title}
+          value={props.profileData.company_title}
           onChange={handleChange}
         />
       </div>
@@ -43,7 +33,7 @@ function Bio(props) {
           placeholder="Eg. Apple, UCLA, etc."
           type="text"
           className="form-control"
-          value={company}
+          value={props.profileData.company}
           onChange={handleChange}
         />
       </div>
@@ -68,7 +58,7 @@ function Bio(props) {
               placeholder="Tell us more about yourself, your goals and what you love!"
               title="Tell us more about yourself, your goals and what you love!"
               style={{ height: "178px !important" }}
-              value={bio}
+              value={props.profileData.bio}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -93,7 +83,7 @@ function Bio(props) {
           type="url"
           id="website"
           className="form-control"
-          value={website} /* Use state for value */
+          value={props.profileData.website} /* Use state for value */
           onChange={handleChange} /* Handle value change */
         />
       </div>
@@ -107,7 +97,7 @@ function Bio(props) {
           type="url"
           id="social_twitter"
           className="form-control"
-          value={social_twitter} /* Use state for value */
+          value={props.profileData.social_twitter} /* Use state for value */
           onChange={handleChange} /* Handle value change */
         />
       </div>
@@ -121,7 +111,7 @@ function Bio(props) {
           type="url"
           id="social_linkedin"
           className="form-control"
-          value={social_linkedin} /* Use state for value */
+          value={props.profileData.social_linkedin} /* Use state for value */
           onChange={handleChange} /* Handle value change */
         />
       </div>

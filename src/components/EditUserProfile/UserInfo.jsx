@@ -39,10 +39,6 @@ function UserInfo(props) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "profile_picture") {
-      // props.setProfileData({
-      //   ...props.profileData,
-      //   profile_image: e.target.files[0],
-      // });
       props.setUserDetails({
         ...props.userDetails,
         profile_picture: e.target.files[0],

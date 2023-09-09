@@ -8,6 +8,8 @@ import SideMenu from "../../pages/MenteeDashboard/SideMenu";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
 import UserInfo from "../EditUserProfile/UserInfo";
+import Expertise from "../EditUserProfile/Expertise";
+import Bio from "../EditUserProfile/Bio";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RiseLoader from "react-spinners/RiseLoader";
@@ -35,6 +37,7 @@ function MenteeProfile() {
     social_linkedin: "",
     company: "",
     company_title: "",
+    website: "",
     expertise: [],
     languages: [],
     industry: [],
@@ -50,6 +53,9 @@ function MenteeProfile() {
     gender: "",
     country_id: "",
     languages: [],
+    industry: [],
+    interest: [],
+    expertise: [],
   });
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
@@ -70,7 +76,6 @@ function MenteeProfile() {
             userId: response.data.id,
           }));
           const url = `/auth/users/profile?user_id=${response.data.id}`;
-
           if (response.status == 200) {
             try {
               const user_profile = await axiosInstance.post(url, {
@@ -90,6 +95,7 @@ function MenteeProfile() {
                       user_profile.data.user_profile.social_linkedin,
                     company: user_profile.data.user_profile.company,
                     company_title: user_profile.data.user_profile.company_title,
+                    website: user_profile.data.user_profile.website,
                     expertise: user_profile.data.user_profile.expertise,
                     languages: user_profile.data.user_profile.languages,
                     industry: user_profile.data.user_profile.industry,
@@ -131,7 +137,6 @@ function MenteeProfile() {
     if (userDetails.profile_picture === File) {
       dataSignUp.append("profile_picture", userDetails.profile_picture);
     }
-    console.log(Object.fromEntries(dataSignUp.entries()));
     try {
       const submitForm = await axiosInstance.post(
         "/auth/users/profile/update_basic_info",
@@ -151,6 +156,126 @@ function MenteeProfile() {
       setFormSubmitted(true);
       setIsModelOpen(false);
       document.querySelector(".modal-backdrop").style.display = "none";
+      document.querySelector(".modal").style.display = "none";
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.log(error.response.data.detail);
+        console.log(error.response.status);
+        if (error.response.statu === 200) {
+          setLoading(false);
+          setResponseError(error.response.data.detail);
+          notify(error.response.data.detail, "success");
+        } else {
+          setLoading(false);
+          notify(error.response.data.detail, "error");
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+        setResponseError(error.request);
+        setLoading(false);
+        notify(error.request, "error");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.log("Error:", error.message);
+        setLoading(false);
+        setResponseError(error.message);
+        notify(error.request, "error");
+      }
+    }
+  };
+  const handleSubmitExperience = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const dataEditExpertise = new FormData();
+    dataEditExpertise.append("industry", userDetails.industry);
+    dataEditExpertise.append("interest", userDetails.interest);
+    dataEditExpertise.append("expertise", userDetails.expertise);
+    dataEditExpertise.append("user_id", profileData.userId);
+
+    try {
+      const submitForm = await axiosInstance.post(
+        "/auth/users/profile/update_expertise",
+        dataEditExpertise,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(JSON.stringify(submitForm.data.message));
+      setResponseError(submitForm.data.message);
+      await delay(1000);
+      setLoading(false);
+      notify(submitForm.data.message, "success");
+      // Set formSubmitted to true to trigger useEffect
+      setFormSubmitted(true);
+      setIsModelOpen(false);
+      document.querySelector(".modal-backdrop").style.display = "none";
+      document.querySelector(".modal").style.display = "none";
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.log(error.response.data.detail);
+        console.log(error.response.status);
+        if (error.response.statu === 200) {
+          setLoading(false);
+          setResponseError(error.response.data.detail);
+          notify(error.response.data.detail, "success");
+        } else {
+          setLoading(false);
+          notify(error.response.data.detail, "error");
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.log(error.request);
+        setResponseError(error.request);
+        setLoading(false);
+        notify(error.request, "error");
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.log("Error:", error.message);
+        setLoading(false);
+        setResponseError(error.message);
+        notify(error.request, "error");
+      }
+    }
+  };
+  const handleSubmitBio = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const dataEditBio = new FormData();
+    dataEditBio.append("company", profileData.company);
+    dataEditBio.append("company_title", profileData.company_title);
+    dataEditBio.append("website", profileData.website);
+    dataEditBio.append("social_twitter", profileData.social_twitter);
+    dataEditBio.append("social_linkedin", profileData.social_linkedin);
+    dataEditBio.append("bio", profileData.bio);
+    dataEditBio.append("user_id", profileData.userId);
+
+    console.log(Object.fromEntries(dataEditBio.entries()))
+
+    try {
+      const submitForm = await axiosInstance.post(
+        "/auth/users/profile/update_bio",
+        dataEditBio,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(JSON.stringify(submitForm.data.message));
+      setResponseError(submitForm.data.message);
+      await delay(1000);
+      setLoading(false);
+      notify(submitForm.data.message, "success");
+      // Set formSubmitted to true to trigger useEffect
+      setFormSubmitted(true);
+      setIsModelOpen(false);
+      document.querySelector(".modal-backdrop").style.display = "none";
+      document.querySelector(".modal").style.display = "none";
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -400,78 +525,73 @@ function MenteeProfile() {
                           </Link>
                         </div>
                       </div>
-                      <div className="xYlXD mb-4">
-                        <p className="sc-gsFSXq fJiOdH font-weight-700">
-                          Languages
-                        </p>
-                        <div className="items">
-                          {profileData.languages.map((item, index) => (
-                            <div
-                              color="#ce82ff"
-                              className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                              key={index}
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.language_name}
-                              </p>
-                            </div>
-                          ))}
+                      <div className="profile_info xYlXD mb-4">
+                        <div>
+                          <p className="grey-2-text mb-3">Languages</p>
+                          <div className="items">
+                            {profileData.languages.map((item, index) => (
+                              <div
+                                color="#ce82ff"
+                                className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
+                                key={index}
+                              >
+                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                  {item.language_name}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="grey-2-text mb-3">Expertise</p>
+                          <div className="items">
+                            {profileData.expertise.map((item, index) => (
+                              <div
+                                className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
+                                key={index}
+                              >
+                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                  {item.expertise_name}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className="xYlXD mb-4">
-                        <p className="sc-gsFSXq fJiOdH font-weight-700">
-                          Expertise
-                        </p>
-                        <div className="items">
-                          {profileData.expertise.map((item, index) => (
-                            <div
-                              color="#ce82ff"
-                              className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                              key={index}
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.expertise_name}
-                              </p>
-                            </div>
-                          ))}
+                      <div className="profile_info xYlXD mb-4">
+                        <div>
+                          <p className="grey-2-text mb-3">Industry</p>
+                          <div className="items">
+                            {profileData.industry.map((item, index) => (
+                              <div
+                                className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
+                                key={index}
+                              >
+                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                  {item.industry_name}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="grey-2-text mb-3">Interest</p>
+                          <div className="items">
+                            {profileData.interest.map((item, index) => (
+                              <div
+                                color="#ce82ff"
+                                className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
+                                key={index}
+                              >
+                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                  {item.category_name}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className="xYlXD mb-4">
-                        <p className="sc-gsFSXq fJiOdH font-weight-700">
-                          Industry
-                        </p>
-                        <div className="items">
-                          {profileData.industry.map((item, index) => (
-                            <div
-                              color="#ce82ff"
-                              className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                              key={index}
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.industry_name}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="xYlXD mb-4">
-                        <p className="sc-gsFSXq fJiOdH font-weight-700">
-                          Interest
-                        </p>
-                        <div className="items">
-                          {profileData.interest.map((item, index) => (
-                            <div
-                              color="#ce82ff"
-                              className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                              key={index}
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.category_name}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+
                       <div className="Experience__Wrapper-sc-1fzo8v-0 euYruo">
                         <div className="section-header d-flex justify-content-between align-items-center">
                           <p className="sc-gsFSXq fJiOdH font-weight-700">
@@ -825,7 +945,6 @@ function MenteeProfile() {
                                 // style={{ maxWidth: "382px" }}
                                 onSubmit={handleSubmit}
                               >
-                                {" "}
                                 <UserInfo
                                   profileData={profileData}
                                   userDetails={userDetails}
@@ -858,7 +977,36 @@ function MenteeProfile() {
                               role="tabpanel"
                               aria-labelledby="experience-tab"
                             >
-                              2
+                              <form
+                                className="py-lg mx-auto"
+                                // style={{ maxWidth: "382px" }}
+                                onSubmit={handleSubmitExperience}
+                              >
+                                <Expertise
+                                  profileData={profileData}
+                                  userDetails={userDetails}
+                                  setProfileData={setProfileData}
+                                  setUserDetails={setUserDetails}
+                                />
+                                <button
+                                  className="sc-jlZhew cKRinY text-truncate px-5 btn--default btn btn-default"
+                                  type="submit"
+                                  style={{ width: "100%" }}
+                                >
+                                  {loading ? (
+                                    <RiseLoader
+                                      color={color}
+                                      loading={loading}
+                                      cssOverride={override}
+                                      size={10}
+                                      aria-label="Loading Spinner"
+                                      data-testid="loader"
+                                    />
+                                  ) : (
+                                    "Update"
+                                  )}
+                                </button>
+                              </form>
                             </div>
                             <div
                               className="tab-pane fade"
@@ -866,7 +1014,36 @@ function MenteeProfile() {
                               role="tabpanel"
                               aria-labelledby="bio-tab"
                             >
-                              3
+                              <form
+                                className="py-lg mx-auto"
+                                // style={{ maxWidth: "382px" }}
+                                onSubmit={handleSubmitBio}
+                              >
+                                <Bio
+                                  profileData={profileData}
+                                  userDetails={userDetails}
+                                  setProfileData={setProfileData}
+                                  setUserDetails={setUserDetails}
+                                />
+                                <button
+                                  className="sc-jlZhew cKRinY text-truncate px-5 btn--default btn btn-default"
+                                  type="submit"
+                                  style={{ width: "100%" }}
+                                >
+                                  {loading ? (
+                                    <RiseLoader
+                                      color={color}
+                                      loading={loading}
+                                      cssOverride={override}
+                                      size={10}
+                                      aria-label="Loading Spinner"
+                                      data-testid="loader"
+                                    />
+                                  ) : (
+                                    "Update"
+                                  )}
+                                </button>
+                              </form>
                             </div>
                           </div>
                         </div>

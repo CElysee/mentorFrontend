@@ -1,75 +1,124 @@
-import React from "react";
+import React, { useEffect, useState, useMemo} from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import PropTypes from "prop-types";
+import axiosInstance from "../../axiosInstance";
 
 function Expertise(props) {
+  const { userDetails, setUserDetails } = props;
   const {
-    userDetails,
-    setUserDetails,
-    industryData,
-    interestData,
-    expertiseData,
-  } = props;
+    industry,
+    interest,
+    expertise,
+    social_twitter,
+    social_linkedin,
+  } = userDetails;
+  // Fetch Api for user registration
+  const [countryData, setCountryData] = useState([]);
+  const [languageData, setLanguageData] = useState([]);
+  const [industryData, setIndustryData] = useState([]);
+  const [interestData, setInterestData] = useState([]);
+  const [expertiseData, setExpertiseData] = useState([]);
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
+  const [selectedInterest, setSelectedInterest] = useState([]);
+  const [selectedExpertise, setSelectedExpertise] = useState([]);
 
-  Expertise.propTypes = {
-    userDetails: PropTypes.object,
-    setUserDetails: PropTypes.func.isRequired,
-    industryData: PropTypes.array,
-    interestData: PropTypes.array,
-    expertiseData: PropTypes.array,
-  };
-  const { industry, interest, expertise, social_twitter, social_linkedin} = userDetails;
-  const industryOptions = industryData.map((industry) => ({
-    value: industry.id,
-    label: industry.industry_name,
-  }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [countryApi, languageApi, industryApi, interestApi, expertiseApi] =
+          await Promise.all([
+            axiosInstance.get("country/list"),
+            axiosInstance.get("languages/list"),
+            axiosInstance.get("industry/list"),
+            axiosInstance.get("interests/list"),
+            axiosInstance.get("expertise/list"),
+          ]);
 
-  const interestOptions = interestData.map((interest) => ({
-    value: interest.id,
-    label: interest.category_name,
-  }));
+        setCountryData(countryApi.data);
+        setLanguageData(languageApi.data);
+        setIndustryData(industryApi.data);
+        setInterestData(interestApi.data);
+        setExpertiseData(expertiseApi.data);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const expertiseOptions = expertiseData.map((expertise) => ({
-    value: expertise.id,
-    label: expertise.expertise_name,
-  }));
+  // Map saved language data to options for Select component
+  const savedIndustryOptions = useMemo(() => {
+    return props.profileData.industry.map((industry) => ({
+      value: industry.id,
+      label: industry.industry_name,
+    }));
+  }, []);
 
-  const handleIndustryChange = (selectedOptions) => {
-    const selectedIndustry = selectedOptions.map((option) => option.value);
+    // Map saved language data to options for Select component
+    const savedInterestOptions = useMemo(() => {
+      return props.profileData.interest.map((interest) => ({
+        value: interest.id,
+        label: interest.category_name,
+      }));
+    }, []);
+
+      // Map saved language data to options for Select component
+    const savedExpertiseOptions = useMemo(() => {
+      return props.profileData.expertise.map((expertise) => ({
+        value: expertise.id,
+        label: expertise.expertise_name,
+      }));
+    }, []);
+
+    
+
+
+   // Set the initial state of selectedLanguages with savedLanguageOptions
+   useEffect(() => {
+    setSelectedIndustries(savedIndustryOptions);
+    setSelectedInterest(savedInterestOptions);
+    setSelectedExpertise(savedExpertiseOptions);
+  }, [savedIndustryOptions, savedInterestOptions, savedExpertiseOptions]);
+
+
+  const handleIndustryChange = (selectedOption) => {
+    setSelectedIndustries(selectedOption);
+    const selectedIndustry = selectedOption.map((option) => option.value);
     setUserDetails({
       ...userDetails,
       industry: selectedIndustry,
     });
   };
 
-  const handleInterestChange = (selectedOptions) => {
-    const selectedInterest = selectedOptions.map((option) => option.value);
+  const handleInterestChange = (selectedOption) => {
+    setSelectedInterest(selectedOption);
+    const selectedInterest = selectedOption.map((option) => option.value);
     setUserDetails({
       ...userDetails,
       interest: selectedInterest,
     });
   };
 
-  const handleExpertise = (selectedOptions) => {
-    const selectedExpertise = selectedOptions.map((option) => option.value);
+  const handleExpertise = (selectedOption) => {
+    setSelectedExpertise(selectedOption);
+    const selectedExpertise = selectedOption.map((option) => option.value);
     setUserDetails({
       ...userDetails,
       expertise: selectedExpertise,
     });
   };
 
-  const handleChange = (e)=>{
-    const {name, value} = e.target
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setUserDetails({
       ...userDetails,
-      [name]:value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   return (
     <>
-      <h2 className="sc-fqkvVR jcuFgw mb-32">Great! What’s your superpower?</h2>
       <div className="form-group">
         <label className="form-label" htmlFor="expertise">
           What’s your Industry?
@@ -77,10 +126,11 @@ function Expertise(props) {
         <Select
           name="industry_id"
           isMulti
-          options={industryOptions}
-          value={industryOptions.filter((option) =>
-            industry.includes(option.value)
-          )}
+          options={industryData.map((industry) => ({
+            value: industry.id,
+            label: industry.industry_name,
+          }))}
+          value={selectedIndustries}
           onChange={handleIndustryChange}
         />
       </div>
@@ -91,10 +141,11 @@ function Expertise(props) {
         <Select
           name="interest_id"
           isMulti
-          options={interestOptions}
-          value={interestOptions.filter((option) =>
-            interest.includes(option.value)
-          )}
+          options={interestData.map((interest) => ({
+            value: interest.id,
+            label: interest.category_name,
+          }))}
+          value={selectedInterest}
           onChange={handleInterestChange}
         />
       </div>
@@ -105,15 +156,22 @@ function Expertise(props) {
         <Select
           isMulti
           name="expertise_id"
-          options={expertiseOptions}
-          value={expertiseOptions.filter((option) =>
-            expertise.includes(option.value)
-          )}
+          options={expertiseData.map((expertise) => ({
+            value: expertise.id,
+            label: expertise.expertise_name,
+          }))}
+          value={selectedExpertise}
           onChange={handleExpertise}
         />
       </div>
     </>
   );
 }
-
+Expertise.propTypes = {
+  userDetails: PropTypes.object,
+  setUserDetails: PropTypes.func.isRequired,
+  industryData: PropTypes.array,
+  interestData: PropTypes.array,
+  expertiseData: PropTypes.array,
+};
 export default Expertise;
