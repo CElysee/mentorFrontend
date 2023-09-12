@@ -1,5 +1,6 @@
 import React from "react";
-import SideMenu from "./SideMenu";
+import "../Dashboard.css";
+import SideMenu from "../Mentor/SideMenu";
 
 function Bookings() {
   return (

@@ -6,20 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { isTokenExpired } from "../../../utils/tokenUtils";
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
+  const navigate = useNavigate();
   useEffect(() => {
-    if (isExpired) {
-      alert("yes")
-      setIsLoggedIn(false);
-    }else if(isExpired === null){
-      setIsLoggedIn(false);
-    }else{
+    if (isExpired === null || isExpired) {
+      navigate("/signIn");
+    } else {
       setIsLoggedIn(true);
     }
-  }, []);
-
+  }, [isExpired]);
   const nav_links = [
     {
       path: "/about",
@@ -38,7 +36,7 @@ function Header() {
       display: "Contact Us",
     },
   ];
-  const navigate = useNavigate();
+  
   const navigateToSignUp = () => {
     navigate("/sign-up");
   };

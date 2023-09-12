@@ -25,7 +25,7 @@ function SignUp() {
 
     const navigateToMentor = async () => {
       await delay(1000);
-      navigate('/setUpMember', {
+      navigate('/setUpMentor', {
         state: {
           userRole: 'mentor'
         }
@@ -33,9 +33,9 @@ function SignUp() {
     };
     const navigateToMentee = async () => {
       await delay(1000);
-      navigate('/setUpMember', {
+      navigate('/setUpMentee', {
         state: {
-          userRole: 'mentee'
+          userRole: 'setUpMentee'
         }
       });
     };

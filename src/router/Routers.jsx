@@ -9,13 +9,19 @@ import MentorProfile from "../pages/mentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
 import ThankYou from "../pages/Authentication/ThankYou";
 import SignUpPage from "../pages/Authentication/SignUpPage";
-import SetUpMember from "../pages/Authentication/SetUpMember";
+import SetUpMentee from "../pages/Authentication/SetUpMentee";
+import SetUpMentor from "../pages/Authentication/SetUpMentor";
 import SignIn from "../pages/Authentication/SignIn";
-import MenteeDashboard from "../pages/MenteeDashboard/Dashboard";
-import Profile from "../pages/MenteeDashboard/Profile";
-import Bookings from "../pages/MenteeDashboard/Bookings";
-import Connections from "../pages/MenteeDashboard/Connections";
-import Support from "../pages/MenteeDashboard/Support";
+import MenteeDashboard from "../pages/Dashboard/Mentee/Dashboard";
+import MentorDashboard from "../pages/Dashboard/Mentor/Dashboard";
+import MenteeProfile from "../pages/Dashboard/Mentee/Profile";
+import MentorDashProfile from "../pages/Dashboard/Mentor/Profile";
+import MenteeBookings from "../pages/Dashboard/Mentee/Bookings";
+import MentorBookings from "../pages/Dashboard/Mentor/Bookings";
+import MenteeConnections from "../pages/Dashboard/Mentee/Connections";
+import MentorConnections from "../pages/Dashboard/Mentor/Connections";
+import MentorCalendar from "../pages/Dashboard/Mentor/Calendar";
+import Support from "../pages/Dashboard/Support";
 import { isTokenExpired } from "../../utils/tokenUtils";
 // Retrieve the token from localStorage
 
@@ -39,14 +45,23 @@ function Routers() {
       <Route path="/sign-up" element={<SignUpPage />} />
       {/* <Route path='/setUpMember/mentee' element={<SetUpMember />} /> */}
       {/* <Route path='/setUpMember/mentor' element={<SetUpMember />} /> */}
-      <Route path="/setUpMember" element={<SetUpMember />} />
+      <Route path="/setUpMentor" element={<SetUpMentor />} />
+      <Route path="/SetUpMentee" element={<SetUpMentee />} />
       <Route path="/thankyou" element={<ThankYou />} />
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/mentee/*">
         <Route path="dashboard" element={<MenteeDashboard />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="bookings" element={<Bookings />} />
-        <Route path="connections" element={<Connections />} />
+        <Route path="profile" element={<MenteeProfile />} />
+        <Route path="bookings" element={<MenteeBookings />} />
+        <Route path="connections" element={<MenteeConnections />} />
+        <Route path="support" element={<Support />} />
+      </Route>
+      <Route path="/mentor/*">
+        <Route path="dashboard" element={<MentorDashboard />} />
+        <Route path="profile" element={<MentorDashProfile />} />
+        <Route path="bookings" element={<MentorBookings />} />
+        <Route path="calendar" element={<MentorCalendar />} />
+        <Route path="connections" element={<MentorConnections />} />
         <Route path="support" element={<Support />} />
       </Route>
     </Routes>

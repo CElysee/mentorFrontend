@@ -100,10 +100,9 @@ function SignIn() {
           navigate("/signIn");
         }
       } catch (error) {
+        notify("Oopps, something went wrong!", "error")
         // Handle error
-        const responseMsg = error.response.data.detail;
-        // console.error("Error:", error.response.data.detail);
-        // console.log(error.response.status);
+        // const responseMsg = error.response.data.detail;
       } finally {
         setLoading(false);
       }

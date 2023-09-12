@@ -4,7 +4,7 @@ import CoverImage from "../../assets/images/coverpic.jpg";
 import ProfileImage from "../../assets/images/profilepic.jpg";
 import "../MenteeProfile/MenteeProfile.css";
 import IndustrySvg from "../../assets/images/industry.svg";
-import SideMenu from "../../pages/MenteeDashboard/SideMenu";
+import SideMenu from "../../pages/Dashboard/Mentee/SideMenu";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
 import UserInfo from "../EditUserProfile/UserInfo";

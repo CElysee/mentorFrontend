@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
-import SideMenu from "./SideMenu";
+import "../Dashboard.css";
+import SideMenu from "../Mentor/SideMenu";
 
 function Connections() {
   return (

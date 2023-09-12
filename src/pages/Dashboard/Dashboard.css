@@ -13,7 +13,7 @@
   flex-direction: column;
   padding: 3rem 1.5rem 0px 0px;
   height: calc(-70px + 100vh);
-  /* border-right: solid 1px var(--grey-3); */
+  border-right: solid 1px var(--grey-3);
 }
 .ejKczW .v2__sidenav .profile {
   gap: 0.75rem;
@@ -595,5 +595,30 @@
   margin-bottom: 0px;
   font-weight: 600;
   font-size: 19px;
-  color:#000
+  color: #000;
+}
+.iurznM {
+  display: grid;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .iurznM {
+    height: 100%;
+    display: block;
+    overflow: auto;
+  }
+}
+@media (min-width: 992px) {
+  .dYqkqL {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+.dYqkqL .child__content {
+  margin: auto;
+  display: table;
+}
+.cKRinY {
+  display: table !important;
+  margin: auto;
 }

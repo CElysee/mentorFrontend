@@ -1,10 +1,12 @@
 import React, { useState, useEffect, CSSProperties } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./UserRegistration.css";
-import UserInfo from "./UserInfo";
-import Expertise from "./Expertise";
-import Bio from "./Bio";
-import Credentials from "./Credentials";
+import PersonalInfo from "./Mentor/PersonalInfo";
+import UserInfo from "./Mentee/UserInfo";
+import MentorshipProfile from "./Mentor/MentorshipProfile"
+import Expertise from "./Mentee/Expertise";
+import Bio from "./Mentee/Bio";
+import Credentials from "./Mentee/Credentials";
 import axiosInstance from "../../axiosInstance";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
@@ -19,7 +21,8 @@ const override = {
 
 function UserRegistration() {
   const navigate = useNavigate();
-  const steps = [<UserInfo />, <Expertise />, <Bio />, <Credentials />];
+  // const steps = [<MentorshipProfile />];
+  const steps = [<PersonalInfo />, <Bio />,<MentorshipProfile />, <Credentials />];
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
   const [responseError, setResponseError] = useState("")
@@ -42,6 +45,8 @@ function UserRegistration() {
   const [industryData, setIndustryData] = useState([]);
   const [interestData, setInterestData] = useState([]);
   const [expertiseData, setExpertiseData] = useState([]);
+  const [targetMenteeData, setTargetMenteeData] = useState([]);
+
 
   const [userDetails, setUserDetails] = useState({
     profile_picture: null,
@@ -52,6 +57,7 @@ function UserRegistration() {
     industry: [],
     interest: [],
     expertise: [],
+    target_mentee: [],
     company: "",
     company_title: "",
     bio: "",
@@ -60,6 +66,8 @@ function UserRegistration() {
     phone_number: "",
     social_twitter: "",
     social_linkedin: "",
+    level_of_experience: "",
+    relationship_preferences: "",
     role: "",
     website: "",
   });
@@ -139,6 +147,9 @@ function UserRegistration() {
 
         const expertiseApi = await axiosInstance.get("expertise/list");
         setExpertiseData(expertiseApi.data);
+
+        const targetMenteeApi = await axiosInstance.get("targetmentees/list");
+        setTargetMenteeData(targetMenteeApi.data);
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -173,6 +184,8 @@ function UserRegistration() {
     dataSignUp.append("company_title", userDetails.company_title);
     dataSignUp.append("social_twitter", userDetails.social_twitter);
     dataSignUp.append("social_linkedin", userDetails.social_linkedin);
+    dataSignUp.append("level_of_experience", userDetails.level_of_experience);
+    dataSignUp.append("relationship_preferences", userDetails.relationship_preferences);
     dataSignUp.append("bio", userDetails.bio);
     dataSignUp.append("phone_number", userDetails.phone_number);
     dataSignUp.append("profile_picture", userDetails.profile_picture);
@@ -181,13 +194,14 @@ function UserRegistration() {
     dataSignUp.append("languages_id", userDetails.languages);
     dataSignUp.append("industry_id", userDetails.industry);
     dataSignUp.append("interest_id", userDetails.interest);
+    dataSignUp.append("target_mentee_id", userDetails.target_mentee);
 
     // console.log(signUpData)
-    // console.log(Object.fromEntries(dataSignUp.entries()));
+    console.log(Object.fromEntries(dataSignUp.entries()));
     
     try {
       const submitForm = await axiosInstance.post(
-        "/auth/create_user_form",
+        "/auth/MentorProfile/Register",
         dataSignUp,
         {
           headers: {
@@ -277,6 +291,7 @@ function UserRegistration() {
                     industryData,
                     interestData,
                     expertiseData,
+                    targetMenteeData,
                     preserveState: true,
                   })}
                 </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import "../MenteeDashboard/MenteeDashboard.css";
-import SideMenu from "./SideMenu";
+import "../Dashboard.css";
+import SideMenu from "../Mentee/SideMenu";
 
 function Dashboard() {
   return (
