@@ -211,3 +211,8 @@
 .fDuWxS .carousel-control-next, .fDuWxS .carousel-control-prev {
     display: none;
 }
+.country_flag{
+    width: 18px;
+    margin-top: -2px;
+    margin-left: 2px;
+}

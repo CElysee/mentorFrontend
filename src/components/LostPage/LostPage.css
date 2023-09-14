@@ -1,0 +1,38 @@
+
+.lfupzh {
+    max-width: 450px;
+    margin-left: auto;
+    padding-top: 48px;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 48px;
+}
+@media (min-width: 992px){
+    .lfupzh {
+        padding-top: 144px;
+        padding-bottom: 144px;
+    }
+}
+.lfupzh .icon {
+    margin-bottom: 32px;
+    width: 150px;
+}
+@media (min-width: 992px){
+    .lfupzh .icon {
+        margin-bottom: 48px;
+    }
+}
+.lfupzh h1 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 16px;
+}
+@media (min-width: 992px){
+    .lfupzh p {
+        margin-bottom: 48px;
+    }
+}
+.lfupzh p {
+    margin-bottom: 32px;
+}

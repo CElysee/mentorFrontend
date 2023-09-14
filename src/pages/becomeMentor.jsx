@@ -1,5 +1,5 @@
 import React from 'react'
-import BecomeMentor from '../components/becomeMentor/becomeMentor'
+import BecomeMentor from '../components/BecomeMentor/BecomeMentor'
 
 function becomeMentor() {
   return (

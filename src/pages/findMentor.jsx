@@ -1,5 +1,5 @@
 import React from "react";
-import FindMentors from "../components/findMentors/findMentors";
+import FindMentors from "../components/FindMentors/FindMentors";
 
 function findMentor() {
   return (

@@ -3,9 +3,9 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import FindMentor from "../pages/findMentor";
-import BecomeMentor from "../pages/becomeMentor";
-import MentorProfile from "../pages/mentorProfile";
+import FindMentor from "../pages/FindMentor";
+import BecomeMentor from "../pages/BecomeMentor";
+import UserMentorProfile from "../pages/UserMentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
 import ThankYou from "../pages/Authentication/ThankYou";
 import SignUpPage from "../pages/Authentication/SignUpPage";
@@ -26,12 +26,12 @@ import { isTokenExpired } from "../../utils/tokenUtils";
 // Retrieve the token from localStorage
 
 function Routers() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("access_token");
-  const isExpired = isTokenExpired(token);
-  if (isExpired) {
-    navigate("/signIn");
-  }
+  // const navigate = useNavigate();
+  // const token = localStorage.getItem("access_token");
+  // const isExpired = isTokenExpired(token);
+  // if (isExpired) {
+  //   navigate("/signIn");
+  // }
   return (
     <Routes>
       {/* <Route path='/' element={<Navigate to='/'/>} /> */}
@@ -40,8 +40,7 @@ function Routers() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/findMentor" element={<FindMentor />} />
       <Route path="/becomeMentor" element={<BecomeMentor />} />
-      <Route path="/mentorProfile" element={<MentorProfile />} />
-      <Route path="/menteeprofile" element={<MentorProfile />} />
+      <Route path="/mentorProfile/:id" element={<UserMentorProfile />} />
       <Route path="/sign-up" element={<SignUpPage />} />
       {/* <Route path='/setUpMember/mentee' element={<SetUpMember />} /> */}
       {/* <Route path='/setUpMember/mentor' element={<SetUpMember />} /> */}

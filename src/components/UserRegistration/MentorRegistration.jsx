@@ -2,9 +2,7 @@ import React, { useState, useEffect, CSSProperties } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./UserRegistration.css";
 import PersonalInfo from "./Mentor/PersonalInfo";
-import UserInfo from "./Mentee/UserInfo";
 import MentorshipProfile from "./Mentor/MentorshipProfile"
-import Expertise from "./Mentee/Expertise";
 import Bio from "./Mentee/Bio";
 import Credentials from "./Mentee/Credentials";
 import axiosInstance from "../../axiosInstance";
@@ -215,7 +213,7 @@ function UserRegistration() {
       await delay(1000);
       notify(submitForm.data.message, "success");
       setLoading(false);
-      await delay(1000);
+      // await delay(1000);
       navigate("/thankyou", {
         state: {
           name: userDetails.name,

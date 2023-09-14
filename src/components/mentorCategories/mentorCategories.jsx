@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import categorieImage from "../../assets/images/marketing.svg"
 import categorieImage2 from "../../assets/images/categiries.svg"
-import "./mentorCategories.css"
+import "./MentorCategories.css"
+import { Link } from "react-router-dom"
+import axiosInstance from "../../axiosInstance";
 
-function mentorCategories() {
+function MentorCategories() {
+  const [mentorCategories, setMentorCategories] = useState([]);
+
+  useEffect (()=>{
+    const fetchData = async ()=>{
+      try{
+        const categoryApi = await axiosInstance.get("/interests/list")
+        setMentorCategories(categoryApi.data)
+      }catch(error){
+        console.error(error);
+      }
+    }
+    fetchData();
+  },[])
   return (
     <>
       <div className="LearnAndGrow__Wrapper-sc-9rypwa-0 eWqOrw d-flex flex-column align-items-center">
@@ -16,416 +31,14 @@ function mentorCategories() {
           </p>
         </div>
         <div className="topics d-none d-md-flex flex-wrap justify-content-center mb-32">
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 hPEWPj">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
+          {mentorCategories.map((item, index)=>(
+            <div key={index} className="LearnAndGrow__Card-sc-9rypwa-1 hPEWPj">
             <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Business Development</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">11117 mentors</p>
+              <h3 className="sc-dcJsrY eXeELN title">{item.category_name}</h3>
+              <p className="sc-jXbUNg kFsvSZ mentor-count">100+ mentors</p>
             </div>
           </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 kwaiZf">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Markerting</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">4258 mentors</p>
-            </div>
-          </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 gtRCNI">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Product Development</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">276 mentors</p>
-            </div>
-          </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 ifqJej">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Management</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">520 mentors</p>
-            </div>
-          </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 iyBrEs">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Networking</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">1594 mentors</p>
-            </div>
-          </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 gOgGAt">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Finance</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">2005 mentors</p>
-            </div>
-          </div>
-          <div className="LearnAndGrow__Card-sc-9rypwa-1 fbYZlV">
-            <div className="icon d-flex justify-content-center align-items-center">
-              <div
-                style={{
-                  display: "inline-block",
-                  maxWidth: "100%",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxSizing: "border-box",
-                  margin: "0px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "block",
-                    maxWidth: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <img
-                    alt=""
-                    src={categorieImage2}
-                    style={{
-                      maxWidth: "100",
-                      display: "block",
-                      margin: "0px",
-                      border: "none",
-                      padding: "0px",
-                    }}
-                  />
-                </div>
-                <img
-                  alt=""
-                  src={categorieImage}
-                  style={{
-                    position: "absolute",
-                    inset: "0px",
-                    boxSizing: "border-box",
-                    padding: "0px",
-                    border: "none",
-                    margin: "auto",
-                    display: "block",
-                    width: "0px",
-                    height: "0px",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    minHeight: "100%",
-                    maxHeight: "100%",
-                  }}
-                />
-                <noscript></noscript>
-              </div>
-            </div>
-            <div className="description">
-              <h3 className="sc-dcJsrY eXeELN title">Product Research</h3>
-              <p className="sc-jXbUNg kFsvSZ mentor-count">3080 mentors</p>
-            </div>
-          </div>
+          ))}
         </div>
         <button
           bg="var(--black)"
@@ -433,13 +46,13 @@ function mentorCategories() {
           type="button"
           className="sc-jlZhew bVwUif text-truncate undefined btn btn-default"
         >
-          <p className="sc-kAyceB cCBfKf font-weight-700 px-28">
+          <Link className="sc-kAyceB cCBfKf font-weight-700 px-28" style={{color: "#fff"}} to={'/findMentor'}>
             Explore all mentors
-          </p>
+          </Link>
         </button>
       </div>
     </>
   );
 }
 
-export default mentorCategories;
+export default MentorCategories;

@@ -35,7 +35,7 @@ function SignUp() {
       await delay(1000);
       navigate('/setUpMentee', {
         state: {
-          userRole: 'setUpMentee'
+          userRole: 'mentee'
         }
       });
     };

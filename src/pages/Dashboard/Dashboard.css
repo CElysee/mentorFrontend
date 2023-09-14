@@ -611,14 +611,6 @@
 @media (min-width: 992px) {
   .dYqkqL {
     padding-top: 64px;
-    padding-bottom: 64px;
+    padding-bottom: 24px;
   }
-}
-.dYqkqL .child__content {
-  margin: auto;
-  display: table;
-}
-.cKRinY {
-  display: table !important;
-  margin: auto;
 }

@@ -11,6 +11,11 @@
   },
   "publicPath": "/public/",
   "dependencies": {
+    "@devexpress/dx-react-core": "^4.0.5",
+    "@devexpress/dx-react-scheduler": "^4.0.5",
+    "@devexpress/dx-react-scheduler-material-ui": "^4.0.5",
+    "@mui/material": "^5.14.8",
+    "@mui/styled-engine-sc": "^5.14.8",
     "axios": "^1.4.0",
     "env-cmd": "^10.1.0",
     "prop-types": "^15.8.1",
@@ -19,7 +24,8 @@
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
     "react-spinners": "^0.13.8",
-    "react-toastify": "^9.1.3"
+    "react-toastify": "^9.1.3",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

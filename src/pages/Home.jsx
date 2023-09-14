@@ -1,7 +1,7 @@
 import React from "react";
-import MentorCategories from "../components/mentorCategories/mentorCategories";
+import MentorCategories from "../components/MentorCategories/MentorCategories";
 import FeauturesSection from "../components/feauturesSection/feauturesSection";
-import DiscoverMentors from "../components/discoverMentors/discoverMentors";
+import DiscoverMentors from "../components/DiscoverMentors/DiscoverMentors";
 import Testimonials from "../components/testimonials/Testimonials";
 import HeroSection from "../components/heroSection/heroSection";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import MentorProfile from "../components/mentorProfile/mentorProfile";
+import MentorProfile from "../components/MentorProfile/MentorProfile";
 
-function mentorProfile() {
+function UserMentorProfile() {
   return (
     <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
       <MentorProfile />
@@ -9,4 +9,4 @@ function mentorProfile() {
   );
 }
 
-export default mentorProfile;
+export default UserMentorProfile;
