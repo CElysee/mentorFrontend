@@ -292,7 +292,7 @@ a:-webkit-any-link {
     justify-content: flex-end;
 }
 .eCqMRJ {
-    height: 38px;
+    height: auto;
     cursor: pointer;
     position: relative;
     border-radius: 0.375rem;
@@ -570,6 +570,8 @@ a:-webkit-any-link {
     font-weight: 700;
     white-space: nowrap;
     margin-bottom: 0.25rem;
+    padding: 0px 10px;
+    color: #0a243f;
 }
 .eoQfdP .date__slot {
     font-weight: 700;
@@ -603,4 +605,15 @@ a:-webkit-any-link {
     height: 60px;
     background: var(--teal) !important;
     border-radius: 8px !important;
+}
+.eJWdRQ {
+    display: flex;
+    padding: 1rem 0px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 0.5rem;
+    height: 74px;
+    opacity: 1;
+    cursor: pointer;
+    border: solid 1px var(--grey-3);
 }

@@ -7,16 +7,22 @@ import LostPage from "../LostPage/LostPage";
 function MentorProfile() {
   const { id } = useParams();
   const [profileData, setProfileData] = useState([]);
+  const [bookingSchedules, setBookingSchedules] = useState([]);
+  const [bookingActive, setBookingActive] = useState(0);
   const url = `/mentors/profile?mentor_id=${id}`;
+  const schedulesUrl = `/ScheduleBookings/list/${id}`;
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const ProfileData = await axiosInstance.post(url);
-
+        const ScheduleData = await axiosInstance.get(schedulesUrl);
         if (ProfileData.status === 200) {
           setProfileData(ProfileData.data);
+        }
+        if (ScheduleData.status === 200) {
+          setBookingSchedules(ScheduleData.data);
         }
       } catch (error) {
         console.error(error);
@@ -24,7 +30,11 @@ function MentorProfile() {
     };
 
     fetchData();
-  }, [url]);
+  }, [url, schedulesUrl, bookingActive]);
+  const handleBookingSlotChange = (index) => {
+    setBookingActive(index);
+  };
+
   return (
     <>
       {profileData ? (
@@ -179,7 +189,7 @@ function MentorProfile() {
                   </div>
                   <div className="ExperienceSection__Wrapper-sc-dr685y-2 iXdsSl">
                     <p className="sc-gsFSXq fJiOdH font-weight-700 mb-16">
-                    Experience
+                      Experience
                     </p>
                     <div className="experience-container">
                       <div className="experience-category">
@@ -201,9 +211,7 @@ function MentorProfile() {
                         </div>
                       </div>
                       <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">
-                          Industry
-                        </p>
+                        <p className="sc-kAyceB cCBfKf grey-2-text">Industry</p>
                         <div className="items">
                           {item.industry.map((item, index) => (
                             <div
@@ -222,19 +230,20 @@ function MentorProfile() {
                           Fluent in
                         </p>
                         <div className="items">
-                          {item.languages.map((item, index)=>(
-                            <div key={index} className="ExperienceSection__Item-sc-dr685y-1 dVoQPv">
-                            <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                              {item.language_name}
-                            </p>
-                          </div>
+                          {item.languages.map((item, index) => (
+                            <div
+                              key={index}
+                              className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
+                            >
+                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                {item.language_name}
+                              </p>
+                            </div>
                           ))}
                         </div>
                       </div>
                       <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">
-                          Interest
-                        </p>
+                        <p className="sc-kAyceB cCBfKf grey-2-text">Interest</p>
                         <div className="items">
                           {item.interest.map((item, index) => (
                             <div
@@ -264,58 +273,27 @@ function MentorProfile() {
                         </p>
                       </div>
                       <div className="Availability__DateWrapper-sc-189eqiz-0 fiTtId">
-                        <div
-                          height="74px"
-                          slot="8"
-                          className="Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 drqGEo eoQfdP"
-                        >
-                          <div className="m-auto">
-                            <small className="date__day">Sat</small>
-                            <p className="sc-jXbUNg kFsvSZ date__date">
-                              05 Aug
-                            </p>
-                            <small className="date__slot">8 slots</small>
+                        {bookingSchedules.map((item, index) => (
+                          <div
+                            key={index}
+                            height="74px"
+                            slot="8"
+                            className={`Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 eoQfdP ${
+                              index === bookingActive ? "drqGEo" : "eJWdRQ"
+                            }`}
+                            role="button"
+                            onClick={() => handleBookingSlotChange(index)}
+                          >
+                            <div className="m-auto">
+                              <p className="sc-jXbUNg kFsvSZ date__date">
+                                {item.startDate}
+                              </p>
+                              <small className="date__slot">
+                                {item.slots_count}
+                              </small>
+                            </div>
                           </div>
-                        </div>
-                        <div
-                          height="74px"
-                          slot="9"
-                          className="Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 drqGEo eoQfdP"
-                        >
-                          <div className="m-auto">
-                            <small className="date__day">Sat</small>
-                            <p className="sc-jXbUNg kFsvSZ date__date">
-                              12 Aug
-                            </p>
-                            <small className="date__slot">9 slots</small>
-                          </div>
-                        </div>
-                        <div
-                          height="74px"
-                          slot="9"
-                          className="Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 drqGEo eoQfdP"
-                        >
-                          <div className="m-auto">
-                            <small className="date__day">Sat</small>
-                            <p className="sc-jXbUNg kFsvSZ date__date">
-                              19 Aug
-                            </p>
-                            <small className="date__slot">9 slots</small>
-                          </div>
-                        </div>
-                        <div
-                          height="74px"
-                          slot="9"
-                          className="Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 drqGEo eoQfdP"
-                        >
-                          <div className="m-auto">
-                            <small className="date__day">Sat</small>
-                            <p className="sc-jXbUNg kFsvSZ date__date">
-                              26 Aug
-                            </p>
-                            <small className="date__slot">9 slots</small>
-                          </div>
-                        </div>
+                        ))}
                       </div>
                       <div className="mb-4">
                         <div className="pb-3 d-flex align-items-center justify-content-between border-bottom grey-3-border mb-3">
@@ -358,36 +336,18 @@ function MentorProfile() {
                           </div>
                         </div>
                         <div className="TimePicker__Wrapper-sc-11a0i3h-0 jiYbol">
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              5:00 AM
-                            </span>
-                          </div>
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              5:30 AM
-                            </span>
-                          </div>
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              6:00 AM
-                            </span>
-                          </div>
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              6:30 AM
-                            </span>
-                          </div>
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              7:00 AM
-                            </span>
-                          </div>
-                          <div className="Styles__Item-sc-z9xbh7-0 eRxXKn">
-                            <span className="m-auto" height="50px">
-                              7:30 AM
-                            </span>
-                          </div>
+                          {bookingSchedules[
+                            bookingActive
+                          ].mentorBookingScheduleSlots.map((item, index) => (
+                            <div
+                              key={index}
+                              className="Styles__Item-sc-z9xbh7-0 eRxXKn"
+                            >
+                              <span className="m-auto" height="50px">
+                                {item.slot_time}
+                              </span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div className="SingleSessions__ButtonWrapper-sc-3tj6m9-0 bTmmwR">
@@ -396,7 +356,7 @@ function MentorProfile() {
                           type="button"
                           className="sc-jlZhew gAyusE text-truncate undefined btn btn-default"
                         >
-                          Book Session for 05 Aug 2023
+                          Book Session for {bookingSchedules[bookingActive].startDate}
                         </button>
                       </div>
                     </div>
