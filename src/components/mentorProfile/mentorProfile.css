@@ -856,3 +856,8 @@ a:-webkit-any-link {
 .momo_payment{
     background-color: #ffcc00 !important;
 }
+.error_response{
+  padding: 10px;
+  color: #e74b3c;
+  font-weight: bold;
+}
