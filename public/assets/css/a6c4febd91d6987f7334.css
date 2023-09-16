@@ -13277,7 +13277,7 @@ select {
     background-color: #fff;
 }
 .modal-backdrop.show {
-    opacity: 0.8;
+    /* opacity: 0.8; */
 }
 @media (min-width: 768px) {
     .modal .search-modal {

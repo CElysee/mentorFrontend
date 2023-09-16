@@ -9,9 +9,12 @@ function MentorProfile() {
   const [profileData, setProfileData] = useState([]);
   const [bookingSchedules, setBookingSchedules] = useState([]);
   const [bookingActive, setBookingActive] = useState(0);
+  const [timeBookingActive, setTimeBookingActive] = useState(0);
+  const [bookingMode, setBookingMode] = useState("");
   const url = `/mentors/profile?mentor_id=${id}`;
   const schedulesUrl = `/ScheduleBookings/list/${id}`;
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +37,12 @@ function MentorProfile() {
   const handleBookingSlotChange = (index) => {
     setBookingActive(index);
   };
-
+  const handleSlotSelection = (value) => {
+    setTimeBookingActive(value);
+  };
+  const handleChange = async (e) => {
+    setBookingMode(e.target.value);
+  };
   return (
     <>
       {profileData ? (
@@ -46,6 +54,7 @@ function MentorProfile() {
                 className="h-100 w-100 img-fit"
               />
             </div>
+
             <div className="Mentor__Wrapper-sc-1ep7oak-1 hBuqpx">
               <div className="Mentor__Wrapper-sc-oybawt-0 fjvYTO">
                 <div className="ProfilePhoto__Wrapper-sc-1fl76in-2 hYcJhf">
@@ -340,8 +349,14 @@ function MentorProfile() {
                             bookingActive
                           ].mentorBookingScheduleSlots.map((item, index) => (
                             <div
+                              role="button"
                               key={index}
-                              className="Styles__Item-sc-z9xbh7-0 eRxXKn"
+                              className={`Styles__Item-sc-z9xbh7-0 ${
+                                timeBookingActive == item.id
+                                  ? "eRxXKn"
+                                  : "iPJjWT"
+                              }`}
+                              onClick={() => handleSlotSelection(item.id)}
                             >
                               <span className="m-auto" height="50px">
                                 {item.slot_time}
@@ -354,10 +369,154 @@ function MentorProfile() {
                         <button
                           bg="var(--teal)"
                           type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
                           className="sc-jlZhew gAyusE text-truncate undefined btn btn-default"
                         >
-                          Book Session for {bookingSchedules[bookingActive].startDate}
+                          Book Session for{" "}
+                          {bookingSchedules[bookingActive].startDate}
                         </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                    data-backdrop="static"
+                  >
+                    <div
+                      role="dialog"
+                      aria-modal="true"
+                      className="fade modal show"
+                      tabIndex="-1"
+                      style={{ display: "block" }}
+                    >
+                      <div className="modal-dialog modal-sm modal-dialog-centered">
+                        <div className="modal-content">
+                          <div className="sc-cwHptR dOVyAW p-4 modal-body">
+                            <h3 className="sc-dcJsrY eXeELN mb-5">
+                              You are about to book a session with{" "}
+                              {profileData[0].mentor.name} on{" "}
+                              {bookingSchedules[bookingActive].startDate}
+                            </h3>
+                            <div className="sc-kAyceB cCBfKf mb-32">
+                              <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                <label className="toggleButton">
+                                  <span
+                                    style={{
+                                      paddingTop: "5px",
+                                      paddingRight: "10px",
+                                    }}
+                                  >
+                                    Use voucher
+                                  </span>
+                                  <input
+                                    type="checkbox"
+                                    value="useVoucher"
+                                    onChange={handleChange}
+                                    checked={bookingMode === "useVoucher"}
+                                  />
+                                  <div>
+                                    <svg viewBox="0 0 44 44">
+                                      <path
+                                        d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                        transform="translate(-2.000000, -2.000000)"
+                                      ></path>
+                                    </svg>
+                                  </div>
+                                </label>
+                              </div>
+                              <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                <label className="toggleButton">
+                                  <span style={{ padding: "5px 10px" }}>
+                                    Pay to Book a session
+                                  </span>
+                                  <input
+                                    type="checkbox"
+                                    value="pay"
+                                    onChange={handleChange}
+                                  />
+                                  <div>
+                                    <svg viewBox="0 0 44 44">
+                                      <path
+                                        d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                        transform="translate(-2.000000, -2.000000)"
+                                      ></path>
+                                    </svg>
+                                  </div>
+                                </label>
+                              </div>
+                              {bookingMode == "useVoucher" && (
+                                <>
+                                  <div className="form-group">
+                                    <label
+                                      className="form-label"
+                                      htmlFor="name"
+                                    >
+                                      Your Voucher Code
+                                    </label>
+                                    <input
+                                      name="name"
+                                      placeholder="First and last name"
+                                      type="text"
+                                      id="name"
+                                      className="form-control"
+                                      value="" /* Use state for value */
+                                    />
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                            <div className="onlinePayment mb-5">
+                              <div className="sc-eldPxv efrIaS" width="1714">
+                                <button
+                                  data-bs-dismiss="modal"
+                                  border="black"
+                                  type="button"
+                                  className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default momo_payment"
+                                >
+                                  Pay with Momo
+                                </button>
+                                <button
+                                  bg="black"
+                                  color="white"
+                                  type="button"
+                                  className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                >
+                                  Pay with Cards
+                                </button>
+                              </div>
+                            </div>
+                            {bookingMode != "pay" && (
+                              <>
+                                <div
+                                  className="sc-eldPxv efrIaS justify-content-end"
+                                  width="1714"
+                                >
+                                  <button
+                                    data-bs-dismiss="modal"
+                                    border="black"
+                                    type="button"
+                                    className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
+                                  >
+                                    Go Back
+                                  </button>
+                                  <button
+                                    bg="black"
+                                    color="white"
+                                    type="button"
+                                    className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                  >
+                                    Confirm
+                                  </button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
