@@ -90,6 +90,7 @@ function SignIn() {
         setToken(userToken);
         setIsLoggedIn(true);
         localStorage.setItem("access_token", userToken);
+        localStorage.setItem("user_role", role)
         if (role === "admin") {
           navigate("/admin");
         } else if (role === "mentee") {

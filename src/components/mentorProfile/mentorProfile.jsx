@@ -16,6 +16,7 @@ const override = {
 function MentorProfile() {
   const navigate = useNavigate()
   const { id } = useParams();
+  const [mentorId, setMentorId] = useState(id);
   const [color, setColor] = useState("#fff");
   const [profileData, setProfileData] = useState([]);
   const [bookingSchedules, setBookingSchedules] = useState([]);
@@ -25,7 +26,6 @@ function MentorProfile() {
   const [bookingActive, setBookingActive] = useState(1);
   const [timeBookingActive, setTimeBookingActive] = useState(0);
   const [bookingMode, setBookingMode] = useState(null);
-  const [mentorId, setMentorId] = useState(id);
   const url = `/mentors/profile?mentor_id=${id}`;
   const schedulesUrl = `/ScheduleBookings/list/${id}`;
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
@@ -33,6 +33,7 @@ function MentorProfile() {
   const [voucherCode, setVoucherCode] = useState("");
   const [responseError, setResponseError] = useState("");
   const [loading, setLoading] = useState("");
+  const [userRole, setUserRole] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +48,8 @@ function MentorProfile() {
           setBookingSchedules(ScheduleData.data);
           setScheduleDate(ScheduleData.data[bookingActive - 1].startDate)
           setScheduledTime(ScheduleData.data[bookingActive - 1].mentorBookingScheduleSlots[timeBookingActive].slot_time)
+          const user_role = localStorage.getItem("user_role");
+          setUserRole(user_role)
           // setBookingActive(ScheduleData.data[0].id)
         }
       } catch (error) {
@@ -160,6 +163,7 @@ function MentorProfile() {
                     </p>
                   </div>
                   <div className="Actions__Wrapper-sc-6lchtg-0 nLQQv">
+                  
                     <a href="/" className="action__item">
                       <svg
                         fill="none"
@@ -198,11 +202,24 @@ function MentorProfile() {
                         </svg>
                       </div>
                     </div>
+                    <button
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      bg="#fff"
+                      height="50"
+                      color="var(--grey-1)"
+                      className="sc-jlZhew klINlq  py-0  btn btn-default"
+                      border="var(--grey-3)"
+                      // onClick={handleModelOpen}
+                    >
+                      Edit Profile
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <div className="Layout__Wrapper-sc-1js8544-0 oKXVt">
+              <div className="Layout__Wrapper-sc-1js8544-0 oKXVt" id={userRole == "mentor" && "mentor_side"}>
                 <div style={{ marginBottom: "8rem" }}>
                   <div className="line-height-16 mb-3">
                     <div className="line-height-16 multi-truncate">
@@ -338,8 +355,9 @@ function MentorProfile() {
                     </div>
                   </div>
                 </div>
+                {}
                 <div className="p-1">
-                  <div className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW">
+                  <div className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW" id={userRole == "mentor" && "mentor_book"}>
                     <div className="Availability__Desktop-sc-189eqiz-2 cLqnWb mb-4">
                       <div className="pb-4">
                         <p className="sc-gsFSXq fJiOdH font-weight-600">

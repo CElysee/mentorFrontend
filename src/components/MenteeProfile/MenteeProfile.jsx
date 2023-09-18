@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CoverImage from "../../assets/images/coverpic.jpg";
 import ProfileImage from "../../assets/images/profilepic.jpg";
 import "../MenteeProfile/MenteeProfile.css";
@@ -23,6 +23,8 @@ const override = {
 };
 function MenteeProfile() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [menteeId, setMenteeId] = useState(id);
   const [responseError, setResponseError] = useState("");
   const [color, setColor] = useState("#fff");
   const [loading, setLoading] = useState(false);
@@ -65,51 +67,31 @@ function MenteeProfile() {
       navigate("/signIn");
     } else {
       const fetchUserProfile = async () => {
+        const url = `/auth/users/profile?user_id=${menteeId}`;
         try {
-          const response = await axiosInstance.get("/auth/users/me", {
+          const user_profile = await axiosInstance.post(url, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
           });
-          setProfileData((prevState) => ({
-            ...prevState,
-            userId: response.data.id,
-          }));
-          const url = `/auth/users/profile?user_id=${response.data.id}`;
-          if (response.status == 200) {
-            try {
-              const user_profile = await axiosInstance.post(url, {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
-              if (user_profile.status === 200) {
-                if (user_profile.data) {
-                  setProfileData((prevState) => ({
-                    ...prevState,
-                    name: user_profile.data.name,
-                    bio: user_profile.data.user_profile.bio,
-                    social_twitter:
-                      user_profile.data.user_profile.social_twitter,
-                    social_linkedin:
-                      user_profile.data.user_profile.social_linkedin,
-                    company: user_profile.data.user_profile.company,
-                    company_title: user_profile.data.user_profile.company_title,
-                    website: user_profile.data.user_profile.website,
-                    expertise: user_profile.data.user_profile.expertise,
-                    languages: user_profile.data.user_profile.languages,
-                    industry: user_profile.data.user_profile.industry,
-                    interest: user_profile.data.user_profile.interest,
-                    country: user_profile.data.user_profile.country,
-                    gender: user_profile.data.user_profile.gender,
-                    profile_image:
-                      user_profile.data.user_profile.profile_picture,
-                  }));
-                }
-              }
-            } catch (error) {
-              console.error("Error fetching data", error);
-            }
+          if (user_profile.data) {
+            setProfileData((prevState) => ({
+              ...prevState,
+              name: user_profile.data.name,
+              bio: user_profile.data.user_profile.bio,
+              social_twitter: user_profile.data.user_profile.social_twitter,
+              social_linkedin: user_profile.data.user_profile.social_linkedin,
+              company: user_profile.data.user_profile.company,
+              company_title: user_profile.data.user_profile.company_title,
+              website: user_profile.data.user_profile.website,
+              expertise: user_profile.data.user_profile.expertise,
+              languages: user_profile.data.user_profile.languages,
+              industry: user_profile.data.user_profile.industry,
+              interest: user_profile.data.user_profile.interest,
+              country: user_profile.data.user_profile.country,
+              gender: user_profile.data.user_profile.gender,
+              profile_image: user_profile.data.user_profile.profile_picture,
+            }));
           }
         } catch (error) {
           console.error("Error fetching data", error);
@@ -254,7 +236,7 @@ function MenteeProfile() {
     dataEditBio.append("bio", profileData.bio);
     dataEditBio.append("user_id", profileData.userId);
 
-    console.log(Object.fromEntries(dataEditBio.entries()))
+    console.log(Object.fromEntries(dataEditBio.entries()));
 
     try {
       const submitForm = await axiosInstance.post(
@@ -529,32 +511,42 @@ function MenteeProfile() {
                         <div>
                           <p className="grey-2-text mb-3">Languages</p>
                           <div className="items">
-                            {profileData.languages.map((item, index) => (
-                              <div
-                                color="#ce82ff"
-                                className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                                key={index}
-                              >
-                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                  {item.language_name}
-                                </p>
-                              </div>
-                            ))}
+                            {profileData.languages ? (
+                              <>
+                                {profileData.languages.map((item, index) => (
+                                  <div
+                                    color="#ce82ff"
+                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
+                                    key={index}
+                                  >
+                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                      {item.language_name}
+                                    </p>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </div>
                         <div>
                           <p className="grey-2-text mb-3">Expertise</p>
                           <div className="items">
-                            {profileData.expertise.map((item, index) => (
-                              <div
-                                className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
-                                key={index}
-                              >
-                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                  {item.expertise_name}
-                                </p>
-                              </div>
-                            ))}
+                            {profileData.languages ? (
+                              <>
+                                {profileData.expertise.map((item, index) => (
+                                  <div
+                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
+                                    key={index}
+                                  >
+                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                      {item.expertise_name}
+                                    </p>
+                                  </div>
+                                ))}
+                              </>
+                            ) : null}
                           </div>
                         </div>
                       </div>
@@ -562,32 +554,45 @@ function MenteeProfile() {
                         <div>
                           <p className="grey-2-text mb-3">Industry</p>
                           <div className="items">
-                            {profileData.industry.map((item, index) => (
-                              <div
-                                className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
-                                key={index}
-                              >
-                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                  {item.industry_name}
-                                </p>
-                              </div>
-                            ))}
+                            {profileData.industry ? (
+                              <>
+                                {profileData.industry.map((item, index) => (
+                                  <div
+                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
+                                    key={index}
+                                  >
+                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                      {item.industry_name}
+                                    </p>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </div>
                         <div>
                           <p className="grey-2-text mb-3">Interest</p>
                           <div className="items">
-                            {profileData.interest.map((item, index) => (
-                              <div
-                                color="#ce82ff"
-                                className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                                key={index}
-                              >
-                                <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                  {item.category_name}
-                                </p>
-                              </div>
-                            ))}
+                            {profileData.interes ? (
+                              <>
+                                {" "}
+                                {profileData.interest.map((item, index) => (
+                                  <div
+                                    color="#ce82ff"
+                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
+                                    key={index}
+                                  >
+                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                      {item.category_name}
+                                    </p>
+                                  </div>
+                                ))}
+                              </>
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </div>
                       </div>
@@ -647,39 +652,6 @@ function MenteeProfile() {
                       </div>
                     </div>
                     <div className="p-1">
-                      <div className="sc-fThUAz dhMxzl">
-                        <div className="accordion">
-                          <div className="d-flex align-items-center justify-content-between mb-3">
-                            <div>
-                              <p className="profile-strength__name">
-                                <span>Profile Strength: </span>
-                                <span className="current-level font-weight-700">
-                                  Strong ⚡️
-                                </span>
-                              </p>
-                            </div>
-                            <div className="cursor-pointer" variant="link">
-                              <p className="sc-kAyceB cCBfKf">
-                                <svg
-                                  fill="none"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M8.5 5L15.5 12L8.5 19"
-                                    stroke="var(--white)"
-                                    strokeWidth="2.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  ></path>
-                                </svg>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div className="sc-bdOgaJ kKdhCQ">
                         <div className="d-flex justify-content-between mb-4">
                           <h3 className="sc-dcJsrY eXeELN title">

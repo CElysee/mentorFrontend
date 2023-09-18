@@ -1,9 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isTokenExpired } from "../../../../utils/tokenUtils";
+import axiosInstance from "../../../axiosInstance";
+import Logo from "../../../assets/images/mentorlogo.svg"
+
 
 function SideMenu() {
   const location = useLocation();
+  const [userId, setUserId] = useState("");
+  const [userProfile, setUserProfile] = useState("");
+  const [profileImage, setProfileImage] = useState("")
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate("/signIn");
+  };
+  const token = localStorage.getItem("access_token");
+  const isExpired = isTokenExpired(token);
+  const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      if (isExpired) {
+        navigate("/signIn");
+      } else {
+        try {
+          const response = await axiosInstance.get("/auth/users/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUserId(response.data.id);
+          if (response.status == 200 && response.data.id) {
+            const requestUrl = `auth/users/mentor_profile/${response.data.id}`
+            const responseProfile = await axiosInstance.post(requestUrl);
+            setUserProfile(responseProfile.data);
+            setProfileImage(responseProfile.data.profile.profile_picture)
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchData();
+  }, []);
   const side_menu_links = [
     {
       path: "/mentor/dashboard",
@@ -31,7 +72,7 @@ function SideMenu() {
       ),
     },
     {
-      path: "/mentor/profile",
+      path: `/mentor/profile/${userId}`,
       display: "Profile",
       icon: (
         <>
@@ -130,7 +171,7 @@ function SideMenu() {
       ),
     },
     {
-      path: "/mentor/bookings",
+      path:`/mentor/bookings/${userId}`,
       display: "Bookings",
       icon: (
         <>
@@ -267,31 +308,36 @@ function SideMenu() {
       ),
     },
   ];
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    navigate("/signIn");
-  };
   return (
     <>
       <div className="v2__sidenav">
         <div className="v2__sidenav__content">
           <div className="v2__sidenav__content">
             <div className="profile mb-3">
-              <img
-                src="https://adplist-bucket.s3.amazonaws.com/media/profile_photos/79e3d1744d654d249f90fc4e0542ded5iYflq.webp"
-                className="img-fit rounded-circle"
-              />
-              <div className="text-truncate">
-                <p className="sc-gsFSXq fJiOdH mb-1 font-weight-700 text-truncate">
-                  Kalisa Patrick
+            {profileImage ? (
+                <>
+                  <img
+                    src={`${imageBaseUrl}/UserProfiles/${profileImage}`}
+                    className="img-fit rounded-circle"
+                    alt={userProfile.name}
+                    title={userProfile.name}
+                    width="100%"
+                    height="100%"
+                  />
+                </>
+              ) : (
+                <>
+                  <img src={Logo} className="img-fit rounded-circle" />
+                </>
+              )}
+              
+              <div className="">
+                <p className="sc-gsFSXq fJiOdH mb-1 font-weight-700">
+                  {userProfile.name}
                 </p>
-                <a
-                  className="grey-2-text text-decoration-none"
-                  href="https://adplist.org/members/kalisa-patrick"
-                >
+                <Link className="grey-2-text text-decoration-none" to={""}>
                   <small>View profile </small>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -310,7 +356,7 @@ function SideMenu() {
               </p>
             </Link>
           ))}
-          <a
+          <Link
             onClick={handleLogout}
             aria-label="Logout"
             className="item"
@@ -351,7 +397,7 @@ function SideMenu() {
             <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
               Logout
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </>

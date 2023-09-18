@@ -50,15 +50,15 @@ function Routers() {
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/mentee/*">
         <Route path="dashboard" element={<MenteeDashboard />} />
-        <Route path="profile" element={<MenteeProfile />} />
-        <Route path="bookings" element={<MenteeBookings />} />
+        <Route path="profile/:id" element={<MenteeProfile />} />
+        <Route path="bookings/:id" element={<MenteeBookings />} />
         <Route path="connections" element={<MenteeConnections />} />
         <Route path="support" element={<Support />} />
       </Route>
       <Route path="/mentor/*">
         <Route path="dashboard" element={<MentorDashboard />} />
-        <Route path="profile" element={<MentorDashProfile />} />
-        <Route path="bookings" element={<MentorBookings />} />
+        <Route path="profile/:id" element={<MentorDashProfile />} />
+        <Route path="bookings/:id" element={<MentorBookings />} />
         <Route path="calendar" element={<MentorCalendar />} />
         <Route path="connections" element={<MentorConnections />} />
         <Route path="support" element={<Support />} />
