@@ -80,7 +80,7 @@ function Bookings() {
                         </svg>
                       </span>
                       <p className="font-weight-400">
-                        The session timings are following your mentor schedules
+                        The session timings are following your schedules
                       </p>
                     </div>
                   </div>

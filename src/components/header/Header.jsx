@@ -19,10 +19,10 @@ function Header() {
     }
   }, [isExpired]);
   const nav_links = [
-    {
-      path: "/about",
-      display: "About Us",
-    },
+    // {
+    //   path: "/about",
+    //   display: "About Us",
+    // },
     {
       path: "/findMentor",
       display: "Find Mentor",

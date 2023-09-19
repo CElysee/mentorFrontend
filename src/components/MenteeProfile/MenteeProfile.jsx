@@ -32,6 +32,7 @@ function MenteeProfile() {
   const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [userRole, setUserRole] = useState("");
   const [profileData, setProfileData] = useState({
     name: "",
     bio: "",
@@ -69,29 +70,32 @@ function MenteeProfile() {
       const fetchUserProfile = async () => {
         const url = `/auth/users/profile?user_id=${menteeId}`;
         try {
-          const user_profile = await axiosInstance.post(url, {
+          const response = await axiosInstance.post(url, {
             headers: {
               "Content-Type": "application/json",
             },
           });
-          if (user_profile.data) {
+          if (response.status == 200) {
             setProfileData((prevState) => ({
               ...prevState,
-              name: user_profile.data.name,
-              bio: user_profile.data.user_profile.bio,
-              social_twitter: user_profile.data.user_profile.social_twitter,
-              social_linkedin: user_profile.data.user_profile.social_linkedin,
-              company: user_profile.data.user_profile.company,
-              company_title: user_profile.data.user_profile.company_title,
-              website: user_profile.data.user_profile.website,
-              expertise: user_profile.data.user_profile.expertise,
-              languages: user_profile.data.user_profile.languages,
-              industry: user_profile.data.user_profile.industry,
-              interest: user_profile.data.user_profile.interest,
-              country: user_profile.data.user_profile.country,
-              gender: user_profile.data.user_profile.gender,
-              profile_image: user_profile.data.user_profile.profile_picture,
+              name: response.data.name,
+              bio: response.data.user_profile[0].bio,
+              social_twitter: response.data.user_profile[0].social_twitter,
+              social_linkedin: response.data.user_profile[0].social_linkedin,
+              company: response.data.user_profile[0].company,
+              company_title: response.data.user_profile[0].company_title,
+              website: response.data.user_profile[0].website,
+              expertise: response.data.user_profile[0].expertise,
+              languages: response.data.user_profile[0].languages,
+              industry: response.data.user_profile[0].industry,
+              interest: response.data.user_profile[0].interest,
+              country: response.data.user_profile[0].country,
+              gender: response.data.user_profile[0].gender,
+              profile_image: response.data.user_profile[0].profile_picture,
             }));
+            const user_role = localStorage.getItem("user_role");
+            setUserRole(user_role);
+            console.log(response.data.user_profile[0].interest)
           }
         } catch (error) {
           console.error("Error fetching data", error);
@@ -297,6 +301,7 @@ function MenteeProfile() {
       });
     }
   };
+
   return (
     <>
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
@@ -442,7 +447,10 @@ function MenteeProfile() {
                   role="tabpanel"
                   aria-labelledby="overview-tab"
                 >
-                  <div className="Layout__Wrapper-sc-1js8544-0 oKXVt">
+                  <div
+                    className="Layout__Wrapper-sc-1js8544-0 oKXVt"
+                    id={userRole == "mentee" && "mentor_side"}
+                  >
                     <div style={{ marginBottom: "8rem" }}>
                       <div className="line-height-16 mb-3">
                         <div
@@ -507,96 +515,79 @@ function MenteeProfile() {
                           </Link>
                         </div>
                       </div>
-                      <div className="profile_info xYlXD mb-4">
-                        <div>
-                          <p className="grey-2-text mb-3">Languages</p>
-                          <div className="items">
-                            {profileData.languages ? (
-                              <>
-                                {profileData.languages.map((item, index) => (
-                                  <div
-                                    color="#ce82ff"
-                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                                    key={index}
-                                  >
-                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                      {item.language_name}
-                                    </p>
-                                  </div>
-                                ))}
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <p className="grey-2-text mb-3">Expertise</p>
-                          <div className="items">
-                            {profileData.languages ? (
-                              <>
-                                {profileData.expertise.map((item, index) => (
-                                  <div
-                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
-                                    key={index}
-                                  >
-                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                      {item.expertise_name}
-                                    </p>
-                                  </div>
-                                ))}
-                              </>
-                            ) : null}
-                          </div>
+                      <div className="ExperienceSection__Wrapper-sc-dr685y-2 iXdsSl">
+                    <p className="sc-gsFSXq fJiOdH font-weight-700 mb-16">
+                      Experience
+                    </p>
+                    <div className="experience-container">
+                      <div className="experience-category">
+                        <p className="sc-kAyceB cCBfKf grey-2-text">
+                          Expertise
+                        </p>
+                        <div className="items">
+                          {profileData.expertise.map((item, index) => (
+                            <div
+                              key={index}
+                              color="#3D9AE8"
+                              className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
+                            >
+                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                {item.expertise_name}
+                              </p>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                      <div className="profile_info xYlXD mb-4">
-                        <div>
-                          <p className="grey-2-text mb-3">Industry</p>
-                          <div className="items">
-                            {profileData.industry ? (
-                              <>
-                                {profileData.industry.map((item, index) => (
-                                  <div
-                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 jvssHl"
-                                    key={index}
-                                  >
-                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                      {item.industry_name}
-                                    </p>
-                                  </div>
-                                ))}
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </div>
-                        <div>
-                          <p className="grey-2-text mb-3">Interest</p>
-                          <div className="items">
-                            {profileData.interes ? (
-                              <>
-                                {" "}
-                                {profileData.interest.map((item, index) => (
-                                  <div
-                                    color="#ce82ff"
-                                    className="ExpertiseAndLang__Item-sc-1ltorum-0 kGxxlD"
-                                    key={index}
-                                  >
-                                    <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                      {item.category_name}
-                                    </p>
-                                  </div>
-                                ))}
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </div>
+                      <div className="experience-category">
+                        <p className="sc-kAyceB cCBfKf grey-2-text">Industry</p>
+                        <div className="items">
+                          {profileData.industry.map((item, index) => (
+                            <div
+                              key={index}
+                              className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
+                            >
+                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                {item.industry_name}
+                              </p>
+                            </div>
+                          ))}
                         </div>
                       </div>
-
+                      <div className="experience-category">
+                        <p className="sc-kAyceB cCBfKf grey-2-text">
+                          Fluent in
+                        </p>
+                        <div className="items">
+                          {profileData.languages.map((item, index) => (
+                            <div
+                              key={index}
+                              className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
+                            >
+                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                {item.language_name}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="experience-category">
+                        <p className="sc-kAyceB cCBfKf grey-2-text">Interest</p>
+                        <div className="items">
+                          {profileData.interest.map((item, index) => (
+                            <div
+                              key={index}
+                              color="#3D9AE8"
+                              className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
+                            >
+                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                {item.category_name}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                       <div className="Experience__Wrapper-sc-1fzo8v-0 euYruo">
                         <div className="section-header d-flex justify-content-between align-items-center">
                           <p className="sc-gsFSXq fJiOdH font-weight-700">
@@ -646,174 +637,6 @@ function MenteeProfile() {
                                 <p className="sc-jXbUNg kFsvSZ">Google</p>
                               </div>
                               <div className="item__badge">Present</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-1">
-                      <div className="sc-bdOgaJ kKdhCQ">
-                        <div className="d-flex justify-content-between mb-4">
-                          <h3 className="sc-dcJsrY eXeELN title">
-                            Community statistics
-                          </h3>
-                        </div>
-                        <div
-                          className="sc-eldPxv jznVFK mt-4 overflow-auto pb-2"
-                          width="1440"
-                        >
-                          <div className="d-flex align-items-center">
-                            <div className="icon-wrapper muted-blue-bg">
-                              <svg
-                                fill="none"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M15.231 2.71764C17.3059 1.57646 19.6382 0.985092 22.0061 0.999779C22.556 1.00319 22.9999 1.4499 22.9999 1.99976C22.9999 4.81006 22.2116 9.70747 17.1476 13.4164C17.2328 13.774 17.3297 14.2446 17.3967 14.7647C17.4699 15.3321 17.511 15.9852 17.4513 16.6279C17.3923 17.2619 17.2287 17.9597 16.832 18.5547L16.8311 18.556C16.1522 19.5709 14.8717 20.1594 13.9772 20.4838C13.4965 20.6582 13.0524 20.7818 12.7293 20.862C12.4857 20.9224 12.307 20.9591 12.226 20.9749C11.9178 21.0335 11.6037 20.9719 11.3591 20.7677C11.1315 20.5777 10.9999 20.2965 10.9999 20V15.414L8.58599 13H3.99995C3.70347 13 3.42229 12.8685 3.23229 12.6409C3.04229 12.4133 2.96308 12.1131 3.01603 11.8214C3.04975 11.6365 3.09272 11.453 3.13795 11.2707C3.21811 10.9475 3.34178 10.5035 3.51613 10.0228C3.84059 9.12829 4.42901 7.84779 5.44392 7.16885L5.44525 7.16797C6.04024 6.77131 6.73803 6.60762 7.37209 6.54869C8.01477 6.48895 8.66789 6.5301 9.23527 6.60322C9.76079 6.67095 10.2358 6.76921 10.5947 6.85508C11.8056 5.1461 13.3898 3.73032 15.231 2.71764Z"
-                                  fill="#17C2FF"
-                                ></path>
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M6.0031 14.9883C5.21994 14.9641 4.45542 15.2299 3.85615 15.7346C3.32938 16.1774 2.94259 16.7872 2.65611 17.3738C2.36392 17.9719 2.14188 18.6175 1.97602 19.1973C1.80925 19.7804 1.69334 20.3181 1.61908 20.7092C1.58181 20.9055 1.5547 21.0666 1.53671 21.1801C1.52694 21.2417 1.51778 21.3035 1.50905 21.3653L1.50883 21.3669C1.46754 21.6758 1.57252 21.9866 1.79285 22.2069C2.01318 22.4273 2.32448 22.5322 2.63332 22.4909C2.69552 22.4821 2.75765 22.4729 2.81969 22.4631C2.93322 22.4451 3.0943 22.418 3.29056 22.3807C3.6817 22.3065 4.21944 22.1905 4.80247 22.0238C5.38232 21.8579 6.02785 21.6359 6.62604 21.3437C7.21235 21.0573 7.82202 20.6707 8.26469 20.1442C9.28572 18.935 9.30096 17.0516 8.11255 15.8782L8.1004 15.8664C7.53341 15.3253 6.78653 15.0126 6.0031 14.9883Z"
-                                  fill="#17C2FF"
-                                ></path>
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="sc-gsFSXq fJiOdH font-weight-500">
-                                0 mins
-                              </p>
-                              <p className="sc-jXbUNg kFsvSZ grey-2-text">
-                                Total learning time
-                              </p>
-                            </div>
-                          </div>
-                          <div className="d-flex align-items-center">
-                            <div className="icon-wrapper muted-red-bg">
-                              <svg
-                                fill="none"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M5.5 2C5.5 1.44772 5.05228 1 4.5 1C3.94772 1 3.5 1.44772 3.5 2V3.5H2C1.44772 3.5 1 3.94772 1 4.5C1 5.05228 1.44772 5.5 2 5.5H3.5V7C3.5 7.55228 3.94772 8 4.5 8C5.05228 8 5.5 7.55228 5.5 7V5.5H7C7.55228 5.5 8 5.05228 8 4.5C8 3.94772 7.55228 3.5 7 3.5H5.5V2Z"
-                                  fill="var(--danger)"
-                                ></path>
-                                <path
-                                  d="M5.5 17C5.5 16.4477 5.05228 16 4.5 16C3.94772 16 3.5 16.4477 3.5 17V18.5H2C1.44772 18.5 1 18.9477 1 19.5C1 20.0523 1.44772 20.5 2 20.5H3.5V22C3.5 22.5523 3.94772 23 4.5 23C5.05228 23 5.5 22.5523 5.5 22V20.5H7C7.55228 20.5 8 20.0523 8 19.5C8 18.9477 7.55228 18.5 7 18.5H5.5V17Z"
-                                  fill="var(--danger)"
-                                ></path>
-                                <path
-                                  d="M13.9333 2.64102C13.7848 2.25483 13.4138 2 13 2C12.5862 2 12.2152 2.25483 12.0667 2.64102L10.3325 7.14988C10.0321 7.93093 9.93768 8.156 9.80855 8.33759C9.67899 8.5198 9.5198 8.67899 9.33759 8.80855C9.156 8.93768 8.93093 9.03207 8.14988 9.33248L3.64102 11.0667C3.25483 11.2152 3 11.5862 3 12C3 12.4138 3.25483 12.7848 3.64102 12.9333L8.14988 14.6675C8.93093 14.9679 9.156 15.0623 9.33759 15.1914C9.5198 15.321 9.67899 15.4802 9.80855 15.6624C9.93768 15.844 10.0321 16.0691 10.3325 16.8501L12.0667 21.359C12.2152 21.7452 12.5862 22 13 22C13.4138 22 13.7848 21.7452 13.9333 21.359L15.6675 16.8501C15.9679 16.0691 16.0623 15.844 16.1914 15.6624C16.321 15.4802 16.4802 15.321 16.6624 15.1914C16.844 15.0623 17.0691 14.9679 17.8501 14.6675L22.359 12.9333C22.7452 12.7848 23 12.4138 23 12C23 11.5862 22.7452 11.2152 22.359 11.0667L17.8501 9.33248C17.0691 9.03207 16.844 8.93768 16.6624 8.80855C16.4802 8.67899 16.321 8.5198 16.1914 8.33759C16.0623 8.156 15.9679 7.93093 15.6675 7.14988L13.9333 2.64102Z"
-                                  fill="var(--danger)"
-                                ></path>
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="sc-gsFSXq fJiOdH font-weight-500">
-                                0
-                              </p>
-                              <p className="sc-jXbUNg kFsvSZ grey-2-text">
-                                Sessions completed
-                              </p>
-                            </div>
-                          </div>
-                          <div className="d-flex align-items-center">
-                            <div className="icon-wrapper muted-orange-bg">
-                              <svg
-                                fill="none"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M22.7071 15.7929C23.0976 16.1834 23.0976 16.8166 22.7071 17.2071L18.2071 21.7071C17.8166 22.0976 17.1834 22.0976 16.7929 21.7071L14.7929 19.7071C14.4024 19.3166 14.4024 18.6834 14.7929 18.2929C15.1834 17.9024 15.8166 17.9024 16.2071 18.2929L17.5 19.5858L21.2929 15.7929C21.6834 15.4024 22.3166 15.4024 22.7071 15.7929Z"
-                                  fill="var(--warning)"
-                                ></path>
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M17 2C17 1.44772 16.5523 1 16 1C15.4477 1 15 1.44772 15 2V3H9V2C9 1.44772 8.55229 1 8 1C7.44772 1 7 1.44772 7 2V3.00163C6.52454 3.00489 6.10898 3.01472 5.74818 3.04419C5.18608 3.09012 4.66938 3.18868 4.18404 3.43597C3.43139 3.81947 2.81947 4.43139 2.43598 5.18404C2.18868 5.66937 2.09012 6.18608 2.0442 6.74817C1.99998 7.28936 1.99999 7.95373 2 8.75869V17.2413C1.99999 18.0463 1.99998 18.7106 2.0442 19.2518C2.09012 19.8139 2.18868 20.3306 2.43598 20.816C2.81947 21.5686 3.43139 22.1805 4.18404 22.564C4.66938 22.8113 5.18608 22.9099 5.74818 22.9558C6.28937 23 6.95372 23 7.75868 23H13.326C13.9318 23 14.2347 23 14.375 22.8802C14.4967 22.7763 14.5613 22.6203 14.5487 22.4608C14.5342 22.2769 14.32 22.0627 13.8917 21.6343L13.3787 21.1213C12.2071 19.9497 12.2071 18.0503 13.3787 16.8787C14.5095 15.7478 16.3186 15.7085 17.4966 16.7608L19.8787 14.3787C20.2615 13.9959 20.7219 13.7382 21.2093 13.6055C21.5544 13.5116 21.727 13.4647 21.8055 13.4041C21.8891 13.3396 21.9219 13.2966 21.9622 13.199C22 13.1074 22 12.9716 22 12.7V8.75868C22 7.95372 22 7.28936 21.9558 6.74817C21.9099 6.18608 21.8113 5.66937 21.564 5.18404C21.1805 4.43139 20.5686 3.81947 19.816 3.43597C19.3306 3.18868 18.8139 3.09012 18.2518 3.04419C17.891 3.01472 17.4755 3.00489 17 3.00163V2ZM7 6V5.00176C6.55447 5.00489 6.20463 5.01357 5.91104 5.03755C5.47262 5.07337 5.24842 5.1383 5.09202 5.21799C4.7157 5.40973 4.40974 5.7157 4.21799 6.09202C4.1383 6.24842 4.07337 6.47262 4.03755 6.91104C4.00078 7.36113 4 7.94342 4 8.8V9H20V8.8C20 7.94342 19.9992 7.36113 19.9624 6.91104C19.9266 6.47262 19.8617 6.24842 19.782 6.09202C19.5903 5.7157 19.2843 5.40973 18.908 5.21799C18.7516 5.1383 18.5274 5.07337 18.089 5.03755C17.7954 5.01357 17.4455 5.00489 17 5.00176V6C17 6.55228 16.5523 7 16 7C15.4477 7 15 6.55228 15 6V5H9V6C9 6.55228 8.55229 7 8 7C7.44772 7 7 6.55228 7 6Z"
-                                  fill="var(--warning)"
-                                ></path>
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="sc-gsFSXq fJiOdH font-weight-500">
-                                0%
-                              </p>
-                              <p className="sc-jXbUNg kFsvSZ grey-2-text">
-                                Average attendance
-                                <svg
-                                  width="14"
-                                  height="14"
-                                  viewBox="0 0 18 18"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-                                    stroke="var(--grey-2)"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  ></path>
-                                </svg>
-                              </p>
-                            </div>
-                          </div>
-                          <div className="d-flex align-items-center">
-                            <div className="icon-wrapper transparent-green-bg">
-                              <svg
-                                fill="none"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M16.992 10.5455C16.1473 8.34649 14.001 6.79594 11.3331 7.29093C8.38389 7.83815 6.45042 10.5187 6.85266 13.4356C6.99659 14.4793 7.44958 16.151 7.91427 17.7148C8.38612 19.3026 8.89469 20.8594 9.17745 21.7096C9.1796 21.716 9.18178 21.7226 9.18401 21.7293C9.21637 21.8268 9.25663 21.948 9.30133 22.0536C9.35482 22.1799 9.4397 22.3476 9.59039 22.5072C9.79047 22.7191 10.0509 22.8694 10.3344 22.9368C10.548 22.9875 10.7357 22.9771 10.8718 22.9603C10.9856 22.9462 11.1107 22.9205 11.2113 22.8998C11.2182 22.8984 11.225 22.897 11.2317 22.8956C12.1093 22.7154 13.7118 22.3774 15.3229 21.9921C16.9095 21.6127 18.5837 21.1691 19.5595 20.7719C22.2734 19.6673 23.6886 16.6567 22.6361 13.8066C21.698 11.2661 19.3167 10.176 16.992 10.5455Z"
-                                  fill="#66D554"
-                                ></path>
-                                <path
-                                  d="M14.5952 1.49282C12.1355 0.359819 9.68086 1.27275 8.29831 3.1779C6.1461 2.22022 3.53199 2.64153 1.99558 4.87797C0.29708 7.35035 0.825343 10.613 3.17234 12.3911C3.59193 12.709 4.17918 13.0846 4.84321 13.4791C4.4244 9.58226 7.05667 6.05027 10.9683 5.3245C13.773 4.8041 16.1321 5.90788 17.6302 7.72748C18.2268 5.25389 17.0637 2.62986 14.5952 1.49282Z"
-                                  fill="#66D554"
-                                ></path>
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="sc-gsFSXq fJiOdH font-weight-500">
-                                3
-                              </p>
-                              <p className="sc-jXbUNg kFsvSZ grey-2-text">
-                                Karma Points
-                                <svg
-                                  width="14"
-                                  height="14"
-                                  viewBox="0 0 18 18"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-                                    stroke="var(--grey-2)"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  ></path>
-                                </svg>
-                              </p>
                             </div>
                           </div>
                         </div>

@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../Dashboard.css";
 import SideMenu from "../Mentee/SideMenu";
+import axiosInstance from "../../../axiosInstance";
 
 function Dashboard() {
+  const [profileMentor, setProfileMentor] = useState([]);
+  const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const profileApi = await axiosInstance("/mentors/list");
+        if (profileApi.status == 200) {
+          setProfileMentor(profileApi.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
@@ -66,7 +84,6 @@ function Dashboard() {
                           <div className="sc-fPXMVe fyyVTl"></div>
                         </div>
                         <div className="banner__content">
-                         
                           <div className="banner__content__item undefined">
                             <div className="item__check">
                               <svg
@@ -90,293 +107,160 @@ function Dashboard() {
                         </div>
                       </div>
                     </div>
-                   
+
                     <div className="sc-ggqIjW hrKGOz">
                       <div className="d-flex align-items-center justify-content-between mb-16">
                         <p className="sc-gsFSXq fJiOdH font-weight-600">
-                          Explore from over 100 mentors
+                          Discover the Rwanda's top mentors
                         </p>
 
                         <div className="d-flex align-items-center">
-                          <a href="/" className="px-2">
-                            <svg
-                              fill="none"
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M15.5 19L8.5 12L15.5 5"
-                                stroke="var(--grey-3)"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </svg>
-                          </a>
-                          <a href="/" className="px-2">
-                            <svg
-                              fill="none"
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M8.5 5L15.5 12L8.5 19"
-                                stroke="var(--default)"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </svg>
-                          </a>
+                          <button
+                            height="32"
+                            type="button"
+                            className="sc-jlZhew iuoDZQ text-truncate font-size-12 btn--default-outline btn btn-default"
+                          >
+                            Explore all
+                          </button>
                         </div>
                       </div>
-                      <div className="row mentors-to-meet">
-                        <div className="col-12 col-md-12">
-                          <div className="row">
-                            <div className="col-12 col-md-4">
-                              <div className="sc-dBmzty bBplWd mentor-to-meet-card cursor-pointer">
-                                <div className="mentor-avatar overflow-hidden">
-                                  <div className="image-dimmer"></div>
-                                  <img
-                                    alt="Rohit Sharma"
-                                    title="Rohit Sharma"
-                                    className=""
-                                    width="100%"
-                                    height="100%"
-                                    src="https://adplist-bucket.s3.amazonaws.com/media/profile_photos/4899bee8b6a64e769a3028b1a45468b6JvhQp.jpg"
-                                  />
-                                </div>
-                                <div
-                                  className="sc-eldPxv bJvagg mb-4"
-                                  width="1440"
-                                >
-                                  <p className="sc-kAyceB cCBfKf preview__content__name d-flex align-items-center text-truncate">
-                                    <span className="black-text font-weight-600 text-truncate">
-                                      Rohit Sharma&nbsp;
-                                    </span>
-                                    <span>🇬🇧</span>
-                                  </p>
-                                  <div className="preview__content__job grey-1-text">
-                                    <div className="item">
-                                      <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 17 17"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M14.1667 4.95833H2.83335C2.05095 4.95833 1.41669 5.59259 1.41669 6.37499V13.4583C1.41669 14.2407 2.05095 14.875 2.83335 14.875H14.1667C14.9491 14.875 15.5834 14.2407 15.5834 13.4583V6.37499C15.5834 5.59259 14.9491 4.95833 14.1667 4.95833Z"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                        <path
-                                          d="M11.3334 14.875V3.54167C11.3334 3.16594 11.1841 2.80561 10.9184 2.53993C10.6527 2.27426 10.2924 2.125 9.91669 2.125H7.08335C6.70763 2.125 6.3473 2.27426 6.08162 2.53993C5.81594 2.80561 5.66669 3.16594 5.66669 3.54167V14.875"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                      </svg>
-                                      <p className="sc-jXbUNg kFsvSZ ml-2 line-clamp">
-                                        <span>Senior Designer</span>{" "}
-                                        <span className="grey-2-text">at</span>{" "}
-                                        <span>VCCP</span>
-                                      </p>
+                      <div className="Mentors__CarouselWrapper-sc-uiznoc-0 fDuWxS">
+                        <div className="carousel slide">
+                          <div className="carousel-inner">
+                            <div className="active carousel-item">
+                              <div className="Mentors__Grid-sc-uiznoc-1 epLwlm">
+                                {profileMentor.map((item, index) => (
+                                  <Link
+                                    key={index}
+                                    className="sc-dBmzty dGxpIk text-decoration-none"
+                                    to={`/mentorProfile/${item.mentor.id}`}
+                                  >
+                                    <div className="mentor-avatar overflow-hidden">
+                                      <div className="image-dimmer"></div>
+                                      <img
+                                        src={
+                                          item.profile.profile_picture
+                                            ? `${imageBaseUrl}/UserProfiles/${item.profile.profile_picture}`
+                                            : null
+                                        }
+                                        className="img-fit w-100 h-100"
+                                        alt={item.mentor.name}
+                                        title={item.mentor.name}
+                                        width="100%"
+                                        height="100%"
+                                      />
                                     </div>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <svg
-                                      fill="none"
-                                      width="18"
-                                      height="18"
-                                      viewBox="0 0 24 24"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="mr-2"
+                                    <div
+                                      className="sc-eldPxv bJvagg mb-4"
+                                      width="1440"
                                     >
-                                      <path
-                                        d="M12 2.00003L15.09 8.26003L22 9.27003L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27003L8.91 8.26003L12 2.00003Z"
-                                        fill="#FFC200"
-                                        stroke="#FFC200"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      ></path>
-                                    </svg>
-                                    <p className="sc-jXbUNg kFsvSZ grey-1-text">
-                                      New mentor
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-12 col-md-4">
-                              <div className="sc-dBmzty bBplWd mentor-to-meet-card cursor-pointer">
-                                <div className="mentor-avatar overflow-hidden">
-                                  <div className="image-dimmer"></div>
-
-                                  <img
-                                    alt="Rohit Sharma"
-                                    title="Rohit Sharma"
-                                    className=""
-                                    width="100%"
-                                    height="100%"
-                                    src="https://adplist-bucket.s3.amazonaws.com/media/profile_photos/4899bee8b6a64e769a3028b1a45468b6JvhQp.jpg"
-                                  />
-                                </div>
-                                <div
-                                  className="sc-eldPxv bJvagg mb-4"
-                                  width="1440"
-                                >
-                                  <p className="sc-kAyceB cCBfKf preview__content__name d-flex align-items-center text-truncate">
-                                    <span className="black-text font-weight-600 text-truncate">
-                                      Rohit Sharma&nbsp;
-                                    </span>
-                                    <span>🇬🇧</span>
-                                  </p>
-                                  <div className="preview__content__job grey-1-text">
-                                    <div className="item">
-                                      <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 17 17"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M14.1667 4.95833H2.83335C2.05095 4.95833 1.41669 5.59259 1.41669 6.37499V13.4583C1.41669 14.2407 2.05095 14.875 2.83335 14.875H14.1667C14.9491 14.875 15.5834 14.2407 15.5834 13.4583V6.37499C15.5834 5.59259 14.9491 4.95833 14.1667 4.95833Z"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                        <path
-                                          d="M11.3334 14.875V3.54167C11.3334 3.16594 11.1841 2.80561 10.9184 2.53993C10.6527 2.27426 10.2924 2.125 9.91669 2.125H7.08335C6.70763 2.125 6.3473 2.27426 6.08162 2.53993C5.81594 2.80561 5.66669 3.16594 5.66669 3.54167V14.875"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                      </svg>
-                                      <p className="sc-jXbUNg kFsvSZ ml-2 line-clamp">
-                                        <span>Senior Designer</span>{" "}
-                                        <span className="grey-2-text">at</span>{" "}
-                                        <span>VCCP</span>
+                                      <p className="sc-kAyceB cCBfKf preview__content__name d-flex align-items-center text-truncate">
+                                        <span className="black-text font-weight-600 text-truncate">
+                                          {item.mentor.name}&nbsp;
+                                        </span>
+                                        <span>
+                                          <img
+                                            src={`/assets/flags/${item.country.code.toLowerCase()}.png`}
+                                            alt={item.country.name}
+                                            className="country_flag"
+                                          />
+                                        </span>
                                       </p>
+                                      <div className="preview__content__job grey-1-text">
+                                        <div className="item">
+                                          <svg
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 17 17"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M14.1667 4.95833H2.83335C2.05095 4.95833 1.41669 5.59259 1.41669 6.37499V13.4583C1.41669 14.2407 2.05095 14.875 2.83335 14.875H14.1667C14.9491 14.875 15.5834 14.2407 15.5834 13.4583V6.37499C15.5834 5.59259 14.9491 4.95833 14.1667 4.95833Z"
+                                              stroke="var(--grey-1)"
+                                              strokeWidth="1.5"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                            ></path>
+                                            <path
+                                              d="M11.3334 14.875V3.54167C11.3334 3.16594 11.1841 2.80561 10.9184 2.53993C10.6527 2.27426 10.2924 2.125 9.91669 2.125H7.08335C6.70763 2.125 6.3473 2.27426 6.08162 2.53993C5.81594 2.80561 5.66669 3.16594 5.66669 3.54167V14.875"
+                                              stroke="var(--grey-1)"
+                                              strokeWidth="1.5"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                            ></path>
+                                          </svg>
+                                          <p className="sc-jXbUNg kFsvSZ ml-2 line-clamp">
+                                            <span>
+                                              {item.profile.company_title}
+                                            </span>{" "}
+                                            <span className="grey-2-text">
+                                              at
+                                            </span>{" "}
+                                            <span>{item.profile.company}</span>
+                                          </p>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <svg
-                                      fill="none"
-                                      width="18"
-                                      height="18"
-                                      viewBox="0 0 24 24"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="mr-2"
-                                    >
-                                      <path
-                                        d="M12 2.00003L15.09 8.26003L22 9.27003L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27003L8.91 8.26003L12 2.00003Z"
-                                        fill="#FFC200"
-                                        stroke="#FFC200"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      ></path>
-                                    </svg>
-                                    <p className="sc-jXbUNg kFsvSZ grey-1-text">
-                                      New mentor
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-12 col-md-4">
-                              <div className="sc-dBmzty bBplWd mentor-to-meet-card cursor-pointer">
-                                <div className="mentor-avatar overflow-hidden">
-                                  <div className="image-dimmer"></div>
-
-                                  <img
-                                    alt="Rohit Sharma"
-                                    title="Rohit Sharma"
-                                    className=""
-                                    width="100%"
-                                    height="100%"
-                                    src="https://adplist-bucket.s3.amazonaws.com/media/profile_photos/4899bee8b6a64e769a3028b1a45468b6JvhQp.jpg"
-                                  />
-                                </div>
-                                <div
-                                  className="sc-eldPxv bJvagg mb-4"
-                                  width="1440"
-                                >
-                                  <p className="sc-kAyceB cCBfKf preview__content__name d-flex align-items-center text-truncate">
-                                    <span className="black-text font-weight-600 text-truncate">
-                                      Rohit Sharma&nbsp;
-                                    </span>
-                                    <span>🇬🇧</span>
-                                  </p>
-                                  <div className="preview__content__job grey-1-text">
-                                    <div className="item">
-                                      <svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 17 17"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M14.1667 4.95833H2.83335C2.05095 4.95833 1.41669 5.59259 1.41669 6.37499V13.4583C1.41669 14.2407 2.05095 14.875 2.83335 14.875H14.1667C14.9491 14.875 15.5834 14.2407 15.5834 13.4583V6.37499C15.5834 5.59259 14.9491 4.95833 14.1667 4.95833Z"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                        <path
-                                          d="M11.3334 14.875V3.54167C11.3334 3.16594 11.1841 2.80561 10.9184 2.53993C10.6527 2.27426 10.2924 2.125 9.91669 2.125H7.08335C6.70763 2.125 6.3473 2.27426 6.08162 2.53993C5.81594 2.80561 5.66669 3.16594 5.66669 3.54167V14.875"
-                                          stroke="var(--grey-1)"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        ></path>
-                                      </svg>
-                                      <p className="sc-jXbUNg kFsvSZ ml-2 line-clamp">
-                                        <span>Senior Designer</span>{" "}
-                                        <span className="grey-2-text">at</span>{" "}
-                                        <span>VCCP</span>
-                                      </p>
+                                    <div className="preview__content__metadata grey-4-bg p-3  d-flex justify-content-between">
+                                      <div>
+                                        <p className="sc-dhKdcB fwahpz grey-2-text">
+                                          Experience
+                                        </p>
+                                        <p className="sc-jXbUNg kFsvSZ grey-1-text font-weight-600">
+                                          {item.profile.level_of_experience}
+                                        </p>
+                                      </div>
+                                      <div className="d-flex align-items-center">
+                                        <svg
+                                          fill="none"
+                                          width="18"
+                                          height="18"
+                                          viewBox="0 0 24 24"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="mr-2"
+                                        >
+                                          <path
+                                            d="M12 2.00003L15.09 8.26003L22 9.27003L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27003L8.91 8.26003L12 2.00003Z"
+                                            fill="#FFC200"
+                                            stroke="#FFC200"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          ></path>
+                                        </svg>
+                                        <p className="sc-jXbUNg kFsvSZ grey-1-text">
+                                          New mentor
+                                        </p>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <svg
-                                      fill="none"
-                                      width="18"
-                                      height="18"
-                                      viewBox="0 0 24 24"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="mr-2"
-                                    >
-                                      <path
-                                        d="M12 2.00003L15.09 8.26003L22 9.27003L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27003L8.91 8.26003L12 2.00003Z"
-                                        fill="#FFC200"
-                                        stroke="#FFC200"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      ></path>
-                                    </svg>
-                                    <p className="sc-jXbUNg kFsvSZ grey-1-text">
-                                      New mentor
-                                    </p>
-                                  </div>
-                                </div>
+                                  </Link>
+                                ))}
                               </div>
                             </div>
                           </div>
+                          <a
+                            className="carousel-control-prev"
+                            role="button"
+                            href="#"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="carousel-control-prev-icon"
+                            ></span>
+                            <span className="sr-only">Previous</span>
+                          </a>
+                          <a
+                            className="carousel-control-next"
+                            role="button"
+                            href="#"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="carousel-control-next-icon"
+                            ></span>
+                            <span className="sr-only">Next</span>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -441,7 +325,7 @@ function Dashboard() {
                           <div>
                             <div className="profile-strength__name d-flex flex-column">
                               <p className="sc-jXbUNg kFsvSZ mb-1 grey-6-text">
-                                Your profile strength
+                                My Experience
                               </p>
                               <span className="current-level font-weight-700">
                                 Youngling 🔰
@@ -466,66 +350,7 @@ function Dashboard() {
                           </svg>
                         </div>
                         <div className="sc-fPXMVe dwWqlx"></div>
-                        <div className="mt-4 collapse">
-                          <div className="mb-4 d-flex">
-                            <div className="mr-2">
-                              <div className="icon-wrapper">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 24 24"
-                                  height="16"
-                                  width="16"
-                                  fill="#3A123E"
-                                  className="m-auto"
-                                >
-                                  <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                  <path d="M9 16.2l-3.5-3.5c-.39-.39-1.01-.39-1.4 0-.39.39-.39 1.01 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7c.39-.39.39-1.01 0-1.4-.39-.39-1.01-.39-1.4 0L9 16.2z"></path>
-                                </svg>
-                              </div>
-                            </div>
-                            <p className="sc-kAyceB cCBfKf grey-6-text">
-                              <s>Fill up basic info</s>
-                            </p>
-                          </div>
-                          <div className="mb-4 d-flex">
-                            <div className="mr-2">
-                              <div className="ring"></div>
-                            </div>
-                            <p
-                              title="Add two links to complete"
-                              className="sc-kAyceB cCBfKf font-weight-500 cursor-pointer"
-                            >
-                              Add your resume and portfolio links
-                            </p>
-                          </div>
-                          <div className="mb-4 d-flex">
-                            <div className="mr-2">
-                              <div className="ring"></div>
-                            </div>
-                            <p
-                              title="Add at least one experience"
-                              className="sc-kAyceB cCBfKf font-weight-500 cursor-pointer"
-                            >
-                              Add your past work experiences
-                            </p>
-                          </div>
-                          <div className="mb-4 d-flex">
-                            <div className="mr-2">
-                              <div className="ring"></div>
-                            </div>
-                            <p
-                              title="Add at least one education"
-                              className="sc-kAyceB cCBfKf font-weight-500 cursor-pointer"
-                            >
-                              Fill up your education journey
-                            </p>
-                          </div>
-                          <div className="mt-32">
-                            <p className="sc-kAyceB cCBfKf grey-6-text">
-                              Complete to get listed as a talent
-                            </p>
-                          </div>
-                        </div>
+                        
                       </div>
                     </div>
                     <div className="sc-bVVIoq jVRdKh p-3 border">
@@ -619,103 +444,11 @@ function Dashboard() {
                               ></path>
                             </svg>
                           </span>
-                          Edit Preferences
+                          Edit Profile
                         </a>
                       </div>
                     </div>
-                    <div className="sc-lgjHQU dyxDoT milestone p-4">
-                      <a
-                        href="/achievements/"
-                        className="w-100 black-text d-flex align-items-center mb-3 text-nowrap"
-                      >
-                        <p
-                          className="sc-kAyceB cCBfKf font-weight-700 mr-1 text-truncate"
-                          style={{ maxWidth: "195px" }}
-                        >
-                          Complete Your 1st Session
-                        </p>
-                        <svg
-                          fill="none"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="ml-auto"
-                        >
-                          <path
-                            d="M8.5 5L15.5 12L8.5 19"
-                            stroke="var(--grey-1)"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          ></path>
-                        </svg>
-                      </a>
-                      <div className="w-100 d-flex align-items-center">
-                        <div className="milestone__image mr-2">
-                          <img
-                            src="https://adplist-bucket.s3.amazonaws.com/media/achievement_badges/b7a09a82e6034a3cb26e229149f6c1a1u9929.png"
-                            alt="Milestone Badge"
-                            className="img-fit d-block milestone__image"
-                          />
-                        </div>
-                        <div className="w-100 milestone__progress-container">
-                          <p className="sc-jXbUNg kFsvSZ grey-2-text mb-2 white-space-pre text-truncate">
-                            Unlock other milestones
-                          </p>
-                          <div
-                            className="sc-eldPxv hLREkY align-items-center"
-                            width="1440"
-                          >
-                            <div
-                              height="0.438rem"
-                              className="sc-fPXMVe bzHroT milestone__progress"
-                            ></div>
-                            <p className="sc-kpDqfm iKwNBk grey-2-text milestone__target">
-                              0 / 1
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sc-eBwKMn bxZCda">
-                      <div className="w-100 description d-flex align-items-center">
-                        <div className="description__image mr-2">
-                          <img
-                            src="https://app.adplist.org/illustrations/dashboard/karma-point@3x.png"
-                            alt="Karma Point Image"
-                            className="img-fit w-100 d-block"
-                          />
-                        </div>
-                        <p className="sc-kAyceB cCBfKf mr-1">Karma Points</p>
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-                            stroke="var(--grey-2)"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          ></path>
-                        </svg>
-                        <h3 className="sc-dcJsrY eXeELN description__count ml-auto">
-                          3
-                        </h3>
-                      </div>
-                      <button
-                        height="32"
-                        bg="var(--muted-grey)"
-                        type="button"
-                        className="sc-jlZhew DvLWd text-truncate mt-auto w-100 btn btn-default"
-                      >
-                        Refer and earn karma
-                      </button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
