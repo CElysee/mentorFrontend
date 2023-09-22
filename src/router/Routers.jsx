@@ -24,6 +24,7 @@ import MentorConnections from "../pages/Dashboard/Mentor/Connections";
 import MentorCalendar from "../pages/Dashboard/Mentor/Calendar";
 import Support from "../pages/Dashboard/Support";
 import { isTokenExpired } from "../../utils/tokenUtils";
+import FindMentorByInterest from "../pages/FindMentorByInterest";
 // Retrieve the token from localStorage
 
 function Routers() {
@@ -42,6 +43,7 @@ function Routers() {
       <Route path="/findMentor" element={<FindMentor />} />
       <Route path="/becomeMentor" element={<BecomeMentor />} />
       <Route path="/mentorProfile/:id" element={<UserMentorProfile />} />
+      <Route path="/findMentorByInterest/:id" element={<FindMentorByInterest />} />
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/setUpMentor" element={<SetUpMentor />} />
       <Route path="/SetUpMentee" element={<SetUpMentee />} />

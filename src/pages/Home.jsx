@@ -3,7 +3,8 @@ import MentorCategories from "../components/MentorCategories/MentorCategories";
 import FeauturesSection from "../components/feauturesSection/feauturesSection";
 import DiscoverMentors from "../components/DiscoverMentors/DiscoverMentors";
 import Testimonials from "../components/testimonials/Testimonials";
-import HeroSection from "../components/heroSection/heroSection";
+import HeroSection from "../components/HeroSection/HeroSection";
+import Partners from "../components/Partners/Partners";
 
 function Home() {
   return (
@@ -13,7 +14,8 @@ function Home() {
         <MentorCategories />
         {/* <FeauturesSection /> */}
         <DiscoverMentors />
-        <Testimonials />
+        <Partners />
+        {/* <Testimonials /> */}
       </div>
     </>
   );

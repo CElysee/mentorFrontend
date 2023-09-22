@@ -32,8 +32,8 @@ function Header() {
       display: "Become Mentor",
     },
     {
-      path: "/contact",
-      display: "Contact Us",
+      path: "/#partners",
+      display: "Partners",
     },
   ];
   
