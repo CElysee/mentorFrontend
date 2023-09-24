@@ -2,9 +2,9 @@ import React from "react";
 import FeatureImage1 from "../../assets/images/career_growth.jpg"
 import FeatureImage2 from "../../assets/images/networking.jpg"
 import FeatureImage3 from "../../assets/images/talent.jpg"
-import "./feauturesSection.css"
+import "./FeauturesSection.css"
 
-function feauturesSection() {
+function FeauturesSection() {
   return (
     <>
       <div className="Features__Wrapper-sc-ogzs7c-0 kLSuSB container">
@@ -82,4 +82,4 @@ function feauturesSection() {
   );
 }
 
-export default feauturesSection;
+export default FeauturesSection;

@@ -1,5 +1,5 @@
 import React from "react";
-import MentorProfile from "../components/MentorProfile/MentorProfile";
+import MentorProfile from "../components/MentorProfile_/MentorProfile";
 
 function UserMentorProfile() {
   return (
