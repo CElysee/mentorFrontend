@@ -1,4 +1,3 @@
-import React from "react";
 import "../../pages/Authentication/Authentication.css";
 import { Link, useLocation } from "react-router-dom";
 
