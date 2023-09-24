@@ -1,9 +1,8 @@
-import React from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import FindMentor from "../pages/FindMentor";
+import FindMentors from "../pages/FindMentors";
 import BecomeMentor from "../pages/BecomeMentor";
 import UserMentorProfile from "../pages/UserMentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
@@ -39,7 +38,7 @@ function Routers() {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/findMentor" element={<FindMentor />} />
+      <Route path="/findMentor" element={<FindMentors />} />
       <Route path="/becomeMentor" element={<BecomeMentor />} />
       <Route path="/mentorProfile/:id" element={<UserMentorProfile />} />
       <Route path="/findMentorByInterest/:id" element={<FindMentorByInterest />} />
