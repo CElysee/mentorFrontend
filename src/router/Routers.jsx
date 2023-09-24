@@ -1,28 +1,28 @@
 import { Routes, Route} from "react-router-dom";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
-import FindMentor from "../pages/FindMentor";
-import HowBecomeMentor from "../pages/HowBecomeMentor";
-import UserMentorProfile from "../pages/UserMentorProfile";
-// import SignUpPage from '../pages/SignUpPage'
-import ThankYou from "../pages/Authentication/ThankYou";
+import Home from "../Pages/Home";
+import About from "../Pages/About";
+import Contact from "../Pages/Contact";
+import FindMentor from "../Pages/FindMentor";
+import HowBecomeMentor from "../Pages/HowBecomeMentor";
+import UserMentorProfile from "../Pages/UserMentorProfile";
+// import SignUpPage from '../Pages/SignUpPage'
+import ThankYou from "../Pages/Authentication/ThankYou";
 import BookingMessage from "../components/MentorProfile/BookingMessage"
-import SignUpPage from "../pages/Authentication/SignUpPage";
-import SetUpMentee from "../pages/Authentication/SetUpMentee";
-import SetUpMentor from "../pages/Authentication/SetUpMentor";
-import SignIn from "../pages/Authentication/SignIn";
-import MenteeDashboard from "../pages/Dashboard/Mentee/Dashboard";
-import MentorDashboard from "../pages/Dashboard/Mentor/Dashboard";
-import MenteeProfile from "../pages/Dashboard/Mentee/Profile";
-import MentorDashProfile from "../pages/Dashboard/Mentor/Profile";
-import MenteeBookings from "../pages/Dashboard/Mentee/Bookings";
-import MentorBookings from "../pages/Dashboard/Mentor/Bookings";
-import MenteeConnections from "../pages/Dashboard/Mentee/Connections";
-import MentorConnections from "../pages/Dashboard/Mentor/Connections";
-import MentorCalendar from "../pages/Dashboard/Mentor/Calendar";
-import Support from "../pages/Dashboard/Support";
-import FindMentorByInterest from "../pages/FindMentorByInterest";
+import SignUpPage from "../Pages/Authentication/SignUpPage";
+import SetUpMentee from "../Pages/Authentication/SetUpMentee";
+import SetUpMentor from "../Pages/Authentication/SetUpMentor";
+import SignIn from "../Pages/Authentication/SignIn";
+import MenteeDashboard from "../Pages/Dashboard/Mentee/Dashboard";
+import MentorDashboard from "../Pages/Dashboard/Mentor/Dashboard";
+import MenteeProfile from "../Pages/Dashboard/Mentee/Profile";
+import MentorDashProfile from "../Pages/Dashboard/Mentor/Profile";
+import MenteeBookings from "../Pages/Dashboard/Mentee/Bookings";
+import MentorBookings from "../Pages/Dashboard/Mentor/Bookings";
+import MenteeConnections from "../Pages/Dashboard/Mentee/Connections";
+import MentorConnections from "../Pages/Dashboard/Mentor/Connections";
+import MentorCalendar from "../Pages/Dashboard/Mentor/Calendar";
+import Support from "../Pages/Dashboard/Support";
+import FindMentorByInterest from "../Pages/FindMentorByInterest";
 // Retrieve the token from localStorage
 
 function Routers() {
