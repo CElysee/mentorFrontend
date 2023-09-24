@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./header.css";
+import "./Header.css";
 import mentorLogoPng from "../../assets/images/mentorlogo.png";
 import mentorLogoSvg from "../../assets/images/mentorlogo.svg";
 import { Link, useNavigate } from "react-router-dom";

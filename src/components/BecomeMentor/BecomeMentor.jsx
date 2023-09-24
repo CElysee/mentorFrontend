@@ -1,5 +1,5 @@
 import React from "react";
-import "./becomeMentor.css";
+import "./BecomeMentor.css";
 
 function becomeMentor() {
   return (
