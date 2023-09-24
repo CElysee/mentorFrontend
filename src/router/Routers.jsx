@@ -7,7 +7,7 @@ import HowBecomeMentor from "../pages/HowBecomeMentor";
 import UserMentorProfile from "../pages/UserMentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
 import ThankYou from "../pages/Authentication/ThankYou";
-import BookingThankYou from "../components/MentorProfile/BookingThankYou";
+import BookingMessage from "../components/MentorProfile/BookingMessage";
 import SignUpPage from "../pages/Authentication/SignUpPage";
 import SetUpMentee from "../pages/Authentication/SetUpMentee";
 import SetUpMentor from "../pages/Authentication/SetUpMentor";
@@ -46,7 +46,7 @@ function Routers() {
       <Route path="/setUpMentor" element={<SetUpMentor />} />
       <Route path="/SetUpMentee" element={<SetUpMentee />} />
       <Route path="/thankyou" element={<ThankYou />} />
-      <Route path="/bookingMessage" element={<BookingThankYou />} />
+      <Route path="/bookingMessage" element={<BookingMessage />} />
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/mentee/*">
         <Route path="dashboard" element={<MenteeDashboard />} />

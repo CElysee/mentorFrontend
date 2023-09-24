@@ -1,7 +1,7 @@
 import "../../pages/Authentication/Authentication.css";
 import { Link, useLocation } from "react-router-dom";
 
-function BookingThankYou() {
+function BookingMessage() {
   const location = useLocation();
 
   return (
@@ -57,4 +57,4 @@ function BookingThankYou() {
   );
 }
 
-export default BookingThankYou;
+export default BookingMessage;
