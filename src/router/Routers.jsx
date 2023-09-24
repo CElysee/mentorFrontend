@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import FindMentor from "../pages/FindMentor";
-import BecomeMentor from "../pages/BecomeMentor";
+import HowBecomeMentor from "../pages/HowBecomeMentor";
 import UserMentorProfile from "../pages/UserMentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
 import ThankYou from "../pages/Authentication/ThankYou";
@@ -39,7 +39,7 @@ function Routers() {
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/findMentor" element={<FindMentor />} />
-      <Route path="/becomeMentor" element={<BecomeMentor />} />
+      <Route path="/becomeMentor" element={<HowBecomeMentor />} />
       <Route path="/mentorProfile/:id" element={<UserMentorProfile />} />
       <Route path="/findMentorByInterest/:id" element={<FindMentorByInterest />} />
       <Route path="/sign-up" element={<SignUpPage />} />
