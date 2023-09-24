@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MentorProfile from "../../../components/MentorProfile_/MentorProfile";
+import MentorProfile from "../../../components/MentorProfile/MentorProfile";
 import { useNavigate } from "react-router-dom";
 import { isTokenExpired } from "../../../../utils/tokenUtils";
 import SideMenu from "../Mentor/SideMenu";

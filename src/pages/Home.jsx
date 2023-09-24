@@ -1,9 +1,9 @@
 import React from "react";
-import MentorCategories from "../components/MentorCategories_/MentorCategories";
-import FeauturesSection from "../components/FeauturesSection_/FeauturesSection";
-import DiscoverMentors from "../components/DiscoverMentors_/DiscoverMentors";
-import Testimonials from "../components/Testimonials_/Testimonials";
-import HeroSection from "../components/HeroSection_/HeroSection";
+import MentorCategories from "../components/MentorCategories/MentorCategories";
+import FeauturesSection from "../components/FeauturesSection/FeauturesSection";
+import DiscoverMentors from "../components/DiscoverMentors/DiscoverMentors";
+import Testimonials from "../components/Testimonials/Testimonials";
+import HeroSection from "../components/HeroSection/HeroSection";
 import Partners from "../components/Partners/Partners";
 
 function Home() {

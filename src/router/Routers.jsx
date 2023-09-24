@@ -7,7 +7,7 @@ import HowBecomeMentor from "../pages/HowBecomeMentor";
 import UserMentorProfile from "../pages/UserMentorProfile";
 // import SignUpPage from '../pages/SignUpPage'
 import ThankYou from "../pages/Authentication/ThankYou";
-import BookingMessage from "../components/MentorProfile_/BookingMessage"
+import BookingMessage from "../components/MentorProfile/BookingMessage"
 import SignUpPage from "../pages/Authentication/SignUpPage";
 import SetUpMentee from "../pages/Authentication/SetUpMentee";
 import SetUpMentor from "../pages/Authentication/SetUpMentor";

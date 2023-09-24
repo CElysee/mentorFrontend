@@ -1,4 +1,4 @@
-import BecomeMentor from '../components/BecomeMentor_/BecomeMentor'
+import BecomeMentor from '../components/BecomeMentor/BecomeMentor'
 
 function HowBecomeMentor() {
   return (

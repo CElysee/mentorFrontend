@@ -1,4 +1,4 @@
-import FindMentors from "../components/FindMentors_/FindMentors";
+import FindMentors from "../components/FindMentors/FindMentors";
 
 function FindMentor() {
   return (
