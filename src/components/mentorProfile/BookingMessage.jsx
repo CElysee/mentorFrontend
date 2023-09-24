@@ -1,4 +1,3 @@
-import "../../pages/Authentication/Authentication.css";
 import { Link, useLocation } from "react-router-dom";
 
 function BookingMessage() {
