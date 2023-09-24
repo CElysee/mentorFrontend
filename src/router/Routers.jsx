@@ -23,7 +23,6 @@ import MenteeConnections from "../pages/Dashboard/Mentee/Connections";
 import MentorConnections from "../pages/Dashboard/Mentor/Connections";
 import MentorCalendar from "../pages/Dashboard/Mentor/Calendar";
 import Support from "../pages/Dashboard/Support";
-import { isTokenExpired } from "../../utils/tokenUtils";
 import FindMentorByInterest from "../pages/FindMentorByInterest";
 // Retrieve the token from localStorage
 
