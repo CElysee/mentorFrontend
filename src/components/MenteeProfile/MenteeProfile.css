@@ -325,7 +325,7 @@
   height: 1em;
   padding: 0.25em 0.25em;
   color: #000;
-  background: transparent url(closebutton.svg) center/0.7em auto no-repeat;
+  background: transparent url(../../assets/images/closebutton.svg) center/0.7em auto no-repeat;
   border: 0;
   border-radius: 1rem;
   opacity: .5;
