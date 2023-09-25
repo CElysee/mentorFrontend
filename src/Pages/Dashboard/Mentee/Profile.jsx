@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import MenteeProfile from "../../../components/MenteeProfile/MenteeProfile";
 import "../Dashboard.css";
 

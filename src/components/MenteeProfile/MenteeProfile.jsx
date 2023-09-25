@@ -4,7 +4,7 @@ import CoverImage from "../../assets/images/coverpic.jpg";
 import ProfileImage from "../../assets/images/profilepic.jpg";
 import "../MenteeProfile/MenteeProfile.css";
 import IndustrySvg from "../../assets/images/industry.svg";
-import SideMenu from "../../pages/Dashboard/Mentee/SideMenu";
+import SideMenu  from "../../Pages/Dashboard/Mentee/SideMenu";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
 import UserInfo from "../EditUserProfile/UserInfo";
@@ -95,7 +95,7 @@ function MenteeProfile() {
             }));
             const user_role = localStorage.getItem("user_role");
             setUserRole(user_role);
-            console.log(response.data.user_profile[0].interest)
+            console.log(response.data.user_profile[0].interest);
           }
         } catch (error) {
           console.error("Error fetching data", error);
@@ -516,127 +516,78 @@ function MenteeProfile() {
                         </div>
                       </div>
                       <div className="ExperienceSection__Wrapper-sc-dr685y-2 iXdsSl">
-                    <p className="sc-gsFSXq fJiOdH font-weight-700 mb-16">
-                      Experience
-                    </p>
-                    <div className="experience-container">
-                      <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">
-                          Expertise
+                        <p className="sc-gsFSXq fJiOdH font-weight-700 mb-16">
+                          Experience
                         </p>
-                        <div className="items">
-                          {profileData.expertise.map((item, index) => (
-                            <div
-                              key={index}
-                              color="#3D9AE8"
-                              className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.expertise_name}
-                              </p>
+                        <div className="experience-container">
+                          <div className="experience-category">
+                            <p className="sc-kAyceB cCBfKf grey-2-text">
+                              Expertise
+                            </p>
+                            <div className="items">
+                              {profileData.expertise.map((item, index) => (
+                                <div
+                                  key={index}
+                                  color="#3D9AE8"
+                                  className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
+                                >
+                                  <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                    {item.expertise_name}
+                                  </p>
+                                </div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">Industry</p>
-                        <div className="items">
-                          {profileData.industry.map((item, index) => (
-                            <div
-                              key={index}
-                              className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.industry_name}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">
-                          Fluent in
-                        </p>
-                        <div className="items">
-                          {profileData.languages.map((item, index) => (
-                            <div
-                              key={index}
-                              className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.language_name}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="experience-category">
-                        <p className="sc-kAyceB cCBfKf grey-2-text">Interest</p>
-                        <div className="items">
-                          {profileData.interest.map((item, index) => (
-                            <div
-                              key={index}
-                              color="#3D9AE8"
-                              className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
-                            >
-                              <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
-                                {item.category_name}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                      <div className="Experience__Wrapper-sc-1fzo8v-0 euYruo">
-                        <div className="section-header d-flex justify-content-between align-items-center">
-                          <p className="sc-gsFSXq fJiOdH font-weight-700">
-                            Experience
-                          </p>
-                          <div
-                            color="#fafafa"
-                            radius="8"
-                            width="28px"
-                            height="28px"
-                            className="sc-bDpDS kwfMeA cursor-pointer"
-                          >
-                            <svg
-                              fill="none"
-                              width="12"
-                              height="12"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16.6168 3.75204C16.8552 3.51361 17.1383 3.32448 17.4498 3.19545C17.7613 3.06641 18.0952 3 18.4324 3C18.7696 3 19.1035 3.06641 19.415 3.19545C19.7265 3.32448 20.0095 3.51361 20.248 3.75204C20.4864 3.99046 20.6755 4.27351 20.8046 4.58503C20.9336 4.89655 21 5.23043 21 5.56761C21 5.90479 20.9336 6.23868 20.8046 6.55019C20.6755 6.86171 20.4864 7.14476 20.248 7.38319L7.99283 19.6383L3 21L4.36168 16.0072L16.6168 3.75204Z"
-                                stroke="var(--black)"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              ></path>
-                            </svg>
                           </div>
-                        </div>
-                        <div>
-                          <div
-                            type="list"
-                            className="InfoCard__Wrapper-sc-1s9rrnh-0 btOVqP"
-                          >
-                            <div className="main-content">
-                              <div className="item__photo">
-                                <img
-                                  src={IndustrySvg}
-                                  alt="industry logo"
-                                  className=""
-                                />
-                              </div>
-                              <div className="item__content">
-                                <p className="sc-gsFSXq fJiOdH mb-1 font-weight-500">
-                                  Software engineer
-                                </p>
-                                <p className="sc-jXbUNg kFsvSZ">Google</p>
-                              </div>
-                              <div className="item__badge">Present</div>
+                          <div className="experience-category">
+                            <p className="sc-kAyceB cCBfKf grey-2-text">
+                              Industry
+                            </p>
+                            <div className="items">
+                              {profileData.industry.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
+                                >
+                                  <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                    {item.industry_name}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="experience-category">
+                            <p className="sc-kAyceB cCBfKf grey-2-text">
+                              Fluent in
+                            </p>
+                            <div className="items">
+                              {profileData.languages.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className="ExperienceSection__Item-sc-dr685y-1 dVoQPv"
+                                >
+                                  <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                    {item.language_name}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="experience-category">
+                            <p className="sc-kAyceB cCBfKf grey-2-text">
+                              Interest
+                            </p>
+                            <div className="items">
+                              {profileData.interest.map((item, index) => (
+                                <div
+                                  key={index}
+                                  color="#3D9AE8"
+                                  className="ExperienceSection__Item-sc-dr685y-1 eCqMRJ"
+                                >
+                                  <p className="sc-jXbUNg kFsvSZ position-relative font-weight-700">
+                                    {item.category_name}
+                                  </p>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>
