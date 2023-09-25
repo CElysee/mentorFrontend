@@ -95,8 +95,8 @@
     font-weight: 700;
 }
 .ihhFES .grad-bg {
-    background-color: rgb(241, 8, 126);
-    background-image: linear-gradient(140deg, rgb(229 88 18), rgb(252, 148, 95));
+    background-color: rgb(13 71 73);
+    background-image: linear-gradient(140deg, rgb(13 71 73), rgb(252, 148, 95));
     background-clip: text;
     -webkit-text-fill-color: transparent;
     object-fit: cover;
@@ -123,8 +123,8 @@
     line-height: 24px;
     padding: 18px 26px;
     border-radius: 8px;
-    background-color: var(--adp-grad-2);
-    background-image: var(--adp-grad-2);
+    background-color: #0E4749 !important;
+    border-color: #0E4749;
 }
 .ihhFES .spacing-60 {
     height: 60px;

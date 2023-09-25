@@ -1,7 +1,8 @@
 import React from "react";
-import "./Footer.css"
-import mentorLogoPng from "../../assets/images/mentorlogo.png"
-import mentorLogoSvg from "../../assets/images/mentorlogo.svg"
+import { Link } from "react-router-dom";
+import "./Footer.css";
+import mentorLogoPng from "../../assets/images/mentorlogo.png";
+import mentorLogoSvg from "../../assets/images/mentorlogo.svg";
 
 function Footer() {
   const year = new Date();
@@ -14,7 +15,7 @@ function Footer() {
             <div
               className="sc-eldPxv hLgegR d-lg-flex align-items-center mb-lg-0"
               width="1440"
-              style={{maxWidth: "548px", marginBottom: "36px"}}
+              style={{ maxWidth: "548px", marginBottom: "36px" }}
             >
               <div>
                 <img src={mentorLogoSvg} width={"100"} />
@@ -27,7 +28,7 @@ function Footer() {
             </div>
             <div className="socials d-flex align-items-center mx-n1 justify-content-lg-end mb-3 mb-xl-0">
               <a
-                href="https://www.youtube.com/channel/UCEDeB17hbLD_Ius5cnilqSg"
+                href="#"
                 target="youtube"
                 aria-label="youtube"
                 className="d-block text-decoration-none mx-1"
@@ -64,7 +65,7 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/adplist-org/"
+                href="#"
                 target="linkedin"
                 aria-label="linkedin"
                 className="d-block text-decoration-none mx-1"
@@ -85,7 +86,7 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/adplist"
+                href="#"
                 target="twitter"
                 aria-label="twitter"
                 className="d-block text-decoration-none mx-1"
@@ -104,7 +105,7 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.instagram.com/joinadplist/"
+                href="#"
                 target="instagram"
                 aria-label="instagram"
                 className="d-block text-decoration-none mx-1"
@@ -145,7 +146,7 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/ADPList"
+                href="#"
                 target="facebook"
                 aria-label="facebook"
                 className="d-block text-decoration-none mx-1"
@@ -209,73 +210,43 @@ function Footer() {
                   ></path>
                 </svg>
               </a>
-             
             </div>
           </div>
           <div className="border-top grey-4-border mt-3 mt-lg-32 pt-4 py-lg-4">
             <div className="d-lg-flex justify-content-between">
               <div className="d-lg-flex links -first">
-                <a href="https://adplist.org/mentors" target="find mentors">
+                <Link to={"/findMentor"} target="find mentors">
                   find mentors
-                </a>
-                <a
-                  href="https://adplist.org/become-a-mentor"
-                  target="become a mentor"
-                >
+                </Link>
+                <Link to={"/becomeMentor"} target="become a mentor">
                   become a mentor
-                </a>
-                <a href="https://community.adplist.org/" target="_blank">
-                  community
-                </a>
-                <a href="https://blog.adplist.org/" target="_blank">
-                  blog
-                </a>
+                </Link>
+
+                <Link to={"#"}>community</Link>
+                <Link to={"#"}>blog</Link>
               </div>
               <div className="d-lg-flex links -second">
-                <a href="https://app.adplist.org/login" target="_blank">
-                  join adplist
-                </a>
-                <a href="https://adplist.org/faqs">FAQs</a>
-                <a
-                  href="https://adplist.notion.site/ADPList-Knowledge-hub-e3afba73ec4c4284bc02313c422eecee"
-                  target="_blank"
-                >
-                  help center
-                </a>
-                <a href="mailto: partnerships@adplist.org">partnerships</a>
+                <Link to={"#"}>join mentor.rw list</Link>
+                <Link to={"#"}>FAQs</Link>
+                <Link href="mailto: partnerships@adplist.org">
+                  partnerships
+                </Link>
               </div>
             </div>
           </div>
           <div className="d-lg-flex justify-content-between">
             <div className="d-flex justify-content-lg-end links -third mb-4 mb-lg-0 order-lg-2">
-              <a
-                href="mailto: support@adplist.org"
+              <Link
+                href="mailto: info@mentor.rw"
                 target="Contact us"
                 className="mb-md-0"
               >
                 Contact us
-              </a>
-              <a
-                href="https://www.adplist.org/privacy-policy"
-                target="_blank"
-                className="mb-md-0"
-              >
+              </Link>
+              <Link to={"/"} className="mb-md-0">
                 Privacy Policy
-              </a>
-              <a
-                href="https://www.adplist.org/terms-and-conditions"
-                target="_blank"
-                className="mb-md-0"
-              >
-                Terms of use
-              </a>
-              <a
-                href="https://adplist.org/sitemap"
-                target="_blank"
-                className="mb-md-0"
-              >
-                Sitemap
-              </a>
+              </Link>
+              <Link className="mb-md-0">Terms of use</Link>
             </div>
             <p className="grey-2-text font-size-12 order-lg-1">
               Copyright {currentYear} - Mentor

@@ -5,91 +5,6 @@ function becomeMentor() {
   return (
     <>
       <div className="becomeAMentor__Wrapper-sc-11bsio4-0 ihhFES">
-        <div className="section hero position-relative">
-          <div className="w-layout-grid hero-grid">
-            <div className="col hero-left">
-              <div
-                data-poster-url="https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-poster-00001.jpg"
-                data-video-urls="https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-transcode.mp4,https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-transcode.webm"
-                data-autoplay="true"
-                data-loop="true"
-                data-wf-ignore="true"
-                className="hero-bg-video w-background-video w-background-video-atom"
-              >
-                <video
-                  autoPlay=""
-                  loop=""
-                  muted=""
-                  poster="https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-poster-00001.jpg"
-                >
-                  <source
-                    src="https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-transcode.mp4"
-                    type="video/mp4"
-                  />
-                  <source
-                    src="https://uploads-ssl.webflow.com/60ba5090a369913dd8084681/60ba55363448cd9302cc58b9_Screen Recording 2021-06-04 at 42752 PM-transcode.webm"
-                    type="video/webm"
-                  />
-                </video>
-                <div className="hero-video w-inline-block w-lightbox cursor-pointer">
-                  <img
-                    src="https://adplist.org/images/Vector.svg"
-                    loading="lazy"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col col-bg-grey">
-              <div className="hero-text-block">
-                <h1
-                  className="react-reveal"
-                  style={{
-                    animationFillMode: "both",
-                    animationDuration: "1000ms",
-                    animationDelay: "500ms",
-                    animationIterationCount: "1",
-                    opacity: "1",
-                    animationName: "react-reveal-862089909884036-1",
-                  }}
-                >
-                  Your next chapter,
-                  <span className="grad-bg">made possible</span> by Mentoring
-                </h1>
-                <div
-                  className="react-reveal spacing-40"
-                  style={{
-                    animationFillMode: "both",
-                    animationDuration: "1000ms",
-                    animationDelay: "500ms",
-                    animationIterationCount: "1",
-                    opacity: "1",
-                    animationName: "react-reveal-862089909884036-1",
-                  }}
-                ></div>
-                <button className="button w-button">Become a mentor</button>
-                <div className="spacing-60"></div>
-                <div className="animated-arrow-group">
-                  <img
-                    src="https://adplist.org/images/arrow-down-2.svg"
-                    loading="lazy"
-                    data-w-id="c10f8cdf-9a00-c0b5-225f-f51c7a43c2a9"
-                    alt=""
-                    className="react-reveal animated-arrow"
-                    style={{
-                      animationFillMode: "both",
-                      animationDuration: "2000ms",
-                      animationDelay: "0ms",
-                      animationIterationCount: "infinite",
-                      opacity: "1",
-                      animationName: "react-reveal-862089909884036-1",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="section section-with-padding section-centered">
           <div className="container w-container">
             <div className="center-tewxt-container">
@@ -613,31 +528,7 @@ function becomeMentor() {
             </div>
           </div>
         </div>
-        <div className="section section-with-padding">
-    <div className="container w-container">
-        <div className="w-layout-grid _2-col-grid v-centered">
-            <div className="col">
-                <img
-                    src="https://adplist.org/images/Rectangle-170.jpg"
-                    loading="lazy"
-                    sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, (max-width: 991px) 92vw, 97vw"
-                    srcset="https://adplist.org/images/Rectangle-170-p-800.jpeg 800w, https://adplist.org/images/Rectangle-170-p-1080.jpeg 1080w, https://adplist.org/images/Rectangle-170.jpg 1194w"
-                    alt=""
-                    className="partner-image"
-                />
-            </div>
-            <div className="col max-500">
-                <h2>Partnered mentors</h2>
-                <p>
-                    Partnered mentors are mentors that join the ADPList community referred by organizations that we work with. On their profile, you can recognize them with a partner tag!&nbsp;
-                    <a href="https://adplist.org/mentors/grace-ling" target="_blank" rel="noreferrer">See example</a>
-                </p>
-                <a href="mailto:partnerships@adplist.org" className="button black w-button">Partner with us</a>
-            </div>
-        </div>
-    </div>
-</div>
-
+        <div className="section section-with-padding"></div>
       </div>
     </>
   );
