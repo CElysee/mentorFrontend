@@ -315,7 +315,7 @@ function SignIn() {
               <a
                 target="terms"
                 className="default-text"
-                href="https://www.adplist.org/terms-and-conditions"
+                href="#"
               >
                 Terms of use
               </a>
@@ -323,7 +323,7 @@ function SignIn() {
               <a
                 target="privacy"
                 className="default-text"
-                href="https://www.adplist.org/privacy-policy"
+                href="#"
               >
                 Privacy Policy
               </a>
@@ -331,7 +331,7 @@ function SignIn() {
               <a
                 target="standards"
                 className="default-text"
-                href="https://adplist.notion.site/ADPList-Knowledge-hub-e3afba73ec4c4284bc02313c422eecee"
+                href="#"
               >
                 Community Standards
               </a>{" "}

@@ -1,6 +1,8 @@
 import React , { useState }from "react";
 import { useNavigate } from 'react-router-dom';
 import "./SignUp.css"
+import MenteeImage from "../../assets/images/community-user.svg"
+import MentorImage from "../../assets/images/be-a-mentor.svg"
 
 
 
@@ -57,7 +59,7 @@ function SignUp() {
                 className="sc-fqkvVR sc-ggqIjW jcuFgw gKfFgF font-weight-600 mb-3 mx-0"
                 style={{ maxWidth: "527px" }}
               >
-                Hello! What brings you to ADPList?
+                Hello! What brings you to Mentor.rw?
               </h2>
               <p className="sc-kAyceB cCBfKf mb-32" style={{maxWidth: "412px"}}>
                 Connect with our community of mentors and users from 141+
@@ -82,7 +84,7 @@ function SignUp() {
                     </svg>
                   </div>
                   <img
-                    src="https://app.adplist.org/illustrations/auth/community-user.svg"
+                    src={MenteeImage}
                     width="70"
                     className=""
                   />
@@ -114,7 +116,7 @@ function SignUp() {
                     </svg>
                   </div>
                   <img
-                    src="https://app.adplist.org/illustrations/auth/be-a-mentor.svg"
+                     src={MentorImage}
                     width="70"
                     className=""
                   />

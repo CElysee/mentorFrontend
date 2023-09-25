@@ -79,7 +79,7 @@ function Header() {
                           <div className="nav__item px-2" title="Messages">
                             <a
                               aria-label="View your messages"
-                              href="https://app.adplist.org/messages"
+                              href="#"
                               className="sc-bJBgwP dqgbhX"
                             >
                               <svg

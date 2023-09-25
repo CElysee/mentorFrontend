@@ -171,7 +171,7 @@ function FindMentors() {
                 <Link
                   key={index}
                   className="sc-dBmzty dGxpIk text-decoration-none"
-                  to=""
+                  to={`/mentorProfile/${item.mentor.id}`}
                 >
                   <div className="mentor-avatar overflow-hidden">
                     <div className="image-dimmer"></div>

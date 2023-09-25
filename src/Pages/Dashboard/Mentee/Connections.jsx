@@ -156,7 +156,7 @@ function Connections() {
                 <div className="sc-ha-dNcR exbmkA mb-5">
                   <Link
                     target="_blank"
-                    href="https://adplist.org/explore"
+                    href="#"
                     className="sc-ffZAAA dsxWwM text-decoration-none"
                   >
                     <h4 className="grey-1-text mb-1">Add mentors</h4>
@@ -164,7 +164,7 @@ function Connections() {
                       className="sc-jXbUNg kFsvSZ grey-2-text text-center mb-4"
                       style={{maxWidth: "194px"}}
                     >
-                      Learn and grow with over <b> 19,344+ </b> mentors today.
+                      Learn and grow with over <b> 50+ </b> mentors today.
                     </p>
                     <button
                       height="38"

@@ -13,6 +13,7 @@ function DiscoverMentors() {
         const profileApi = await axiosInstance("/mentors/list");
         if (profileApi.status == 200) {
           setProfileMentor(profileApi.data);
+          
         }
       } catch (error) {
         console.error(error);

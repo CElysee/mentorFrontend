@@ -17,7 +17,7 @@ function FeauturesSection() {
               Leap 10x career growth with iconic mentors
             </h2>
             <p className="sc-kAyceB cCBfKf text-description">
-              If you’re looking for advice, jamming or networking - ADPList lets
+              If you’re looking for advice, jamming or networking - Mentor.rw lets
               you freely schedule a 1:1 mentorship session in fun new ways and
               work with them directly.
             </p>
@@ -63,7 +63,7 @@ function FeauturesSection() {
               More visible, get scouted as a talent
             </h2>
             <p className="sc-kAyceB cCBfKf text-description">
-              Out of a job, not out of touch. ADPList lets you list yourself as
+              Out of a job, not out of touch. Mentor.rw lets you list yourself as
               a talent in the community and get vouched by mentors - boosting
               your credentials to get hired fast.
             </p>

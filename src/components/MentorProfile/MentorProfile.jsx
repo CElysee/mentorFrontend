@@ -5,6 +5,7 @@ import axiosInstance from "../../axiosInstance";
 import LostPage from "../LostPage/LostPage";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
+import CoverPic from "../../assets/images/coverpic.jpg"
 
 const override = {
   display: "block",
@@ -120,7 +121,7 @@ function MentorProfile() {
           <div key={index}>
             <div className="CoverPicture__Wrapper-sc-d03l4u-0 xttQm">
               <img
-                src="https://adplist.org/photos/cover-photo.png"
+                src={CoverPic}
                 className="h-100 w-100 img-fit"
               />
             </div>

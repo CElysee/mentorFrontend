@@ -98,7 +98,7 @@ function Dashboard() {
                               </svg>
                             </div>
                             <p className="item__content">
-                              <a href="https://adplist.org/mentors">
+                              <a href="">
                                 Book your first session
                               </a>{" "}
                               — Learn/network with mentors.

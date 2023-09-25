@@ -228,7 +228,7 @@ function Footer() {
               <div className="d-lg-flex links -second">
                 <Link to={"#"}>join mentor.rw list</Link>
                 <Link to={"#"}>FAQs</Link>
-                <Link href="mailto: partnerships@adplist.org">
+                <Link href="mailto: info@mentor.rw">
                   partnerships
                 </Link>
               </div>
