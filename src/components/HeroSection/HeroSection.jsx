@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./HeroSection.css";
-import heroImage1 from "../../assets/images/1.webp";
-import heroImage2 from "../../assets/images/2.webp";
-import heroImage3 from "../../assets/images/3.webp";
-import heroImage4 from "../../assets/images/4.webp";
-import heroImage5 from "../../assets/images/5.webp";
-import heroImage6 from "../../assets/images/6.webp";
-import heroImage7 from "../../assets/images/7.webp";
+import heroImage4 from "../../assets/images/close-up-portrait.jpg";
+import heroImage5 from "../../assets/images/portrait-happy.jpg";
+import heroImage6 from "../../assets/images/portrait-smiley-male.jpg";
+import heroImage7 from "../../assets/images/portrait-gorgeous.jpg";
 import axiosInstance from "../../axiosInstance";
 
 function HeroSection() {
@@ -107,7 +104,9 @@ function HeroSection() {
                           >
                             <option value="">Interest</option>
                             {interestData.map((item, index) => (
-                              <option key={index} value={item.id}>{item.category_name}</option>
+                              <option key={index} value={item.id}>
+                                {item.category_name}
+                              </option>
                             ))}
                           </select>
                         </div>
@@ -136,7 +135,9 @@ function HeroSection() {
                           >
                             <option value="">Expertise</option>
                             {expertiseData.map((item, index) => (
-                              <option key={index} value={item.id}>{item.expertise_name}</option>
+                              <option key={index} value={item.id}>
+                                {item.expertise_name}
+                              </option>
                             ))}
                           </select>
                         </div>
@@ -175,45 +176,7 @@ function HeroSection() {
             </div>
           </div>
         </div>
-        <div
-          size="105"
-          className="Intro__Avatar-sc-4plfni-0 fkhfTM"
-          style={{ top: "72px", right: "195px" }}
-        >
-          <img
-            width="100%"
-            height="100%"
-            src={heroImage1}
-            alt="avatar"
-            className=""
-          />
-        </div>
-        <div
-          size="92"
-          className="Intro__Avatar-sc-4plfni-0 gwpcuQ"
-          style={{ top: "72px", right: "15px" }}
-        >
-          <img
-            width="100%"
-            height="100%"
-            src={heroImage2}
-            alt="avatar"
-            className=""
-          />
-        </div>
-        <div
-          size="80"
-          className="Intro__Avatar-sc-4plfni-0 fXgRkI"
-          style={{ top: "236px", right: "282px" }}
-        >
-          <img
-            width="100%"
-            height="100%"
-            src={heroImage3}
-            alt="avatar"
-            className=""
-          />
-        </div>
+
         <div
           size="170"
           className="Intro__Avatar-sc-4plfni-0 iaKzg"
