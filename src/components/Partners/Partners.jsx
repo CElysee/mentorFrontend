@@ -9,7 +9,7 @@ function Partners() {
     <>
       <div className="Companies__Wrapper-sc-1rbzcw0-0 gusIrI" id="partners">
         <p className="sc-gsFSXq fJiOdH mb-32 text-center font-weight-700">
-          Over 5000+ companies joined us
+          Our Partners
         </p>
         <div className="partners_logo">
         <div className="slick-slide slick-active">
