@@ -45,6 +45,7 @@ function Header() {
   };
   const handleLogout = () => {
     localStorage.removeItem('access_token')
+    localStorage.removeItem('user_role')
     setIsLoggedIn(false);
     navigate("/signIn")
   };

@@ -5,7 +5,7 @@ import axiosInstance from "../../axiosInstance";
 import LostPage from "../LostPage/LostPage";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
-import CoverPic from "../../assets/images/coverpic.jpg"
+import CoverPic from "../../assets/images/coverpic.jpg";
 
 const override = {
   display: "block",
@@ -15,17 +15,17 @@ const override = {
 };
 
 function MentorProfile() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { id } = useParams();
   const [mentorId, setMentorId] = useState(id);
   const [color, setColor] = useState("#fff");
   const [profileData, setProfileData] = useState([]);
   const [bookingSchedules, setBookingSchedules] = useState([]);
-  const [mentorName, setMentorName]=useState("")
-  const [scheduleDate, setScheduleDate]=useState("")
-  const [scheduledTime, setScheduledTime]=useState("")
-  const [bookingActive, setBookingActive] = useState(1);
-  const [timeBookingActive, setTimeBookingActive] = useState(0);
+  const [mentorName, setMentorName] = useState("");
+  const [scheduleDate, setScheduleDate] = useState("");
+  const [scheduledTime, setScheduledTime] = useState("");
+  const [bookingActive, setBookingActive] = useState(null);
+  const [timeBookingActive, setTimeBookingActive] = useState(null);
   const [bookingMode, setBookingMode] = useState(null);
   const url = `/mentors/profile?mentor_id=${id}`;
   const schedulesUrl = `/ScheduleBookings/list/${id}`;
@@ -34,7 +34,7 @@ function MentorProfile() {
   const [voucherCode, setVoucherCode] = useState("");
   const [responseError, setResponseError] = useState("");
   const [loading, setLoading] = useState("");
-  const [userRole, setUserRole] = useState("")
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +43,17 @@ function MentorProfile() {
         const ScheduleData = await axiosInstance.get(schedulesUrl);
         if (reponseData.status === 200) {
           setProfileData(reponseData.data);
-          setMentorName(reponseData.data[0].mentor.name)
+          setMentorName(reponseData.data[0].mentor.name);
         }
         if (ScheduleData.status === 200) {
           setBookingSchedules(ScheduleData.data);
-          setScheduleDate(ScheduleData.data[bookingActive - 1].startDate)
-          setScheduledTime(ScheduleData.data[bookingActive - 1].mentorBookingScheduleSlots[timeBookingActive].slot_time)
+          // setScheduleDate(ScheduleData.data[bookingActive - 1].startDate);
+          setScheduledTime();
+          // ScheduleData.data[bookingActive - 1].mentorBookingScheduleSlots[
+          //   timeBookingActive
+          // ].slot_time
           const user_role = localStorage.getItem("user_role");
-          setUserRole(user_role)
+          setUserRole(user_role);
           // setBookingActive(ScheduleData.data[0].id)
         }
       } catch (error) {
@@ -94,7 +97,7 @@ function MentorProfile() {
       navigate("/bookingMessage", {
         state: {
           mentorName: mentorName,
-          scheduleDate:scheduleDate,
+          scheduleDate: scheduleDate,
           scheduledTime: scheduledTime,
         },
       });
@@ -120,10 +123,7 @@ function MentorProfile() {
         profileData.map((item, index) => (
           <div key={index}>
             <div className="CoverPicture__Wrapper-sc-d03l4u-0 xttQm">
-              <img
-                src={CoverPic}
-                className="h-100 w-100 img-fit"
-              />
+              <img src={CoverPic} className="h-100 w-100 img-fit" />
             </div>
 
             <div className="Mentor__Wrapper-sc-1ep7oak-1 hBuqpx">
@@ -164,7 +164,6 @@ function MentorProfile() {
                     </p>
                   </div>
                   <div className="Actions__Wrapper-sc-6lchtg-0 nLQQv">
-                  
                     <a href="/" className="action__item">
                       <svg
                         fill="none"
@@ -220,7 +219,10 @@ function MentorProfile() {
                 </div>
               </div>
 
-              <div className="Layout__Wrapper-sc-1js8544-0 oKXVt" id={userRole == "mentor" && "mentor_side"}>
+              <div
+                className="Layout__Wrapper-sc-1js8544-0 oKXVt"
+                id={userRole == "mentor" && "mentor_side"}
+              >
                 <div style={{ marginBottom: "8rem" }}>
                   <div className="line-height-16 mb-3">
                     <div className="line-height-16 multi-truncate">
@@ -356,290 +358,281 @@ function MentorProfile() {
                     </div>
                   </div>
                 </div>
-                {}
                 <div className="p-1">
-                  <div className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW" id={userRole == "mentor" && "mentor_book"}>
-                    <div className="Availability__Desktop-sc-189eqiz-2 cLqnWb mb-4">
-                      <div className="pb-4">
-                        <p className="sc-gsFSXq fJiOdH font-weight-600">
-                          Available sessions
-                        </p>
-                        <p className="sc-jXbUNg kFsvSZ grey-2-text mt-1">
-                          Book 1:1 sessions from the options based on your needs
-                        </p>
-                      </div>
-                      <div className="Availability__DateWrapper-sc-189eqiz-0 fiTtId">
-                        {bookingSchedules.map((item, index) => (
-                          <div
-                            key={index}
-                            height="74px"
-                            slot="8"
-                            className={`Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 eoQfdP ${
-                              item.id === bookingActive ? "drqGEo" : "eJWdRQ"
-                            }`}
-                            role="button"
-                            onClick={() => handleBookingSlotChange(item.id)}
-                          >
-                            <div className="m-auto">
-                              <p className="sc-jXbUNg kFsvSZ date__date">
-                                {item.startDate}
-                              </p>
-                              <small className="date__slot">
-                                {item.slots_count}
-                              </small>
-                            </div>
+                  {bookingSchedules.length > 0 ? (
+                    <>
+                      {" "}
+                      <div
+                        className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW"
+                        id={userRole == "mentor" && "mentor_book"}
+                      >
+                        <div className="Availability__Desktop-sc-189eqiz-2 cLqnWb mb-4">
+                          <div className="pb-4">
+                            <p className="sc-gsFSXq fJiOdH font-weight-600">
+                              Available sessions
+                            </p>
+                            <p className="sc-jXbUNg kFsvSZ grey-2-text mt-1">
+                              Book 1:1 sessions from the options based on your
+                              needs
+                            </p>
                           </div>
-                        ))}
-                      </div>
-                      <div className="mb-4">
-                        <div className="pb-3 d-flex align-items-center justify-content-between border-bottom grey-3-border mb-3">
-                          <p> Available time slots </p>
-                          <div className="d-flex align-items-center">
-                            <a href="/" className="px-2">
-                              <svg
-                                fill="none"
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
+                          <div className="Availability__DateWrapper-sc-189eqiz-0 fiTtId">
+                            {bookingSchedules.map((item, index) => (
+                              <div
+                                key={index}
+                                height="74px"
+                                slot="8"
+                                className={`Styles__Item-sc-z9xbh7-0 DatePicker__Wrapper-sc-1ddgz1i-0 eoQfdP ${
+                                  index === bookingActive ? "drqGEo" : "eJWdRQ"
+                                }`}
+                                role="button"
+                                onClick={() => handleBookingSlotChange(index)}
                               >
-                                <path
-                                  d="M15.5 19L8.5 12L15.5 5"
-                                  stroke="var(--grey-3)"
-                                  strokeWidth="2.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                ></path>
-                              </svg>
-                            </a>
-                            <a href="/" className="px-2">
-                              <svg
-                                fill="none"
-                                width="14"
-                                height="14"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M8.5 5L15.5 12L8.5 19"
-                                  stroke="var(--default)"
-                                  strokeWidth="2.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                ></path>
-                              </svg>
-                            </a>
+                                <div className="m-auto">
+                                  <p className="sc-jXbUNg kFsvSZ date__date">
+                                    {item.startDate}
+                                  </p>
+                                  <small className="date__slot">
+                                    {item.slots_count}
+                                  </small>
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        </div>
-                        <div className="TimePicker__Wrapper-sc-11a0i3h-0 jiYbol">
-                          {bookingSchedules[
-                            bookingActive - 1
-                          ].mentorBookingScheduleSlots.map((item, index) => (
-                            <div
-                              role="button"
-                              key={index}
-                              className={`Styles__Item-sc-z9xbh7-0 ${
-                                timeBookingActive == item.id
-                                  ? "eRxXKn"
-                                  : "iPJjWT"
-                              }`}
-                              onClick={() => handleSlotSelection(item.id)}
-                            >
-                              <span className="m-auto" height="50px">
-                                {item.slot_time}
-                              </span>
+                          <div className="mb-4">
+                            <div className="pb-3 d-flex align-items-center justify-content-between border-bottom grey-3-border mb-3">
+                              <p> Available time slots </p>
                             </div>
-                          ))}
+                            {bookingActive == null ? (
+                              <>
+                                <p className="sc-gsFSXq fJiOdH font-weight-600">
+                                  Select date to see available sessions
+                                </p>
+                              </>
+                            ) : (
+                              <>
+                                <div className="TimePicker__Wrapper-sc-11a0i3h-0 jiYbol">
+                                  {bookingSchedules[
+                                    bookingActive
+                                  ].mentorBookingScheduleSlots.map(
+                                    (item, index) => (
+                                      <div
+                                        role="button"
+                                        key={index}
+                                        className={`Styles__Item-sc-z9xbh7-0 ${
+                                          timeBookingActive == item.id
+                                            ? "eRxXKn"
+                                            : "iPJjWT"
+                                        }`}
+                                        onClick={() =>
+                                          handleSlotSelection(item.id)
+                                        }
+                                      >
+                                        <span className="m-auto" height="50px">
+                                          {item.slot_time}
+                                        </span>
+                                      </div>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          {timeBookingActive && (
+                            <>
+                              <div className="SingleSessions__ButtonWrapper-sc-3tj6m9-0 bTmmwR">
+                                <button
+                                  style={{ backgroundColor: "var(--teal)" }}
+                                  type="button"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal"
+                                  className="sc-jlZhew gAyusE text-truncate undefined btn btn-default"
+                                >
+                                  Book Session for{" "}
+                                  {bookingSchedules[bookingActive].startDate}
+                                </button>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
-
-                      <div className="SingleSessions__ButtonWrapper-sc-3tj6m9-0 bTmmwR">
-                        <button
-                          style={{ backgroundColor: "var(--teal)" }}
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                          className="sc-jlZhew gAyusE text-truncate undefined btn btn-default"
-                          disabled={timeBookingActive === 0}
+                      <div
+                        className="modal fade"
+                        id="exampleModal"
+                        tabIndex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                        data-backdrop="static"
+                      >
+                        <div
+                          role="dialog"
+                          aria-modal="true"
+                          className="fade modal show"
+                          tabIndex="-1"
+                          style={{ display: "block" }}
                         >
-                          Book Session for{" "}
-                          {bookingSchedules[bookingActive - 1].startDate}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="modal fade"
-                    id="exampleModal"
-                    tabIndex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                    data-backdrop="static"
-                  >
-                    <div
-                      role="dialog"
-                      aria-modal="true"
-                      className="fade modal show"
-                      tabIndex="-1"
-                      style={{ display: "block" }}
-                    >
-                      <div className="modal-dialog modal-sm modal-dialog-centered">
-                        <div className="modal-content">
-                          <div className="sc-cwHptR dOVyAW p-4 modal-body">
-                            <h3 className="sc-dcJsrY eXeELN mb-5">
-                              You are about to book a session with{" "}
-                              {profileData[0].mentor.name} on{" "}
-                              {bookingSchedules[bookingActive - 1].startDate}
-                            </h3>
-                            <div className="sc-kAyceB cCBfKf mb-32">
-                              <div className="checkbox-wrapper-44 form-check form-check-inline">
-                                <label className="toggleButton">
-                                  <span
-                                    style={{
-                                      paddingTop: "5px",
-                                      paddingRight: "10px",
-                                    }}
-                                  >
-                                    Use voucher
-                                  </span>
-                                  <input
-                                    type="checkbox"
-                                    value="useVoucher"
-                                    onChange={handleChange}
-                                    checked={bookingMode === "useVoucher"}
-                                  />
-                                  <div>
-                                    <svg viewBox="0 0 44 44">
-                                      <path
-                                        d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
-                                        transform="translate(-2.000000, -2.000000)"
-                                      ></path>
-                                    </svg>
-                                  </div>
-                                </label>
-                              </div>
-                              <div className="checkbox-wrapper-44 form-check form-check-inline">
-                                <label className="toggleButton">
-                                  <span style={{ padding: "5px 10px" }}>
-                                    Pay to Book a session
-                                  </span>
-                                  <input
-                                    type="checkbox"
-                                    value="pay"
-                                    onChange={handleChange}
-                                    checked={bookingMode === "pay"}
-                                  />
-                                  <div>
-                                    <svg viewBox="0 0 44 44">
-                                      <path
-                                        d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
-                                        transform="translate(-2.000000, -2.000000)"
-                                      ></path>
-                                    </svg>
-                                  </div>
-                                </label>
-                              </div>
-                              {bookingMode == "useVoucher" && (
-                                <>
-                                  <div className="form-group">
-                                    <label
-                                      className="form-label"
-                                      htmlFor="name"
-                                    >
-                                      Your Voucher Code
+                         {timeBookingActive && ( 
+                          <div className="modal-dialog modal-sm modal-dialog-centered">
+                            <div className="modal-content">
+                              <div className="sc-cwHptR dOVyAW p-4 modal-body">
+                                <h3 className="sc-dcJsrY eXeELN mb-5">
+                                  You are about to book a session with{" "}
+                                  {profileData[0].mentor.name} on{" "}
+                                  {bookingSchedules[bookingActive].startDate}
+                                </h3>
+                                <div className="sc-kAyceB cCBfKf mb-32">
+                                  <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                    <label className="toggleButton">
+                                      <span
+                                        style={{
+                                          paddingTop: "5px",
+                                          paddingRight: "10px",
+                                        }}
+                                      >
+                                        Use voucher
+                                      </span>
+                                      <input
+                                        type="checkbox"
+                                        value="useVoucher"
+                                        onChange={handleChange}
+                                        checked={bookingMode === "useVoucher"}
+                                      />
+                                      <div>
+                                        <svg viewBox="0 0 44 44">
+                                          <path
+                                            d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                            transform="translate(-2.000000, -2.000000)"
+                                          ></path>
+                                        </svg>
+                                      </div>
                                     </label>
-                                    <input
-                                      name="voucher_code"
-                                      placeholder="MENT-VSX034"
-                                      type="text"
-                                      id="handleVoucher"
-                                      className="form-control"
-                                      value={
-                                        voucherCode
-                                      } /* Use state for value */
-                                      onChange={
-                                        handleVoucher
-                                      } /* Use onChange to update value */
-                                    />
-                                    <p className="text-center error_response">
-                                      {responseError}
-                                    </p>
                                   </div>
-                                </>
-                              )}
-                              {bookingMode == "pay" && (
-                                <>
-                                  {" "}
-                                  <div className="onlinePayment mb-5">
+                                  <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                    <label className="toggleButton">
+                                      <span style={{ padding: "5px 10px" }}>
+                                        Pay to Book a session
+                                      </span>
+                                      <input
+                                        type="checkbox"
+                                        value="pay"
+                                        onChange={handleChange}
+                                        checked={bookingMode === "pay"}
+                                      />
+                                      <div>
+                                        <svg viewBox="0 0 44 44">
+                                          <path
+                                            d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                            transform="translate(-2.000000, -2.000000)"
+                                          ></path>
+                                        </svg>
+                                      </div>
+                                    </label>
+                                  </div>
+                                  {bookingMode == "useVoucher" && (
+                                    <>
+                                      <div className="form-group">
+                                        <label
+                                          className="form-label"
+                                          htmlFor="name"
+                                        >
+                                          Your Voucher Code
+                                        </label>
+                                        <input
+                                          name="voucher_code"
+                                          placeholder="MENT-VSX034"
+                                          type="text"
+                                          id="handleVoucher"
+                                          className="form-control"
+                                          value={
+                                            voucherCode
+                                          } /* Use state for value */
+                                          onChange={
+                                            handleVoucher
+                                          } /* Use onChange to update value */
+                                        />
+                                        <p className="text-center error_response">
+                                          {responseError}
+                                        </p>
+                                      </div>
+                                    </>
+                                  )}
+                                  {bookingMode == "pay" && (
+                                    <>
+                                      {" "}
+                                      <div className="onlinePayment mb-5">
+                                        <div
+                                          className="sc-eldPxv efrIaS"
+                                          width="1714"
+                                        >
+                                          <button
+                                            data-bs-dismiss="modal"
+                                            border="black"
+                                            type="button"
+                                            className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default momo_payment"
+                                          >
+                                            Pay with Momo
+                                          </button>
+                                          <button
+                                            bg="black"
+                                            color="white"
+                                            type="button"
+                                            className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                          >
+                                            Pay with Cards
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+
+                                {bookingMode != "pay" && (
+                                  <>
                                     <div
-                                      className="sc-eldPxv efrIaS"
+                                      className="sc-eldPxv efrIaS justify-content-end"
                                       width="1714"
                                     >
                                       <button
                                         data-bs-dismiss="modal"
                                         border="black"
                                         type="button"
-                                        className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default momo_payment"
+                                        className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
                                       >
-                                        Pay with Momo
+                                        Go Back
                                       </button>
+
                                       <button
-                                        bg="black"
+                                        style={{ backgroundColor: "black" }}
                                         color="white"
                                         type="button"
                                         className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                        onClick={handleBookingVoucher}
+                                        disabled={bookingMode !== "useVoucher"}
                                       >
-                                        Pay with Cards
+                                        <RiseLoader
+                                          color={color}
+                                          loading={loading}
+                                          cssOverride={override}
+                                          size={10}
+                                          aria-label="Loading Spinner"
+                                          data-testid="loader"
+                                          className="loader"
+                                        />
+                                        {loading ? null : "Book Now"}
                                       </button>
                                     </div>
-                                  </div>
-                                </>
-                              )}
+                                  </>
+                                )}
+                              </div>
                             </div>
-
-                            {bookingMode != "pay" && (
-                              <>
-                                <div
-                                  className="sc-eldPxv efrIaS justify-content-end"
-                                  width="1714"
-                                >
-                                  <button
-                                    data-bs-dismiss="modal"
-                                    border="black"
-                                    type="button"
-                                    className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
-                                  >
-                                    Go Back
-                                  </button>
-
-                                  <button
-                                    style={{ backgroundColor: "black" }}
-                                    color="white"
-                                    type="button"
-                                    className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
-                                    onClick={handleBookingVoucher}
-                                    disabled={bookingMode !== "useVoucher"}
-                                  >
-                                    <RiseLoader
-                                      color={color}
-                                      loading={loading}
-                                      cssOverride={override}
-                                      size={10}
-                                      aria-label="Loading Spinner"
-                                      data-testid="loader"
-                                      className="loader"
-                                    />
-                                    {loading ? null : "Book Now"}
-                                    
-                                  </button>
-                                </div>
-                              </>
-                            )}
                           </div>
+                         )}
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </>
+                  ) : (
+                    <NoSchedule />
+                  )}
                 </div>
               </div>
             </div>
@@ -651,5 +644,20 @@ function MentorProfile() {
     </>
   );
 }
-
+function NoSchedule() {
+  return (
+    <>
+      <div
+        className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW"
+        // id={userRole == "mentor" && "mentor_book"}
+      >
+        <div className="Availability__Desktop-sc-189eqiz-2 cLqnWb mb-4">
+          <p className="sc-gsFSXq fJiOdH font-weight-600 text-center">
+            No Available sessions
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}
 export default MentorProfile;
