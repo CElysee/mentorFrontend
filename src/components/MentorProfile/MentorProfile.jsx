@@ -47,14 +47,9 @@ function MentorProfile() {
         }
         if (ScheduleData.status === 200) {
           setBookingSchedules(ScheduleData.data);
-          // setScheduleDate(ScheduleData.data[bookingActive - 1].startDate);
           setScheduledTime();
-          // ScheduleData.data[bookingActive - 1].mentorBookingScheduleSlots[
-          //   timeBookingActive
-          // ].slot_time
           const user_role = localStorage.getItem("user_role");
           setUserRole(user_role);
-          // setBookingActive(ScheduleData.data[0].id)
         }
       } catch (error) {
         console.error(error);
@@ -77,15 +72,16 @@ function MentorProfile() {
     setVoucherCode(e.target.value);
   };
   const bookMentorUrl = `/BookMentor/book/`;
-  const bookMentordata = {
-    user_id: "1",
-    mentor_id: mentorId,
-    schedule_id: bookingActive,
-    slot_id: timeBookingActive,
-    voucher_code: voucherCode,
-  };
+  
   const handleBookingVoucher = async (e) => {
     e.preventDefault();
+    const bookMentordata = {
+      user_id: "1",
+      mentor_id: mentorId,
+      schedule_id: bookingSchedules[bookingActive].id,
+      slot_id: timeBookingActive,
+      voucher_code: voucherCode,
+    };
     try {
       const response = await axiosInstance.post(bookMentorUrl, null, {
         params: bookMentordata,

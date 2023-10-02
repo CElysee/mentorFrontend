@@ -100,7 +100,7 @@
 
 @media (min-width: 768px) {
   .djBjss .intro-content--mentee {
-    max-width: 640px;
+    max-width: 740px;
   }
 }
 .djBjss .intro-content--mentor,
@@ -410,4 +410,83 @@ cLWvGv {
 select:focus-visible {
   outline: none !important; /* Remove default outline */
   border: none !important; /* Remove default border */
+}
+/*------------------------------------------*/
+/*  HERO-11
+/*------------------------------------------*/
+
+#hero-11 {
+  overflow: hidden;
+  background-image: url("../../assets/images//hero-11.jpg");
+  margin-top: -100px;
+}
+
+.hero-11-txt {
+  margin-top: 40px;
+}
+
+.hero-11-txt h2{
+  line-height: 1.25;
+  margin-bottom: 28px;
+}
+.hero-11-txt p {
+  padding-right: 5%;
+  font-size: 1.125rem;
+  margin-bottom: 32px;
+}
+
+.hero-11-img {
+  position: relative;
+  margin: -60px -12% -100px -15px;
+}
+.w-700 {
+  font-weight: 700;
+}
+.s-60 {
+  font-size: 3.75rem;
+}
+p.btn-txt {
+  margin: 20px 0 0 0;
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    /* HERO-11 */
+    .hero-11-txt { margin-top: -40px; }
+    .hero-11-txt p { padding-right: 0; }
+    .hero-11-img { margin: -100px -12% -50px 0; }
+}
+@media (max-width: 767px) { 
+    /* HERO-11 */
+    #hero-11 { text-align: center; padding-top: 80px; margin-top:0px; }
+    .hero-11-txt { margin-top: 0; }
+    .hero-11-txt p { padding-right: 0; }
+    .hero-11-img { margin: 40px 0 -100px; }
+    .s-60 {
+      font-size: 2.75rem;
+  }
+}
+@media (min-width: 480px) and (max-width: 767.98px) {
+    /* HERO-11 */
+    .hero-11-txt { padding: 0 3%; }
+    .hero-11-img { margin: 40px 0 -80px; }
+}
+@media (min-width: 414px) and (max-width: 479.98px) {
+    /* HERO-11 */
+    .hero-11-txt { padding: 0 4%; }
+    .hero-11-img { margin: 35px 3% -50px; }
+}
+@media (min-width: 390px) and (max-width: 413.98px) {
+    /* HERO-11 */
+    .hero-11-txt p { padding: 0 4%; }
+    .hero-11-img { margin: 30px 3% -50px; }
+}
+@media (min-width: 321px) and (max-width: 389.98px) {
+    /* HERO-11 */
+    .hero-11-txt p { padding: 0 4%; }
+    .hero-11-img { margin: 30px 3% -50px; }
+}
+@media (max-width: 320.98px) { 
+   /* HERO-11 */
+   #hero-11 { padding-top: 70px; }
+  .hero-11-txt p { padding: 0 5%; }
+  .hero-11-img { margin: 30px 3% -50px; }
 }

@@ -24,13 +24,13 @@ function MentorCategories() {
       <div className="LearnAndGrow__Wrapper-sc-9rypwa-0 eWqOrw d-flex flex-column align-items-center">
         <div className="text-center mb-32">
           <h2 className="sc-fqkvVR jcuFgw mb-3">
-            Learn and grow across expertise for free
+          Embrace learning, map out your path to success and grow across expertise for free 
           </h2>
           <p
             className="sc-gsFSXq fJiOdH"
             style={{ color: "rgba(0, 0, 0, 0.7)" }}
           >
-            Find mentors from product fields across the globe
+            Connect with mentors spanning diverse product fields worldwide.
           </p>
         </div>
         <div className="topics d-none d-md-flex flex-wrap justify-content-center mb-32">
@@ -56,7 +56,7 @@ function MentorCategories() {
             style={{ color: "#fff" }}
             to={"/findMentor"}
           >
-            Explore all mentors
+            Find a mentor
           </Link>
         </button>
       </div>

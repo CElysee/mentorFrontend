@@ -1,8 +1,8 @@
 import React from "react";
 import "../Partners/Partners.css";
-import AMILogo from "../../assets/images/mentor-AMI.png";
-import Klab from "../../assets/images/mentor-klab.png";
-import UNDP from "../../assets/images/mentor-undp.png";
+import AMILogo from "../../assets/images/AMI-Logo_revised.png";
+import Klab from "../../assets/images/Klab-Logo-revised.png";
+import UNDP from "../../assets/images/UNDP-Logo-revised.png";
 
 function Partners() {
   return (
