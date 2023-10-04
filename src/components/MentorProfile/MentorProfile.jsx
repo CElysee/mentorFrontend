@@ -32,8 +32,9 @@ function MentorProfile() {
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [voucherCode, setVoucherCode] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [responseError, setResponseError] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function MentorProfile() {
         }
         if (ScheduleData.status === 200) {
           setBookingSchedules(ScheduleData.data);
-          setScheduledTime();
+          setScheduleDate(ScheduleData.data[0].startDate);
           const user_role = localStorage.getItem("user_role");
           setUserRole(user_role);
         }
@@ -55,7 +56,6 @@ function MentorProfile() {
         console.error(error);
       }
     };
-
     fetchData();
   }, [url, schedulesUrl, bookingActive]);
   const handleBookingSlotChange = (value) => {
@@ -64,6 +64,7 @@ function MentorProfile() {
   };
   const handleSlotSelection = (value) => {
     setTimeBookingActive(value);
+    setScheduledTime();
   };
   const handleChange = async (e) => {
     setBookingMode(e.target.value);
@@ -71,12 +72,16 @@ function MentorProfile() {
   const handleVoucher = async (e) => {
     setVoucherCode(e.target.value);
   };
+  const handleEmail = async (e) => {
+    setUserEmail(e.target.value);
+  };
   const bookMentorUrl = `/BookMentor/book/`;
   
   const handleBookingVoucher = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const bookMentordata = {
-      user_id: "1",
+      user_id: userEmail,
       mentor_id: mentorId,
       schedule_id: bookingSchedules[bookingActive].id,
       slot_id: timeBookingActive,
@@ -100,6 +105,7 @@ function MentorProfile() {
     } catch (error) {
       notify(error.response.data.detail, "error");
       setResponseError(error.response.data.detail);
+      setLoading(false)
     }
   };
   const notify = (message, type) => {
@@ -217,7 +223,7 @@ function MentorProfile() {
 
               <div
                 className="Layout__Wrapper-sc-1js8544-0 oKXVt"
-                id={userRole == "mentor" && "mentor_side"}
+                id={userRole == "mentor" && "mentor_side" ? "" : ""}
               >
                 <div style={{ marginBottom: "8rem" }}>
                   <div className="line-height-16 mb-3">
@@ -360,7 +366,7 @@ function MentorProfile() {
                       {" "}
                       <div
                         className="Availability__DesktopWrapper-sc-189eqiz-3 lhABAW"
-                        id={userRole == "mentor" && "mentor_book"}
+                        id={userRole == "mentor" && "mentor_side" ? "" : ""}
                       >
                         <div className="Availability__Desktop-sc-189eqiz-2 cLqnWb mb-4">
                           <div className="pb-4">
@@ -420,9 +426,10 @@ function MentorProfile() {
                                             ? "eRxXKn"
                                             : "iPJjWT"
                                         }`}
-                                        onClick={() =>
-                                          handleSlotSelection(item.id)
-                                        }
+                                        onClick={() => {
+                                          handleSlotSelection(item.id);
+                                          setScheduledTime(item.slot_time);
+                                        }}
                                       >
                                         <span className="m-auto" height="50px">
                                           {item.slot_time}
@@ -535,7 +542,7 @@ function MentorProfile() {
                                         </label>
                                         <input
                                           name="voucher_code"
-                                          placeholder="MENT-VSX034"
+                                          placeholder="VSX034"
                                           type="text"
                                           id="handleVoucher"
                                           className="form-control"
@@ -544,6 +551,27 @@ function MentorProfile() {
                                           } /* Use state for value */
                                           onChange={
                                             handleVoucher
+                                          } /* Use onChange to update value */
+                                        />
+                                      </div>
+                                      <div className="form-group">
+                                        <label
+                                          className="form-label"
+                                          htmlFor="name"
+                                        >
+                                          Your Email
+                                        </label>
+                                        <input
+                                          name="voucher_code"
+                                          placeholder="info@mentor.rw"
+                                          type="text"
+                                          id="handleEmail"
+                                          className="form-control"
+                                          value={
+                                            userEmail
+                                          } /* Use state for value */
+                                          onChange={
+                                            handleEmail
                                           } /* Use onChange to update value */
                                         />
                                         <p className="text-center error_response">
@@ -614,7 +642,7 @@ function MentorProfile() {
                                           data-testid="loader"
                                           className="loader"
                                         />
-                                        {loading ? null : "Book Now"}
+                                        <span style={{paddingLeft: "10px"}}>{loading ? "Booking in progress" : "Book Now"}</span>
                                       </button>
                                     </div>
                                   </>

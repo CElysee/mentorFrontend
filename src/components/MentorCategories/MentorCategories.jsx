@@ -24,7 +24,7 @@ function MentorCategories() {
       <div className="LearnAndGrow__Wrapper-sc-9rypwa-0 eWqOrw d-flex flex-column align-items-center">
         <div className="text-center mb-32">
           <h2 className="sc-fqkvVR jcuFgw mb-3">
-          Embrace learning, map out your path to success and grow across expertise for free 
+          Embrace learning, map out your path to success and grow across expertise for free.
           </h2>
           <p
             className="sc-gsFSXq fJiOdH"
