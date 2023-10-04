@@ -59,7 +59,7 @@ function Routers() {
         <Route path="dashboard" element={<MentorDashboard />} />
         <Route path="profile/:id" element={<MentorDashProfile />} />
         <Route path="bookings/:id" element={<MentorBookings />} />
-        <Route path="calendar" element={<MentorCalendar />} />
+        <Route path="calendar/:id" element={<MentorCalendar />} />
         <Route path="connections" element={<MentorConnections />} />
         <Route path="support" element={<Support />} />
       </Route>

@@ -141,7 +141,7 @@ function SideMenu() {
       ),
     },
     {
-      path: "/mentor/calendar",
+      path: `/mentor/calendar/${userId}`,
       display: "Calendar",
       icon: (
         <>

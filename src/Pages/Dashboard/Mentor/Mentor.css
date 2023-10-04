@@ -87,3 +87,23 @@
   color: #e55812;
   background: rgba(4, 4, 4, 0.09);
 }
+@media (min-width: 992px){
+  .dYqkqL {
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+}
+.fc-direction-ltr {
+  padding-left: 15px;
+}
+.fc-event-title{
+  white-space: break-spaces;
+  padding: 5px !important;
+}
+.fc .fc-daygrid-event-harness {
+  margin-bottom: 5px;
+}
+.fc-h-event {
+  background-color: #0e4749 !important;
+  border: #0e4749 !important;
+}
