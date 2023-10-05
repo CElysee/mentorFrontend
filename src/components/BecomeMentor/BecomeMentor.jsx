@@ -1,11 +1,11 @@
 import React from "react";
 import "./BecomeMentor.css";
 import BecomeMentorImage1 from "../../assets/images/happy-businessman-back-view.jpg";
-import BecomeMentorImage2 from "../../assets/images/afro-american-woman-pointing-computer.jpg";
+import BecomeMentorImage2 from "../../assets/images/52753237374_4a03137a43_k.jpg";
 import BecomeMentorImage3 from "../../assets/images/community.jpg";
-import TestimonialsImage1 from "../../assets/images/businesswoman.jpg";
-import TestimonialsImage2 from "../../assets/images/Designermale.jpg";
-import TestimonialsImage3 from "../../assets/images/businesswoman-smiling.jpg";
+import TestimonialsImage1 from "../../assets/images/52975327647_96c9ebc952_k.jpg";
+import TestimonialsImage2 from "../../assets/images/53083423336_702b2f0df4_c.jpg";
+import TestimonialsImage3 from "../../assets/images/52975929656_de38797450_c.jpg";
 import { Link } from "react-router-dom";
 
 function becomeMentor() {

@@ -11,7 +11,7 @@ import Head7Bg from "../../assets/images/head7_bg.png";
 import headimg7 from "../../assets/images/head_img7.png";
 import head7rock from "../../assets/images/head7_rock.png";
 import line_l from "../../assets/images/line_l.png";
-import heroimg from "../../assets/images/hero-11-img-7e9471ab.png";
+import heroimg from "../../assets/images/hero-11-img.png";
 import axiosInstance from "../../axiosInstance";
 
 function HeroSection() {
