@@ -23,6 +23,9 @@ import MentorConnections from "../Pages/Dashboard/Mentor/Connections";
 import MentorCalendar from "../Pages/Dashboard/Mentor/Calendar";
 import Support from "../Pages/Dashboard/Support";
 import FindMentorByInterest from "../Pages/FindMentorByInterest";
+import FeelEmpowered from "../Pages/FeelEmpowered"
+import ToolsToMentor from "../Pages/ToolsToMentor";
+import DiverseCommunity from "../Pages/DiverseCommunity";
 // Retrieve the token from localStorage
 
 function Routers() {
@@ -48,6 +51,9 @@ function Routers() {
       <Route path="/thankyou" element={<ThankYou />} />
       <Route path="/bookingMessage" element={<BookingMessage />} />
       <Route path="/signIn" element={<SignIn />} />
+      <Route path="/FeelEmpowered" element={<FeelEmpowered />} />
+      <Route path="/ToolsToMentor" element={<ToolsToMentor />} />
+      <Route path="/DiverseCommunity" element={<DiverseCommunity />} />
       <Route path="/mentee/*">
         <Route path="dashboard" element={<MenteeDashboard />} />
         <Route path="profile/:id" element={<MenteeProfile />} />

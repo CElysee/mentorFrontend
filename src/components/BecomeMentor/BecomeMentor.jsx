@@ -120,30 +120,38 @@ function becomeMentor() {
                 </span>
               </h2>
               <div className="spacing-20"></div>
-              <Link to={'/sign-up'} className="button w-button">Become a mentor</Link>
+              <Link to={"/sign-up"} className="button w-button">
+                Become a mentor
+              </Link>
             </div>
             <div className="w-layout-grid grid">
-              <div className="col-md-4">
-                <img src={BecomeMentorImage1} className="feature-image" />
-                <h3>Feel empowered</h3>
-                <p className="bb">
-                  Be part of a community of mentors globally that supports each
-                  other to inspire conversations; supported 24/7.
-                </p>
+              <div className="col-md-4 articles">
+                <Link to={"/FeelEmpowered"}>
+                  <img src={BecomeMentorImage1} className="feature-image" />
+                  <h3>Feel empowered</h3>
+                  <p className="bb">
+                    Be part of a community of mentors globally that supports
+                    each other to inspire conversations; supported 24/7.
+                  </p>
+                </Link>
               </div>
-              <div className="col-md-4">
-                <img
-                  src={BecomeMentorImage2}
-                  alt=""
-                  className="feature-image"
-                />
-                <h3>Tools to Mentor</h3>
-                <p className="bb">
-                  Our tools like Send notes, Group session hosting, Calendar
-                  Management and more — helps you be successful in mentoring.
-                </p>
+
+              <div className="col-md-4 articles">
+                <Link to={"/ToolsToMentor"}>
+                  <img
+                    src={BecomeMentorImage2}
+                    alt=""
+                    className="feature-image"
+                  />
+                  <h3>Tools to Mentor</h3>
+                  <p className="bb">
+                    Our tools like Send notes, Group session hosting, Calendar
+                    Management and more — helps you be successful in mentoring.
+                  </p>
+                </Link>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 articles">
+                <Link to={'/DiverseCommunity'}>
                 <img
                   src={BecomeMentorImage3}
                   alt=""
@@ -154,6 +162,7 @@ function becomeMentor() {
                   From over 40+ mentors in Rwanda, it’s time to scale your
                   impact beyond the local community.
                 </p>
+                </Link>
               </div>
             </div>
           </div>

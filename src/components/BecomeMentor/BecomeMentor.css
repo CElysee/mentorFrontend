@@ -378,3 +378,6 @@
     color: rgb(7, 127, 127) !important;
     text-decoration: underline;
 }
+.articles h3, .articles p{
+    color: #000;
+}
