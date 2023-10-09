@@ -566,10 +566,10 @@ function Bookings() {
                                       aria-label="Loading Spinner"
                                       data-testid="loader"
                                     />
-                                    Updating status
+                                    Adding new slot
                                   </>
                                 ) : (
-                                  "Update Now"
+                                  "Add Slot"
                                 )}
                               </button>
                             </div>
