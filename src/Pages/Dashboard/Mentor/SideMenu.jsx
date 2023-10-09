@@ -12,8 +12,9 @@ function SideMenu() {
   const [profileImage, setProfileImage] = useState("")
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    navigate("/signIn");
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('user_role')
+    navigate("/signIn")
   };
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
@@ -22,7 +23,7 @@ function SideMenu() {
   useEffect(() => {
     const fetchData = async () => {
       
-      if (isExpired) {
+      if (isExpired || isExpired == null) {
         navigate("/signIn");
       } else {
         try {
@@ -294,7 +295,7 @@ function SideMenu() {
               </p>
             </Link>
           ))}
-          <Link
+          <a
             onClick={handleLogout}
             aria-label="Logout"
             className="item"
@@ -307,7 +308,6 @@ function SideMenu() {
                 height="24"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                variant="outline"
               >
                 <path
                   d="M15.4361 11.8778L3.39511 11.8778"
@@ -335,7 +335,7 @@ function SideMenu() {
             <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
               Logout
             </p>
-          </Link>
+          </a>
         </div>
       </div>
     </>

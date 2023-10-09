@@ -160,7 +160,7 @@ function Header() {
                             <div className="nav__item pr-0 pl-2">
                               <a
                                 onClick={handleLogout}
-                                aria-label="Get a match"
+                                aria-label="Logout"
                                 className="grey-5-bg grey-2-text btn px-3"
                                 role="button"
                               >

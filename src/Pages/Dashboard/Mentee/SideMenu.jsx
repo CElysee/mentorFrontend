@@ -10,17 +10,19 @@ function SideMenu() {
   const [userProfile, setUserProfile] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     navigate("/signIn");
   };
+
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isExpired) {
+      if (isExpired || isExpired == null) {
         navigate("/signIn");
       } else {
         try {

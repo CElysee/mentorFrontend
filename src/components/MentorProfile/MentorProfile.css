@@ -637,12 +637,12 @@ a:-webkit-any-link {
   grid-template-columns: auto auto;
 }
 .dSkGVF {
-  height: 60px;
-  border-color: black !important;
+  height: 45px;
+  border-color: #077f80 !important;
   border-radius: 8px !important;
 }
 .gedcqL {
-  height: 60px;
+  height: 45px;
   background: var(--teal) !important;
   color: white !important;
   border-radius: 8px !important;

@@ -4,7 +4,7 @@ import CoverImage from "../../assets/images/coverpic.jpg";
 import ProfileImage from "../../assets/images/profilepic.jpg";
 import "../MenteeProfile/MenteeProfile.css";
 import IndustrySvg from "../../assets/images/industry.svg";
-import SideMenu  from "../../Pages/Dashboard/Mentee/SideMenu";
+import SideMenu from "../../Pages/Dashboard/Mentee/SideMenu";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
 import UserInfo from "../EditUserProfile/UserInfo";
@@ -115,11 +115,13 @@ function MenteeProfile() {
     setLoading(true);
 
     const dataSignUp = new FormData();
+
     dataSignUp.append("name", profileData.name);
     dataSignUp.append("gender", profileData.gender);
     dataSignUp.append("country_id", userDetails.country_id);
     dataSignUp.append("languages_id", userDetails.languages);
     dataSignUp.append("user_id", profileData.userId);
+
     if (userDetails.profile_picture === File) {
       dataSignUp.append("profile_picture", userDetails.profile_picture);
     }
@@ -129,7 +131,7 @@ function MenteeProfile() {
         dataSignUp,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
@@ -248,12 +250,14 @@ function MenteeProfile() {
         dataEditBio,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
       console.log(JSON.stringify(submitForm.data.message));
       setResponseError(submitForm.data.message);
+
       await delay(1000);
       setLoading(false);
       notify(submitForm.data.message, "success");

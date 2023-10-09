@@ -72,21 +72,6 @@
   height: 0.438rem;
   background-color: var(--grey-4);
 }
-.CiLZB {
-  margin-top: 15px !important;
-  padding: 0.5rem 0.75rem;
-  display: inline-block;
-  position: relative;
-  -moz-box-align: center;
-  align-items: center;
-  -moz-box-pack: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: 700;
-  border-radius: 6px;
-  color: #e55812;
-  background: rgba(4, 4, 4, 0.09);
-}
 @media (min-width: 992px){
   .dYqkqL {
     padding-top: 20px;
@@ -106,4 +91,8 @@
 .fc-h-event {
   background-color: #0e4749 !important;
   border: #0e4749 !important;
+}
+.sc-etVdmn {
+  display: flex;
+  justify-content: space-between;
 }

@@ -75,15 +75,6 @@ function Calendar() {
               eventClick={handleEventClick}
             />
 
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              Launch demo modal
-            </button>
-
             <div
               className="modal fade"
               id="exampleModal"
@@ -104,17 +95,27 @@ function Calendar() {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div className="modal-body">...</div>
-                  <div className="modal-footer">
+                  <div className="modal-body">1</div>
+                  <div
+                    className="sc-eldPxv efrIaS justify-content-end"
+                    width="1714"
+                  >
                     <button
-                      type="button"
-                      className="btn btn-secondary"
                       data-bs-dismiss="modal"
+                      border="black"
+                      type="button"
+                      className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
                     >
-                      Close
+                      Go Back
                     </button>
-                    <button type="button" className="btn btn-primary">
-                      Save changes
+
+                    <button
+                      style={{ backgroundColor: "black" }}
+                      color="white"
+                      type="button"
+                      className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                    >
+                      <span style={{ paddingLeft: "10px" }}>Book Now</span>
                     </button>
                   </div>
                 </div>

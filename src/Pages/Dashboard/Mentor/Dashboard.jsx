@@ -6,14 +6,22 @@ import axiosInstance from "../../../axiosInstance";
 
 function Dashboard() {
   const [profileMentor, setProfileMentor] = useState([]);
+  const [userId, setUserId] = useState("");
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const profileApi = await axiosInstance("/mentors/list");
+        const profileApi = await axiosInstance.get("/mentors/list");
+        const userInfo = await axiosInstance.get("/auth/users/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (profileApi.status == 200) {
           setProfileMentor(profileApi.data);
+          setUserId(userInfo.data.id);
         }
       } catch (error) {
         console.error(error);
@@ -21,6 +29,7 @@ function Dashboard() {
     };
     fetchData();
   }, []);
+
   return (
     <>
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
@@ -72,14 +81,13 @@ function Dashboard() {
                           ></path>
                         </svg>
                         <h2 className="banner__header mb-2">
-                          Let’s start with the basics
+                          Pending Bookings
                         </h2>
                         <div className="mb-4">
                           <div className="d-md-flex align-items-center justify-content-between mb-2 mb-md-3">
                             <p className="mb-3 mb-md-0 grey-2-text">
                               Get more by setting up a profile you love.
                             </p>
-                            <p className="grey-2-text">50% completed</p>
                           </div>
                           <div className="sc-fPXMVe fyyVTl"></div>
                         </div>
@@ -98,11 +106,33 @@ function Dashboard() {
                               </svg>
                             </div>
                             <p className="item__content">
-                              <a href="">
-                                Book your first session
-                              </a>{" "}
-                              — Learn/network with mentors.
+                              <a href="">Book your first session</a> —
+                              Learn/network with mentors.
                             </p>
+                            <Link
+                              to={`/mentor/bookings/${userId}`}
+                              className="sc-ePDLzJ duYmkE font-size-14 line-height-18 grey-1-text mt-3"
+                              style={{width: "max-content"}}
+                            >
+                              <span className="mr-2">
+                                <svg
+                                  fill="none"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M16.6168 3.75204C16.8552 3.51361 17.1383 3.32448 17.4498 3.19545C17.7613 3.06641 18.0952 3 18.4324 3C18.7696 3 19.1035 3.06641 19.415 3.19545C19.7265 3.32448 20.0095 3.51361 20.248 3.75204C20.4864 3.99046 20.6755 4.27351 20.8046 4.58503C20.9336 4.89655 21 5.23043 21 5.56761C21 5.90479 20.9336 6.23868 20.8046 6.55019C20.6755 6.86171 20.4864 7.14476 20.248 7.38319L7.99283 19.6383L3 21L4.36168 16.0072L16.6168 3.75204Z"
+                                    stroke="var(--grey-2)"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  ></path>
+                                </svg>
+                              </span>
+                              View all bookings
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -319,40 +349,6 @@ function Dashboard() {
                     </div>
                   </div>
                   <div className="sc-bStcSt jBOpKl">
-                    <div className="sc-fThUAz hckRhi cursor-pointer">
-                      <div className="accordion">
-                        <div className="d-flex align-items-center justify-content-between mb-3">
-                          <div>
-                            <div className="profile-strength__name d-flex flex-column">
-                              <p className="sc-jXbUNg kFsvSZ mb-1 grey-6-text">
-                                My Experience
-                              </p>
-                              <span className="current-level font-weight-700">
-                                Youngling 🔰
-                              </span>
-                            </div>
-                          </div>
-                          <svg
-                            fill="none"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="cursor-pointer"
-                          >
-                            <path
-                              d="M8.5 5L15.5 12L8.5 19"
-                              stroke="var(--white)"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></path>
-                          </svg>
-                        </div>
-                        <div className="sc-fPXMVe dwWqlx"></div>
-                        
-                      </div>
-                    </div>
                     <div className="sc-bVVIoq jVRdKh p-3 border">
                       <div className="mb-2 justify-content-between d-flex">
                         <p className="sc-kAyceB cCBfKf">
@@ -423,8 +419,8 @@ function Dashboard() {
                           Share what career opportunities you are open to in the
                           commmunity
                         </p>
-                        <a
-                          href="/"
+                        <Link
+                          to={`/mentor/profile/${userId}`}
                           className="sc-ePDLzJ duYmkE font-size-14 line-height-18 grey-1-text mt-3"
                         >
                           <span className="mr-2">
@@ -445,10 +441,9 @@ function Dashboard() {
                             </svg>
                           </span>
                           Edit Profile
-                        </a>
+                        </Link>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
               </div>
