@@ -30,7 +30,7 @@ function ThankYou() {
                   </svg>
                 </div>
                 <h2 className="sc-fqkvVR jcuFgw my-4">
-                  Thank you for registering!
+                Welcome to Our Community - Registration Completed 🎉
                 </h2>
                 <p className="line-height-16 mb-4">
                   Dear <strong>{location.state.name}</strong>, We are absolutely thrilled to welcome you to our vibrant community! Your registration has been confirmed, and we're excited to have you on board.
