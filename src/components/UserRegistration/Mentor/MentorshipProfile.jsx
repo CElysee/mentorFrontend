@@ -166,7 +166,7 @@ function MentorshipProfile(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="relationship_preferences">
-            What relationship type do you prefer?
+        What relationship type do you prefer with your mentee?
         </label>
         <div className="position-relative d-flex align-items-center">
           <div className="sc-ikkxIA borKZa form-control px-0 --border-none css-b62m3t-container">

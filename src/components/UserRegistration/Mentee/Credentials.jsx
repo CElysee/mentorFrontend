@@ -46,7 +46,7 @@ function Credentials(props) {
         </label>
         <input
           name="phone_number"
-          placeholder="Phone Number"
+          placeholder="0782384772"
           type="number"
           id="phone_number"
           className="form-control"

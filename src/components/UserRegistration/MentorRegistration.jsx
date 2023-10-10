@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./UserRegistration.css";
 import PersonalInfo from "./Mentor/PersonalInfo";
 import MentorshipProfile from "./Mentor/MentorshipProfile"
-import Bio from "./Mentee/Bio";
+import MentorBio from "./Mentor/MentorBio";
 import Credentials from "./Mentee/Credentials";
 import axiosInstance from "../../axiosInstance";
 import RiseLoader from "react-spinners/RiseLoader";
@@ -20,7 +20,7 @@ const override = {
 function UserRegistration() {
   const navigate = useNavigate();
   // const steps = [<MentorshipProfile />];
-  const steps = [<PersonalInfo />, <Bio />,<MentorshipProfile />, <Credentials />];
+  const steps = [<PersonalInfo />, <MentorBio />,<MentorshipProfile />, <Credentials />];
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
   const [responseError, setResponseError] = useState("")

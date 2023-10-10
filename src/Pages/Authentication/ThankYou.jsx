@@ -33,7 +33,7 @@ function ThankYou() {
                   Thank you for registering!
                 </h2>
                 <p className="line-height-16 mb-4">
-                  Dear <strong>{location.state.name}</strong>, We are excited to have you join our community. Your registration has been confirmed.
+                  Dear <strong>{location.state.name}</strong>, We are absolutely thrilled to welcome you to our vibrant community! Your registration has been confirmed, and we're excited to have you on board.
                   
                 </p>
                 <p className="text-center mb-32">

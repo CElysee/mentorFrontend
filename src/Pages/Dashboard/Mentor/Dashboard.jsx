@@ -86,7 +86,7 @@ function Dashboard() {
                         <div className="mb-4">
                           <div className="d-md-flex align-items-center justify-content-between mb-2 mb-md-3">
                             <p className="mb-3 mb-md-0 grey-2-text">
-                              Get more by setting up a profile you love.
+                              Get more active by checking recent bookings.
                             </p>
                           </div>
                           <div className="sc-fPXMVe fyyVTl"></div>

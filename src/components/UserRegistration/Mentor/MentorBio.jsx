@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function MentorBio(props) {
   const { userDetails, setUserDetails } = props;
-  Bio.propTypes = {
+  MentorBio.propTypes = {
     userDetails: PropTypes.object,
     setUserDetails: PropTypes.func.isRequired,
   };
@@ -36,7 +36,7 @@ function MentorBio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="company">
-          Company/School
+          Company Name
         </label>
         <input
           name="company"
@@ -75,7 +75,7 @@ function MentorBio(props) {
         </div>
       </div>
       <div className="mb-32">
-        <p className="mb-3">Sample bio(Min: 100 characters)</p>
+        <p className="mb-3">Sample bio(Min: 500 characters)</p>
         <div className="p-3 muted-grey-bg" style={{ borderRadius: "10px" }}>
           <p className="sc-kAyceB cCBfKf grey-2-text">
             I am a product designer at Apple who writes about design. I love my
