@@ -19,7 +19,7 @@ function Bio(props) {
   return (
     <>
       <h2 className="sc-fqkvVR jcuFgw mb-32">
-        How would you like to be intro'd?
+        How would you like to be intro'd? *
       </h2>
       <div className="form-group">
         <label className="form-label" htmlFor="company_title">
@@ -36,7 +36,7 @@ function Bio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="company">
-          Company/School
+          Company *
         </label>
         <input
           name="company"
@@ -55,7 +55,7 @@ function Bio(props) {
           />
         </div>
         <p className="sc-kAyceB cCBfKf line-height-20">
-          Everyone has a story, what's yours?
+          Everyone has a story, what's yours? *
         </p>
       </div>
       <div className="mb-4">
@@ -85,7 +85,7 @@ function Bio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="website">
-          Website
+          Website 
         </label>
         <input
           name="website"

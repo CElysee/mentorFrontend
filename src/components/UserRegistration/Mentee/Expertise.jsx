@@ -72,7 +72,7 @@ function Expertise(props) {
       <h2 className="sc-fqkvVR jcuFgw mb-32">Great! What’s your superpower?</h2>
       <div className="form-group">
         <label className="form-label" htmlFor="expertise">
-          What’s your Industry?
+          What’s your Industry? *
         </label>
         <Select
           name="industry_id"
@@ -86,7 +86,7 @@ function Expertise(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="expertise">
-          What’s your Interest?
+          What’s your Interest? *
         </label>
         <Select
           name="interest_id"
@@ -100,7 +100,7 @@ function Expertise(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="expertise">
-          What’s your Expertise?
+          What’s your Expertise? *
         </label>
         <Select
           isMulti
