@@ -28,7 +28,7 @@ function Credentials(props) {
       <h2 className="sc-fqkvVR jcuFgw mb-32">Accelerate your career growth</h2>
       <div className="form-group">
         <label className="form-label" htmlFor="employer">
-          Email address
+          Email address *
         </label>
         <input
           name="email"
@@ -42,7 +42,7 @@ function Credentials(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="employer">
-          Phone Number
+          Phone Number *
         </label>
         <input
           name="phone_number"
@@ -56,7 +56,7 @@ function Credentials(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="password">
-          Create a password
+          Create a password *
         </label>
         <div className="position-relative d-flex align-items-center input-container">
           <input

@@ -66,7 +66,7 @@ function PersonalInfo(props) {
       <h2 className="sc-fqkvVR jcuFgw mb-32">Tell us your origin story</h2>
       <div className="mb-4 form-group">
         <label className="mb-3 form-label" htmlFor="profile_picture">
-          Upload profile photo
+          Upload profile photo *
         </label>
         <div className="d-flex align-items-center">
           <div>
@@ -140,7 +140,7 @@ function PersonalInfo(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="name">
-          Your full name
+          Your full name *
         </label>
         <input
           name="name"
@@ -154,7 +154,7 @@ function PersonalInfo(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="gender">
-          What gender do you identify as?
+          What gender do you identify as? *
         </label>
         <div className="position-relative d-flex align-items-center">
           <div className="sc-ikkxIA borKZa form-control px-0 --border-none css-b62m3t-container">
@@ -176,7 +176,7 @@ function PersonalInfo(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="country_iso">
-          Which country do you live in?
+          Which country do you live in? *
         </label>
         <Select
           name="country_id"
@@ -188,7 +188,7 @@ function PersonalInfo(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="country_iso">
-          Languages spoken
+          Languages spoken *
         </label>
         <Select
           name="languages_id"

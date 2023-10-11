@@ -7,6 +7,7 @@ import axiosInstance from "../../../axiosInstance";
 function Dashboard() {
   const [profileMentor, setProfileMentor] = useState([]);
   const [userId, setUserId] = useState("");
+  const [bookings, setBookings] = useState([]);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const token = localStorage.getItem("access_token");
 
@@ -14,6 +15,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const profileApi = await axiosInstance.get("/mentors/list");
+
         const userInfo = await axiosInstance.get("/auth/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -22,6 +24,9 @@ function Dashboard() {
         if (profileApi.status == 200) {
           setProfileMentor(profileApi.data);
           setUserId(userInfo.data.id);
+          const requestUrl = `/BookMentor/list/${userInfo.data.id}`;
+          const responseProfile = await axiosInstance.post(requestUrl);
+          setBookings(responseProfile.data);
         }
       } catch (error) {
         console.error(error);
@@ -29,7 +34,6 @@ function Dashboard() {
     };
     fetchData();
   }, []);
-
   return (
     <>
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
@@ -49,9 +53,6 @@ function Dashboard() {
                     <div className="border-bottom grey-3-border mb-4">
                       <div className="sc-fatcLD rdVON mb-4">
                         <h2 className="sc-fqkvVR jcuFgw mb-2">Welcome 👋</h2>
-                        <p className="sc-gsFSXq fJiOdH grey-2-text mb-4">
-                          You have no upcoming sessions
-                        </p>
                       </div>
                       <div
                         className="sc-eONNys cwDSrr text-left mb-4 mt-3"
@@ -92,48 +93,69 @@ function Dashboard() {
                           <div className="sc-fPXMVe fyyVTl"></div>
                         </div>
                         <div className="banner__content">
-                          <div className="banner__content__item undefined">
-                            <div className="item__check">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                height="16"
-                                width="16"
-                                fill="var(--black)"
+                          {bookings ? (
+                            bookings.map((item, index) => (
+                              <div
+                                className="banner__content__item"
+                                key={index}
                               >
-                                <path d="M0 0h24v24H0V0z" fill="none"></path>
-                                <path d="M9 16.2l-3.5-3.5c-.39-.39-1.01-.39-1.4 0-.39.39-.39 1.01 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7c.39-.39.39-1.01 0-1.4-.39-.39-1.01-.39-1.4 0L9 16.2z"></path>
-                              </svg>
-                            </div>
-                            <p className="item__content">
-                              <a href="">Book your first session</a> —
-                              Learn/network with mentors.
+                                <div className="item__check">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    height="16"
+                                    width="16"
+                                    fill="var(--black)"
+                                  >
+                                    <path
+                                      d="M0 0h24v24H0V0z"
+                                      fill="none"
+                                    ></path>
+                                    <path d="M9 16.2l-3.5-3.5c-.39-.39-1.01-.39-1.4 0-.39.39-.39 1.01 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7c.39-.39.39-1.01 0-1.4-.39-.39-1.01-.39-1.4 0L9 16.2z"></path>
+                                  </svg>
+                                </div>
+                                <p className="item__content">
+                                  <a href="#">{item.schedule_date}</a> — with{" "}
+                                  {item.name} at{" "}
+                                  <b>
+                                    {
+                                      item.booking.mentorBookingScheduleSlots
+                                        .slot_time
+                                    }
+                                  </b>
+                                </p>
+                              </div>
+                            ))
+                          ) : (
+                            <p className="sc-gsFSXq fJiOdH grey-2-text mb-4">
+                              You have no upcoming sessions
                             </p>
-                            <Link
-                              to={`/mentor/bookings/${userId}`}
-                              className="sc-ePDLzJ duYmkE font-size-14 line-height-18 grey-1-text mt-3"
-                              style={{width: "max-content"}}
-                            >
-                              <span className="mr-2">
-                                <svg
-                                  fill="none"
-                                  width="18"
-                                  height="18"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M16.6168 3.75204C16.8552 3.51361 17.1383 3.32448 17.4498 3.19545C17.7613 3.06641 18.0952 3 18.4324 3C18.7696 3 19.1035 3.06641 19.415 3.19545C19.7265 3.32448 20.0095 3.51361 20.248 3.75204C20.4864 3.99046 20.6755 4.27351 20.8046 4.58503C20.9336 4.89655 21 5.23043 21 5.56761C21 5.90479 20.9336 6.23868 20.8046 6.55019C20.6755 6.86171 20.4864 7.14476 20.248 7.38319L7.99283 19.6383L3 21L4.36168 16.0072L16.6168 3.75204Z"
-                                    stroke="var(--grey-2)"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  ></path>
-                                </svg>
-                              </span>
-                              View all bookings
-                            </Link>
-                          </div>
+                          )}
+
+                          <Link
+                            to={`/mentor/bookings/${userId}`}
+                            className="sc-ePDLzJ duYmkE font-size-14 line-height-18 grey-1-text mt-3"
+                            style={{ width: "max-content" }}
+                          >
+                            <span className="mr-2">
+                              <svg
+                                fill="none"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M16.6168 3.75204C16.8552 3.51361 17.1383 3.32448 17.4498 3.19545C17.7613 3.06641 18.0952 3 18.4324 3C18.7696 3 19.1035 3.06641 19.415 3.19545C19.7265 3.32448 20.0095 3.51361 20.248 3.75204C20.4864 3.99046 20.6755 4.27351 20.8046 4.58503C20.9336 4.89655 21 5.23043 21 5.56761C21 5.90479 20.9336 6.23868 20.8046 6.55019C20.6755 6.86171 20.4864 7.14476 20.248 7.38319L7.99283 19.6383L3 21L4.36168 16.0072L16.6168 3.75204Z"
+                                  stroke="var(--grey-2)"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                ></path>
+                              </svg>
+                            </span>
+                            View all bookings
+                          </Link>
                         </div>
                       </div>
                     </div>

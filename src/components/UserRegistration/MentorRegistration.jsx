@@ -337,6 +337,7 @@ function UserRegistration() {
                     data-testid="loader"
                   />
                   {currentStep === steps.length ? "Submit" : "Continue"}
+                  
                 </button>
               </div>
             </form>

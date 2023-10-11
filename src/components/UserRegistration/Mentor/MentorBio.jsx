@@ -19,11 +19,11 @@ function MentorBio(props) {
   return (
     <>
       <h2 className="sc-fqkvVR jcuFgw mb-32">
-        How would you like to be intro'd?
+        How would you like to be intro'd? *
       </h2>
       <div className="form-group">
         <label className="form-label" htmlFor="company_title">
-          Your title
+          Your title *
         </label>
         <input
           name="company_title"
@@ -36,7 +36,7 @@ function MentorBio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="company">
-          Company Name
+          Company Name *
         </label>
         <input
           name="company"
@@ -55,7 +55,7 @@ function MentorBio(props) {
           />
         </div>
         <p className="sc-kAyceB cCBfKf line-height-20">
-          Everyone has a story, what's yours?
+          Everyone has a story, what's yours? *
         </p>
       </div>
       <div className="mb-4">
@@ -69,6 +69,7 @@ function MentorBio(props) {
               title="Tell us more about yourself, your goals and what you love!"
               style={{ height: "178px !important" }}
               value={bio}
+              minLength={500}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -85,7 +86,7 @@ function MentorBio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="website">
-        Portfolio/Website link
+        Portfolio/Website link 
         </label>
         <input
           name="website"
@@ -99,7 +100,7 @@ function MentorBio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="social_twitter">
-          Twitter profile
+          Twitter profile 
         </label>
         <input
           name="social_twitter"
@@ -113,7 +114,7 @@ function MentorBio(props) {
       </div>
       <div className="form-group">
         <label className="form-label" htmlFor="social_linkedin">
-          LinkedIn profile
+          LinkedIn profile 
         </label>
         <input
           name="social_linkedin"
