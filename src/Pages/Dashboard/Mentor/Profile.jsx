@@ -8,6 +8,7 @@ import "../Mentor/Mentor.css"
 function Profile() {
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
+  const[mentorDashboard, setMentorDashboard] = useState(true)
   const isExpired = isTokenExpired(token);
   if (isExpired || isExpired == null) {
     navigate("/signIn");
@@ -17,7 +18,7 @@ function Profile() {
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
         <div width="1440" className="sc-bddgXz ejKczW container">
           <SideMenu />
-          <MentorProfile />
+          <MentorProfile mentorDashboard/>
         </div>
       </div>
     </>

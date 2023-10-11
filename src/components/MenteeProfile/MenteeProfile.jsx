@@ -21,7 +21,7 @@ const override = {
   borderColor: "#e55812",
   paddingRight: "10px",
 };
-function MenteeProfile() {
+function MenteeProfile(props) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [menteeId, setMenteeId] = useState(id);
@@ -33,6 +33,9 @@ function MenteeProfile() {
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("userId")
+  );
   const [profileData, setProfileData] = useState({
     name: "",
     bio: "",
@@ -383,19 +386,21 @@ function MenteeProfile() {
                     <div className="d-flex align-items-center"></div>
                   </div>
                   <div className="Actions__Wrapper-sc-9xetoo-1 cJXdIa">
-                    <button
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      bg="#fff"
-                      height="50"
-                      color="var(--grey-1)"
-                      className="sc-jlZhew klINlq text-truncate py-0 px-3 btn btn-default"
-                      border="var(--grey-3)"
-                      onClick={handleModelOpen}
-                    >
-                      Edit Profile
-                    </button>
+                    {loggedInUser == id ? (
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        bg="#fff"
+                        height="50"
+                        color="var(--grey-1)"
+                        className="sc-jlZhew klINlq text-truncate py-0 px-3 btn btn-default"
+                        border="var(--grey-3)"
+                        onClick={handleModelOpen}
+                      >
+                        Edit Profile
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               </div>

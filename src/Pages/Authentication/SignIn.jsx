@@ -88,7 +88,7 @@ function SignIn() {
             },
           }
         );
-        // console.log(JSON.stringify(check_username.data));
+        console.log(JSON.stringify(check_username.data));
         const userToken = check_username.data.access_token;
         const role = check_username.data.role;
         setUserRole(role);
@@ -96,6 +96,7 @@ function SignIn() {
         setIsLoggedIn(true);
         localStorage.setItem("access_token", userToken);
         localStorage.setItem("user_role", role);
+        localStorage.setItem("userId", check_username.data.userId);
         if (role === "admin") {
           navigate("/admin");
         } else if (role === "mentee") {

@@ -123,3 +123,6 @@
   -webkit-box-shadow: 0 0 0 0.2rem rgb(255 255 255 / 25%);
   box-shadow: 0 0 0 0.2rem rgb(255 255 255 / 25%);
 }
+.hidden{
+  display: none;
+}

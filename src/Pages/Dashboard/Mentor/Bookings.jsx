@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../Dashboard.css";
 import SideMenu from "../Mentor/SideMenu";
@@ -33,7 +34,7 @@ function Bookings() {
     const fetchData = async () => {
       try {
         const requestUrl = `/BookMentor/list/${id}`;
-        const responseProfile = await axiosInstance.post(requestUrl);
+        const responseProfile = await axiosInstance.get(requestUrl);
         setBookings(responseProfile.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -80,7 +81,7 @@ function Bookings() {
       });
       console.log("Response:", response.data);
       setLoading(false);
-      setFormSubmitted(true)
+      setFormSubmitted(true);
       notify(response.data.message, "success");
       document.querySelector(".modal-backdrop").style.display = "none";
       document.querySelector(".modal").style.display = "none";
@@ -218,7 +219,7 @@ function Bookings() {
                       aria-labelledby="upcoming-tab"
                       className="fade tab-pane active show active"
                     >
-                      {bookings ? (
+                      {bookings.length ? (
                         <>
                           {bookings.map((item, index) => (
                             <div
@@ -392,36 +393,6 @@ function Bookings() {
                       ) : (
                         <EmptyBooking />
                       )}
-                    </div>
-                    <div
-                      role="tabpanel"
-                      id="history"
-                      aria-labelledby="history-tab"
-                      className="fade tab-pane"
-                    >
-                      <div
-                        style={{
-                          transition:
-                            "opacity 400ms ease 0s, transform 400ms ease 0s",
-                          transform: "none",
-                          opacity: "1",
-                        }}
-                      >
-                        <div width="1440" className="sc-eldPxv ddyETa">
-                          <div>
-                            <p className="grey-2-text line-height-16 mb-0">
-                              You have no upcoming bookings - start sharing a
-                              conversation with a mentor.
-                            </p>
-                            <button
-                              type="button"
-                              className="sc-jlZhew cKRinY text-truncate px-4 mt-4 btn--default btn btn-default"
-                            >
-                              Explore mentors
-                            </button>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <div
@@ -603,12 +574,14 @@ function EmptyBooking() {
               You have no upcoming bookings - start sharing a conversation with
               a mentor.
             </p>
-            <button
-              type="button"
+            <a
+              href="/findMentor"
+              target="_blanket"
+              style={{ width: "fit-content" }}
               className="sc-jlZhew cKRinY text-truncate px-4 mt-4 btn--default btn btn-default"
             >
               Explore mentors
-            </button>
+            </a>
           </div>
         </div>
       </div>

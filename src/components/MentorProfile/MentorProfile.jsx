@@ -14,7 +14,7 @@ const override = {
   paddingRight: "10px",
 };
 
-function MentorProfile() {
+function MentorProfile(props) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [mentorId, setMentorId] = useState(id);
@@ -36,6 +36,9 @@ function MentorProfile() {
   const [responseError, setResponseError] = useState("");
   const [loading, setLoading] = useState(false);
   const [userRole, setUserRole] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("userId")
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -204,26 +207,26 @@ function MentorProfile() {
                         </svg>
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      bg="#fff"
-                      height="50"
-                      color="var(--grey-1)"
-                      className="sc-jlZhew klINlq  py-0  btn btn-default"
-                      border="var(--grey-3)"
-                      // onClick={handleModelOpen}
-                    >
-                      Edit Profile
-                    </button>
+                    {loggedInUser == id ? (
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        bg="#fff"
+                        height="50"
+                        color="var(--grey-1)"
+                        className="sc-jlZhew klINlq text-truncate py-0 px-3 btn btn-default"
+                        border="var(--grey-3)"
+                      >
+                        Edit Profile
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               </div>
 
               <div
-                className="Layout__Wrapper-sc-1js8544-0 oKXVt"
-                id={userRole == "mentor" && "mentor_side" ? "" : ""}
+                className={`Layout__Wrapper-sc-1js8544-0 ${props.mentorDashboard ? null : "oKXVt"}`}
               >
                 <div style={{ marginBottom: "8rem" }}>
                   <div className="line-height-16 mb-3">
@@ -360,7 +363,7 @@ function MentorProfile() {
                     </div>
                   </div>
                 </div>
-                <div className="p-1">
+                <div className={`p-1 ${props.mentorDashboard && 'hidden' }`}>
                   {bookingSchedules.length > 0 ? (
                     <>
                       {" "}

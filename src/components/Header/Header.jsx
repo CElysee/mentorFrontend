@@ -46,6 +46,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('access_token')
     localStorage.removeItem('user_role')
+    localStorage.removeItem('userId')
     setIsLoggedIn(false);
     navigate("/signIn")
   };

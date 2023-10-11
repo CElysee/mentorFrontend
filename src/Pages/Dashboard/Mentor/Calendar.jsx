@@ -143,6 +143,7 @@ function Calendar() {
       });
     }
   };
+  console.log(formFields)
   return (
     <>
       <div className="Layout__Wrapper-sc-2tn75p-0 fBYEGj">
@@ -208,12 +209,12 @@ function Calendar() {
                     >
                       Go Back
                     </button>
-
                     <button
                       style={{ backgroundColor: "black" }}
                       color="white"
                       type="button"
                       className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                     
                     >
                       <span style={{ paddingLeft: "10px" }}>Book Now</span>
                     </button>
@@ -367,6 +368,7 @@ function Calendar() {
                         color="white"
                         type="submit"
                         className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                        disabled={formFields[0].value == "" && true}
                       >
                         <span style={{ paddingLeft: "10px" }}>
                           {loading ? (
