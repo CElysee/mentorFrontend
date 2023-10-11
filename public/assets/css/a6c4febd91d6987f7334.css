@@ -14486,9 +14486,9 @@ p {
 #__next,
 body,
 html {
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* height: 100%; */
+    /* overflow-y: initial; */
+    /* overflow-x: auto; */
     position: relative;
     width: 100%;
 }
@@ -14498,6 +14498,7 @@ html {
     -moz-box-orient: vertical;
     -moz-box-direction: normal;
     flex-direction: column;
+    /* overflow: auto; */
 }
 .overflow-visible {
     overflow: visible !important;

@@ -1,4 +1,5 @@
-import React from "react";
+import React , { useEffect }from "react";
+import { useLocation } from "react-router-dom"
 import heroimg from "../assets/images/happy-businessman-back-view.jpg";
 
 function FeelEmpowered() {
@@ -6,7 +7,7 @@ function FeelEmpowered() {
     <div className="Intro__Wrapper-sc-4plfni-1">
       <section
         id="hero-11"
-        className="bg--scroll hero-section"
+        className=""
         style={{ paddingTop: "120px", paddingBottom: "160px", marginTop: "0px" }}
       >
         <div className="container">

@@ -1,7 +1,7 @@
 import React from 'react'
 import Header  from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import Routers from "../router/Routers"
+import Routers from "../Router/Router"
 
 function Layout() {
   return (
