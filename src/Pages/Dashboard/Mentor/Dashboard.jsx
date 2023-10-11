@@ -25,7 +25,7 @@ function Dashboard() {
           setProfileMentor(profileApi.data);
           setUserId(userInfo.data.id);
           const requestUrl = `/BookMentor/list/${userInfo.data.id}`;
-          const responseProfile = await axiosInstance.post(requestUrl);
+          const responseProfile = await axiosInstance.get(requestUrl);
           setBookings(responseProfile.data);
         }
       } catch (error) {
