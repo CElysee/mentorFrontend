@@ -15,6 +15,14 @@ function Bio(props) {
       ...userDetails,
       [name]: value,
     })
+    if(name == "bio"){
+      const remaningcount = 500 - value.length
+      if(remaningcount < 0 ){
+        props.setBioCharCount(0)
+      }else{
+        props.setBioCharCount(remaningcount)
+      }
+    }
   }
   return (
     <>
@@ -55,7 +63,7 @@ function Bio(props) {
           />
         </div>
         <p className="sc-kAyceB cCBfKf line-height-20">
-          Everyone has a story, what's yours? *
+        Everyone has a story, what's yours? * <br></br><b>(Remaining Character: {props.bioCharCount} characters)</b>
         </p>
       </div>
       <div className="mb-4">
@@ -75,7 +83,7 @@ function Bio(props) {
         </div>
       </div>
       <div className="mb-32">
-        <p className="mb-3">Sample bio(Min: 100 characters)</p>
+        <p className="mb-3">Sample bio</p>
         <div className="p-3 muted-grey-bg" style={{ borderRadius: "10px" }}>
           <p className="sc-kAyceB cCBfKf grey-2-text">
             I am a product designer at Apple who writes about design. I love my

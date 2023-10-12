@@ -56,7 +56,7 @@ function MentorCategories() {
             style={{ color: "#fff" }}
             to={"/findMentor"}
           >
-            Find a mentor
+            Discover Multi-Interest Mentors
           </Link>
         </button>
       </div>

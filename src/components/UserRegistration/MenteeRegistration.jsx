@@ -22,8 +22,8 @@ function UserRegistration() {
   const steps = [<UserInfo />, <Expertise />, <Bio />, <Credentials />];
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
-  const [responseError, setResponseError] = useState("")
-  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const [responseError, setResponseError] = useState("");
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const location = useLocation();
   // setState to track current step
@@ -42,6 +42,7 @@ function UserRegistration() {
   const [industryData, setIndustryData] = useState([]);
   const [interestData, setInterestData] = useState([]);
   const [expertiseData, setExpertiseData] = useState([]);
+  const [bioCharCount, setBioCharCount] = useState(500);
 
   const [userDetails, setUserDetails] = useState({
     profile_picture: null,
@@ -73,26 +74,23 @@ function UserRegistration() {
           userDetails.country_id === "" ||
           userDetails.languages === "")) ||
       (currentStep === 2 &&
-        (userDetails.industry === "" ||
-          userDetails.interest === "" ||
-          userDetails.expertise === "")) ||
+        (userDetails.industry == "" ||
+          userDetails.interest == "" ||
+          userDetails.expertise == "")) ||
       (currentStep === 3 &&
         (userDetails.bio === "" ||
-          userDetails.bio.length < 100 ||
+          userDetails.bio.length < 500 ||
           userDetails.company === "" ||
           userDetails.company_title === "")) ||
       (currentStep === 4 &&
         (userDetails.email === "" ||
           userDetails.phone_number === "" ||
-          userDetails.password === "")) ||
-      // (currentStep === 2 && expertiseInputIsEmpty) || // Add similar checks for other steps
-      // ... Add similar checks for other steps
-
-      setIsButtonDisabled((prevDisabledStatus) => {
-        const newDisabledStatus = [...prevDisabledStatus];
-        newDisabledStatus[currentStep - 1] = isCurrentStepButtonDisabled;
-        return newDisabledStatus;
-      });
+          userDetails.password === ""));
+    setIsButtonDisabled((prevDisabledStatus) => {
+      const newDisabledStatus = [...prevDisabledStatus];
+      newDisabledStatus[currentStep - 1] = isCurrentStepButtonDisabled;
+      return newDisabledStatus;
+    });
   }, [
     currentStep,
     userDetails.profile_picture,
@@ -145,7 +143,6 @@ function UserRegistration() {
     };
     fetchData();
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -160,7 +157,7 @@ function UserRegistration() {
     // console.log(Object.fromEntries(dataForm.entries()));
     const profilePictureFile = dataForm.get("profile_picture");
     const profilePictureFileName = profilePictureFile.name;
-    
+
     const dataSignUp = new FormData();
     dataSignUp.append("name", userDetails.name);
     dataSignUp.append("email", userDetails.email);
@@ -184,7 +181,7 @@ function UserRegistration() {
 
     // console.log(signUpData)
     // console.log(Object.fromEntries(dataSignUp.entries()));
-    
+
     try {
       const submitForm = await axiosInstance.post(
         "/auth/create_user_form",
@@ -197,12 +194,12 @@ function UserRegistration() {
         }
       );
       console.log(JSON.stringify(submitForm.data.message));
-      setResponseError(submitForm.data.message)
+      setResponseError(submitForm.data.message);
       await delay(1000);
       notify(submitForm.data.message, "success");
       setLoading(false);
       await delay(1000);
-      navigate("/thankyou", {
+      navigate("/thankYouMessage", {
         state: {
           name: userDetails.name,
         },
@@ -212,26 +209,25 @@ function UserRegistration() {
         // The request was made and the server responded with a status code
         console.log(error.response.data.detail);
         console.log(error.response.status);
-        if (error.response.statu === 201){
+        if (error.response.statu === 201) {
           setLoading(false);
-          setResponseError(error.response.data.detail)
+          setResponseError(error.response.data.detail);
           notify(error.response.data.detail, "success");
-        }else{
+        } else {
           setLoading(false);
           notify(error.response.data.detail, "error");
         }
-        
       } else if (error.request) {
         // The request was made but no response was received
         console.log(error.request);
-        setResponseError(error.request)
+        setResponseError(error.request);
         setLoading(false);
         notify(error.request, "error");
       } else {
         // Something happened in setting up the request that triggered an error
         console.log("Error:", error.message);
         setLoading(false);
-        setResponseError(error.message)
+        setResponseError(error.message);
         notify(error.request, "error");
       }
     }
@@ -277,6 +273,8 @@ function UserRegistration() {
                     industryData,
                     interestData,
                     expertiseData,
+                    bioCharCount,
+                    setBioCharCount,
                     preserveState: true,
                   })}
                 </div>
@@ -311,9 +309,7 @@ function UserRegistration() {
                   className="sc-jlZhew cKRinY text-truncate px-5 btn--default btn btn-default"
                   onClick={handleNextSteps}
                   disabled={isButtonDisabled[currentStep - 1]}
-                  {...(currentStep === steps.length
-                    ? { type: "submit" }
-                    : { type: "button" })}
+                  {...(completed ? { type: "submit" } : { type: "button" })}
                 >
                   <RiseLoader
                     color={color}
@@ -323,7 +319,11 @@ function UserRegistration() {
                     aria-label="Loading Spinner"
                     data-testid="loader"
                   />
-                  {currentStep === steps.length ? "Submit" : "Continue"}
+                 {currentStep === steps.length
+                    ? loading
+                      ? "Creating account"
+                      : "Create account"
+                    : "Continue"}
                 </button>
               </div>
             </form>

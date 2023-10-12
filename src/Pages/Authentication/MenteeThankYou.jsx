@@ -1,6 +1,6 @@
 import React from "react";
 import "../Authentication/Authentication.css";
-import {Link, useLocation} from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
 
 function ThankYou() {
   const location = useLocation();
@@ -11,7 +11,7 @@ function ThankYou() {
         <div className="h-100">
           <div className="overflow-auto h-100 container">
             <div id="main-content"></div>
-            <div width="394" className="sc-pKqro fJHraE">
+            <div width="" className="sc-pKqro fJHraE">
               <div className="sc-gvPdwL cRlQbk text-center px-2">
                 <div className="sc-dBFDNq eetzUf">
                   <svg
@@ -30,22 +30,32 @@ function ThankYou() {
                   </svg>
                 </div>
                 <h2 className="sc-fqkvVR jcuFgw my-4">
-                Welcome to Our Community - Registration Completed 🎉
+                  Welcome to Our Community - Registration Completed 🎉
                 </h2>
+                <div style={{textAlign:"justify"}}>
                 <p className="line-height-16 mb-4">
-                  Dear <strong>{location.state.name}</strong>, We are absolutely thrilled to welcome you to our vibrant community! Your registration has been confirmed, and we're excited to have you on board.
-                  
+                  Dear <strong>{location.state.name}</strong>, We are absolutely
+                  thrilled to welcome you to our vibrant community!
                 </p>
+                <p className="line-height-16 mb-4">
+                Your registration is successful, and we are excited to have you
+                on board at Mentor.rw. We believe in fostering a supportive and
+                engaging environment where members like you can connect, learn,
+                and collaborate. Your presence adds immense value to our
+                community, and we can't wait to see the positive impact we will
+                create together.
+              </p>
+              </div>
                 {/* <p className="line-height-16 mb-4">Your account is not yet approved. Please wait for approval from the administrator. Once your account is approved, you'll receive a confirmation email to be able to proceed with the requested action.</p> */}
                 <p className="text-center mb-32">
-                  Login to your account to get started
-                  <br></br><br></br>
+                  <br></br>
+                  <br></br>
                   <Link
                     style={{ display: "inline-block" }}
                     className="teal-text hzgUZB sc-jlZhew text-truncate px-4 btn--default btn"
-                    to={'/signIn'}
+                    to={"/signIn"}
                   >
-                    Login
+                    Login to your account to get started
                   </Link>
                 </p>
               </div>

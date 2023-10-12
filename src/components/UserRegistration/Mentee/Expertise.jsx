@@ -19,7 +19,7 @@ function Expertise(props) {
     interestData: PropTypes.array,
     expertiseData: PropTypes.array,
   };
-  const { industry, interest, expertise, social_twitter, social_linkedin} = userDetails;
+  const { industry, interest, expertise} = userDetails;
   const industryOptions = industryData.map((industry) => ({
     value: industry.id,
     label: industry.industry_name,
@@ -59,23 +59,23 @@ function Expertise(props) {
     });
   };
 
-  const handleChange = (e)=>{
-    const {name, value} = e.target
-    setUserDetails({
-      ...userDetails,
-      [name]:value
-    })
-  }
+  // const handleChange = (e)=>{
+  //   const {name, value} = e.target
+  //   setUserDetails({
+  //     ...userDetails,
+  //     [name]:value
+  //   })
+  // }
 
   return (
     <>
       <h2 className="sc-fqkvVR jcuFgw mb-32">Great! What’s your superpower?</h2>
       <div className="form-group">
-        <label className="form-label" htmlFor="expertise">
+        <label className="form-label" htmlFor="industry">
           What’s your Industry? *
         </label>
         <Select
-          name="industry_id"
+          name="industry"
           isMulti
           options={industryOptions}
           value={industryOptions.filter((option) =>
@@ -85,11 +85,11 @@ function Expertise(props) {
         />
       </div>
       <div className="form-group">
-        <label className="form-label" htmlFor="expertise">
+        <label className="form-label" htmlFor="interest">
           What’s your Interest? *
         </label>
         <Select
-          name="interest_id"
+          name="interest"
           isMulti
           options={interestOptions}
           value={interestOptions.filter((option) =>
@@ -104,7 +104,7 @@ function Expertise(props) {
         </label>
         <Select
           isMulti
-          name="expertise_id"
+          name="expertise"
           options={expertiseOptions}
           value={expertiseOptions.filter((option) =>
             expertise.includes(option.value)
