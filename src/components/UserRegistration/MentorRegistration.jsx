@@ -84,7 +84,7 @@ function UserRegistration() {
           userDetails.expertise === "")) ||
       (currentStep === 3 &&
         (userDetails.bio === "" ||
-          userDetails.bio.length < 100 ||
+          userDetails.bio.length < 400 ||
           userDetails.company === "" ||
           userDetails.company_title === "")) ||
       (currentStep === 4 &&

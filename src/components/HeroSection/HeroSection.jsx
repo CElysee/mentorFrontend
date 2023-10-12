@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./HeroSection.css";
 import heroImage4 from "../../assets/images/close-up-portrait.jpg";
 import heroImage5 from "../../assets/images/portrait-happy.jpg";
@@ -45,16 +46,21 @@ function HeroSection() {
                     Personalized 1:1 mentorship in Rwanda
                   </h2>
                   <p className="p-lg">
-                  Seize this remarkable opportunity to shape a successful future and make a lasting impact on your life, guided by world-class professionals.
+                    Seize this remarkable opportunity to shape a successful
+                    future and make a lasting impact on your life, guided by
+                    world-class professionals.
                   </p>
 
-                  <a
-                    href="#banner-3"
+                  <Link
+                    to={"/findMentor"}
                     className="sc-jlZhew bVwUif text-truncate undefined btn btn-default"
-                    style={{padding: "0.375rem 2.75rem", display: "inline-flex"}}
+                    style={{
+                      padding: "0.375rem 2.75rem",
+                      display: "inline-flex",
+                    }}
                   >
-                    Get started
-                  </a>
+                    Explore Mentors
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6">

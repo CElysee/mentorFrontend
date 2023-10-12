@@ -36,9 +36,9 @@ function ThankYou() {
                   Dear <strong>{location.state.name}</strong>, We are absolutely thrilled to welcome you to our vibrant community! Your registration has been confirmed, and we're excited to have you on board.
                   
                 </p>
-                <p className="line-height-16 mb-4">Your account is not yet approved. Please wait for approval from the administrator. Once your account is approved, you'll receive a confirmation email to be able to proceed with the requested action.</p>
+                {/* <p className="line-height-16 mb-4">Your account is not yet approved. Please wait for approval from the administrator. Once your account is approved, you'll receive a confirmation email to be able to proceed with the requested action.</p> */}
                 <p className="text-center mb-32">
-                  Log in to your account to get started
+                  Login to your account to get started
                   <br></br><br></br>
                   <Link
                     style={{ display: "inline-block" }}

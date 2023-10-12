@@ -23,6 +23,12 @@ function FindMentors() {
     };
     fetchData();
   }, []);
+  const handleFilter = (category) => {
+    const filteredData = profileMentor.filter((item) => item.mentor_interest === category);
+    console.log(filteredData)
+    // Update state with filtered data
+    // For example, setData(filteredData);
+  };
   return (
     <>
       <div className="explore__Wrapper-sc-wikv8h-0 kTYjaS container">
@@ -40,28 +46,6 @@ function FindMentors() {
                   <div className="react-horizontal-scrolling-menu--wrapper">
                     <div className="react-horizontal-scrolling-menu--header"></div>
                     <div className="react-horizontal-scrolling-menu--inner-wrapper">
-                      <div className="react-horizontal-scrolling-menu--arrow-left">
-                        <div
-                          className="Arrows__StyledArrow-sc-kci6kk-0 lhRKAX"
-                          style={{ display: "none", marginLeft: "-32px" }}
-                        >
-                          <svg
-                            fill="none"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M15.5 19L8.5 12L15.5 5"
-                              stroke="var(--black)"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></path>
-                          </svg>
-                        </div>
-                      </div>
                       <div className="react-horizontal-scrolling-menu--scroll-container">
                         <div className="react-horizontal-scrolling-menu--item">
                           <button
@@ -111,7 +95,7 @@ function FindMentors() {
                                 strokeLinejoin="round"
                               ></path>
                             </svg>
-                            <span className="ml-12 d-none d-md-block">All</span>
+                            <span className="d-none d-md-block">All</span>
                           </button>
                         </div>
                         <div
@@ -127,41 +111,15 @@ function FindMentors() {
                             border="var(--grey-3)"
                             type="button"
                             className="sc-jlZhew fjUACt text-truncate font-weight-400 btn btn-default"
+                            onClick={() => handleFilter(item.id)}
                           >
-                            <span className="ml-12 d-none d-md-block">
+                            <span className="d-md-block">
                               {item.category_name}
                             </span>
                           </button>
                         ))}
                       </div>
-                      <div className="react-horizontal-scrolling-menu--arrow-right">
-                        <div
-                          className="Arrows__StyledArrow-sc-kci6kk-0 lhRKAX"
-                          style={{
-                            display: "flex",
-                            marginLeft: "0px",
-                            paddingLeft: "0px",
-                          }}
-                        >
-                          <svg
-                            fill="none"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M8.5 5L15.5 12L8.5 19"
-                              stroke="var(--black)"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            ></path>
-                          </svg>
-                        </div>
-                      </div>
                     </div>
-                    <div className="react-horizontal-scrolling-menu--footer"></div>
                   </div>
                 </div>
               </div>

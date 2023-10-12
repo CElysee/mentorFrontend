@@ -404,7 +404,6 @@ function MenteeProfile(props) {
                   </div>
                 </div>
               </div>
-
               <div className="sc-fUnMCh epgYHv">
                 <nav
                   className="Member__TabWrapper-sc-ium6kc-0 tcqie nav nav-tabs"

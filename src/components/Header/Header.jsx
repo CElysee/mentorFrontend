@@ -25,11 +25,11 @@ function Header() {
     // },
     {
       path: "/findMentor",
-      display: "Find Mentor",
+      display: "Explore Mentors",
     },
     {
       path: "/becomeMentor",
-      display: "Become Mentor",
+      display: "Become a Mentor",
     },
     {
       path: "/#partners",

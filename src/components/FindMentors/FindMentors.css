@@ -102,6 +102,7 @@ px
 .jmqjbq .react-horizontal-scrolling-menu--scroll-container {
     display: flex;
     gap: 1.5rem;
+    justify-content: center;
 }
 .react-horizontal-scrolling-menu--scroll-container {
     display: flex;
