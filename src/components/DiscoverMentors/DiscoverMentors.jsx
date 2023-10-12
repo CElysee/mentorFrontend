@@ -13,7 +13,6 @@ function DiscoverMentors() {
         const profileApi = await axiosInstance("/mentors/list");
         if (profileApi.status == 200) {
           setProfileMentor(profileApi.data);
-          
         }
       } catch (error) {
         console.error(error);
@@ -33,49 +32,14 @@ function DiscoverMentors() {
               Discover the Rwanda's top mentors
             </h3>
             <div className="styles__Actions-sc-1gutphy-1 egZZaN mentor__actions">
-              <button
+              <Link
+              to={'/findMentor'}
                 height="32"
                 type="button"
                 className="sc-jlZhew iuoDZQ text-truncate font-size-12 btn--default-outline btn btn-default"
               >
                 Explore all
-              </button>
-              <div className="ScrollToggle__Wrapper-sc-1523nzt-0 dmYQRy togglers">
-                <div id="mentor-cards" className="toggler grey-4-bg">
-                  <svg
-                    fill="none"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.5 19L8.5 12L15.5 5"
-                      stroke="var(--black)"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
-                </div>
-                <div className="toggler false">
-                  <svg
-                    fill="none"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.5 5L15.5 12L8.5 19"
-                      stroke="var(--black)"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="Mentors__CarouselWrapper-sc-uiznoc-0 fDuWxS">
@@ -110,11 +74,11 @@ function DiscoverMentors() {
                               {item.mentor.name}&nbsp;
                             </span>
                             <span>
-                            <img
-                              src={`/assets/flags/${item.country.code.toLowerCase()}.png`}
-                              alt={item.country.name}
-                              className="country_flag"
-                            />
+                              <img
+                                src={`/assets/flags/${item.country.code.toLowerCase()}.png`}
+                                alt={item.country.name}
+                                className="country_flag"
+                              />
                             </span>
                           </p>
                           <div className="preview__content__job grey-1-text">
@@ -148,7 +112,6 @@ function DiscoverMentors() {
                               </p>
                             </div>
                           </div>
-                          
                         </div>
                         <div className="preview__content__metadata grey-4-bg p-3  d-flex justify-content-between">
                           <div>

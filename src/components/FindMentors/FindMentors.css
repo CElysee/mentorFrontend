@@ -273,3 +273,28 @@ px
     color: var(--black) !important;
     border-radius: 8px !important;
 }
+.fjUACt:hover{
+    height: 50px !important;
+    border-color: #e55812 !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    background: #0d4749;
+}
+.fjUACt:focus{
+    box-shadow: none !important;
+}
+.selectedButtonFilter {
+    height: 50px !important;
+    border-color: #e55812 !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    background: #0d4749;
+}
+.noMentors{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 20px !important;
+    width: 1200px !important;
+}
