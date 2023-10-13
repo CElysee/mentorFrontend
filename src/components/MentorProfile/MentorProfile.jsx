@@ -6,6 +6,8 @@ import LostPage from "../LostPage/LostPage";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import CoverPic from "../../assets/images/coverpic.jpg";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const override = {
   display: "block",
@@ -27,6 +29,9 @@ function MentorProfile(props) {
   const [bookingActive, setBookingActive] = useState(null);
   const [timeBookingActive, setTimeBookingActive] = useState(null);
   const [bookingMode, setBookingMode] = useState(null);
+  const [business_info, setBusinessInfo] = useState("");
+  const [area_of_interest_context, setAreaOfInterestContext] = useState("");
+  const [mentor_questions, setMentorQuestions] = useState("");
   const url = `/mentors/profile?mentor_id=${id}`;
   const schedulesUrl = `/ScheduleBookings/list/${id}`;
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
@@ -70,26 +75,41 @@ function MentorProfile(props) {
     setScheduledTime();
   };
   const handleChange = async (e) => {
-    setBookingMode(e.target.value);
+    const name = e.target.name;
+    if(name == "booking_mode"){
+      setBookingMode(e.target.value);
+    }else if(name == "voucher_code"){
+      setVoucherCode(e.target.value);
+    }
+    else if(name == "mentee_email"){
+      setUserEmail(e.target.value);
+    }
+    else if (name == "business_info"){
+      setBusinessInfo(e.target.value)
+    }else if(name == "area_of_interest_context"){
+      setAreaOfInterestContext(e.target.value)
+    }
   };
-  const handleVoucher = async (e) => {
-    setVoucherCode(e.target.value);
-  };
-  const handleEmail = async (e) => {
-    setUserEmail(e.target.value);
+   // Handler for content change in the Quill editor
+   const handleEditorChange = (value) => {
+    setMentorQuestions(value);
   };
   const bookMentorUrl = `/BookMentor/book/`;
-  
+
   const handleBookingVoucher = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const bookMentordata = {
       user_id: userEmail,
       mentor_id: mentorId,
       schedule_id: bookingSchedules[bookingActive].id,
       slot_id: timeBookingActive,
       voucher_code: voucherCode,
+      business_info: business_info,
+      area_of_interest_context: area_of_interest_context,
+      mentor_questions: mentor_questions,
     };
+    console.log(bookMentordata)
     try {
       const response = await axiosInstance.post(bookMentorUrl, null, {
         params: bookMentordata,
@@ -108,7 +128,7 @@ function MentorProfile(props) {
     } catch (error) {
       notify(error.response.data.detail, "error");
       setResponseError(error.response.data.detail);
-      setLoading(false)
+      setLoading(false);
     }
   };
   const notify = (message, type) => {
@@ -226,7 +246,9 @@ function MentorProfile(props) {
               </div>
 
               <div
-                className={`Layout__Wrapper-sc-1js8544-0 ${props.mentorDashboard ? null : "oKXVt"}`}
+                className={`Layout__Wrapper-sc-1js8544-0 ${
+                  props.mentorDashboard ? null : "oKXVt"
+                }`}
               >
                 <div style={{ marginBottom: "8rem" }}>
                   <div className="line-height-16 mb-3">
@@ -363,7 +385,7 @@ function MentorProfile(props) {
                     </div>
                   </div>
                 </div>
-                <div className={`p-1 ${props.mentorDashboard && 'hidden' }`}>
+                <div className={`p-1 ${props.mentorDashboard && "hidden"}`}>
                   {bookingSchedules.length > 0 ? (
                     <>
                       {" "}
@@ -454,8 +476,9 @@ function MentorProfile(props) {
                                   data-bs-target="#exampleModal"
                                   className="sc-jlZhew gAyusE text-truncate undefined btn btn-default"
                                 >
-                                  Book Session for{" "}
-                                  {bookingSchedules[bookingActive].startDate}
+                                  Book Session on{" "}
+                                  {bookingSchedules[bookingActive].startDate} at{" "}
+                                  {scheduledTime}
                                 </button>
                               </div>
                             </>
@@ -477,183 +500,242 @@ function MentorProfile(props) {
                           tabIndex="-1"
                           style={{ display: "block" }}
                         >
-                         {timeBookingActive && ( 
-                          <div className="modal-dialog modal-sm modal-dialog-centered">
-                            <div className="modal-content">
-                              <div className="sc-cwHptR dOVyAW p-4 modal-body">
-                                <h3 className="sc-dcJsrY eXeELN mb-5">
-                                  You are about to book a session with{" "}
-                                  {profileData[0].mentor.name} on{" "}
-                                  {bookingSchedules[bookingActive].startDate}
-                                </h3>
-                                <div className="sc-kAyceB cCBfKf mb-32">
-                                  <div className="checkbox-wrapper-44 form-check form-check-inline">
-                                    <label className="toggleButton">
-                                      <span
-                                        style={{
-                                          paddingTop: "5px",
-                                          paddingRight: "10px",
-                                        }}
-                                      >
-                                        Use voucher
-                                      </span>
-                                      <input
-                                        type="checkbox"
-                                        value="useVoucher"
-                                        onChange={handleChange}
-                                        checked={bookingMode === "useVoucher"}
-                                      />
-                                      <div>
-                                        <svg viewBox="0 0 44 44">
-                                          <path
-                                            d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
-                                            transform="translate(-2.000000, -2.000000)"
-                                          ></path>
-                                        </svg>
-                                      </div>
-                                    </label>
-                                  </div>
-                                  <div className="checkbox-wrapper-44 form-check form-check-inline">
-                                    <label className="toggleButton">
-                                      <span style={{ padding: "5px 10px" }}>
-                                        Pay to Book a session
-                                      </span>
-                                      <input
-                                        type="checkbox"
-                                        value="pay"
-                                        onChange={handleChange}
-                                        checked={bookingMode === "pay"}
-                                      />
-                                      <div>
-                                        <svg viewBox="0 0 44 44">
-                                          <path
-                                            d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
-                                            transform="translate(-2.000000, -2.000000)"
-                                          ></path>
-                                        </svg>
-                                      </div>
-                                    </label>
-                                  </div>
-                                  {bookingMode == "useVoucher" && (
-                                    <>
-                                      <div className="form-group">
-                                        <label
-                                          className="form-label"
-                                          htmlFor="name"
+                          {timeBookingActive && (
+                            <div className="modal-dialog modal-sm modal-dialog-centered">
+                              <div className="modal-content">
+                                <div className="sc-cwHptR dOVyAW p-4 modal-body">
+                                  <h3 className="sc-dcJsrY eXeELN mb-5">
+                                    You are about to book a session with{" "}
+                                    {profileData[0].mentor.name} on{" "}
+                                    {bookingSchedules[bookingActive].startDate}
+                                  </h3>
+                                  <div className="sc-kAyceB cCBfKf mb-32">
+                                    <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                      <label className="toggleButton">
+                                        <span
+                                          style={{
+                                            paddingTop: "5px",
+                                            paddingRight: "10px",
+                                          }}
                                         >
-                                          Your Voucher Code
-                                        </label>
+                                          Use voucher
+                                        </span>
                                         <input
-                                          name="voucher_code"
-                                          placeholder="VSX034"
-                                          type="text"
-                                          id="handleVoucher"
-                                          className="form-control"
-                                          value={
-                                            voucherCode
-                                          } /* Use state for value */
-                                          onChange={
-                                            handleVoucher
-                                          } /* Use onChange to update value */
+                                          type="checkbox"
+                                          value="useVoucher"
+                                          onChange={handleChange}
+                                          checked={bookingMode === "useVoucher"}
+                                          name="booking_mode"
                                         />
-                                      </div>
-                                      <div className="form-group">
-                                        <label
-                                          className="form-label"
-                                          htmlFor="name"
-                                        >
-                                          Your Email
-                                        </label>
-                                        <input
-                                          name="voucher_code"
-                                          placeholder="info@mentor.rw"
-                                          type="text"
-                                          id="handleEmail"
-                                          className="form-control"
-                                          value={
-                                            userEmail
-                                          } /* Use state for value */
-                                          onChange={
-                                            handleEmail
-                                          } /* Use onChange to update value */
-                                        />
-                                        <p className="text-center error_response">
-                                          {responseError}
-                                        </p>
-                                      </div>
-                                    </>
-                                  )}
-                                  {bookingMode == "pay" && (
-                                    <>
-                                      {" "}
-                                      <div className="onlinePayment mb-5">
-                                        <div
-                                          className="sc-eldPxv efrIaS"
-                                          width="1714"
-                                        >
-                                          <button
-                                            data-bs-dismiss="modal"
-                                            border="black"
-                                            type="button"
-                                            className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default momo_payment"
-                                          >
-                                            Pay with Momo
-                                          </button>
-                                          <button
-                                            bg="black"
-                                            color="white"
-                                            type="button"
-                                            className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
-                                          >
-                                            Pay with Cards
-                                          </button>
+                                        <div>
+                                          <svg viewBox="0 0 44 44">
+                                            <path
+                                              d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                              transform="translate(-2.000000, -2.000000)"
+                                            ></path>
+                                          </svg>
                                         </div>
+                                      </label>
+                                    </div>
+                                    <div className="checkbox-wrapper-44 form-check form-check-inline">
+                                      <label className="toggleButton">
+                                        <span style={{ padding: "5px 10px" }}>
+                                          Pay to Book a session
+                                        </span>
+                                        <input
+                                          type="checkbox"
+                                          value="pay"
+                                          onChange={handleChange}
+                                          checked={bookingMode === "pay"}
+                                          name="booking_mode"
+                                        />
+                                        <div>
+                                          <svg viewBox="0 0 44 44">
+                                            <path
+                                              d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
+                                              transform="translate(-2.000000, -2.000000)"
+                                            ></path>
+                                          </svg>
+                                        </div>
+                                      </label>
+                                    </div>
+                                    {bookingMode == "useVoucher" && (
+                                      <>
+                                        <div className="form-group">
+                                          <label
+                                            className="form-label"
+                                            htmlFor="name"
+                                          >
+                                            Your Voucher Code
+                                          </label>
+                                          <input
+                                            name="voucher_code"
+                                            placeholder="VSX034"
+                                            type="text"
+                                            id="handleVoucher"
+                                            className="form-control"
+                                            value={
+                                              voucherCode
+                                            } /* Use state for value */
+                                            onChange={
+                                              handleChange
+                                            } /* Use onChange to update value */
+                                          />
+                                        </div>
+                                        <div className="form-group">
+                                          <label
+                                            className="form-label"
+                                            htmlFor="mentee_email"
+                                          >
+                                            Your Email
+                                          </label>
+                                          <input
+                                            name="mentee_email"
+                                            placeholder="info@mentor.rw"
+                                            type="text"
+                                            id="handleEmail"
+                                            className="form-control"
+                                            value={
+                                              userEmail
+                                            } /* Use state for value */
+                                            onChange={
+                                              handleChange
+                                            } /* Use onChange to update value */
+                                          />
+                                          <p className="text-center error_response">
+                                            {responseError}
+                                          </p>
+                                        </div>
+                                        <div className="form-group">
+                                          <label
+                                            className="form-label"
+                                            htmlFor="business_info"
+                                          >
+                                            Describe your business
+                                          </label>
+                                          <textarea
+                                            name="business_info"
+                                            className="form-control py-3"
+                                            rows={5}
+                                            placeholder="Tell us more about your business!"
+                                            style={{
+                                              height: "178px !important",
+                                            }}
+                                            minLength={500}
+                                            onChange={handleChange}
+                                          ></textarea>
+                                        </div>
+                                        <div className="form-group">
+                                          <label
+                                            className="form-label"
+                                            htmlFor="area_of_interest_context"
+                                          >
+                                            Give more context on the area of
+                                            interest
+                                          </label>
+                                          <textarea
+                                            name="area_of_interest_context"
+                                            className="form-control py-3"
+                                            rows={5}
+                                            placeholder="Tell us more about your business!"
+                                            style={{
+                                              height: "178px !important",
+                                            }}
+                                            minLength={500}
+                                            onChange={handleChange}
+                                          ></textarea>
+                                        </div>
+                                        <div className="form-group">
+                                          <label
+                                            className="form-label"
+                                            htmlFor="mentor_questions"
+                                          >
+                                            Provide questions that your mentor is going to answer
+                                          </label>
+                                          <ReactQuill
+                                            value={mentor_questions}
+                                            onChange={handleEditorChange}
+                                          />
+                                        </div>
+                                      </>
+                                    )}
+                                    {bookingMode == "pay" && (
+                                      <>
+                                        {" "}
+                                        <div className="onlinePayment mb-5">
+                                          <div
+                                            className="sc-eldPxv efrIaS"
+                                            width="1714"
+                                          >
+                                            <button
+                                              data-bs-dismiss="modal"
+                                              border="black"
+                                              type="button"
+                                              className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default momo_payment"
+                                            >
+                                              Pay with Momo
+                                            </button>
+                                            <button
+                                              bg="black"
+                                              color="white"
+                                              type="button"
+                                              className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                            >
+                                              Pay with Cards
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </>
+                                    )}
+                                  </div>
+
+                                  {bookingMode != "pay" && (
+                                    <>
+                                      <div
+                                        className="sc-eldPxv efrIaS justify-content-end"
+                                        width="1714"
+                                      >
+                                        <button
+                                          data-bs-dismiss="modal"
+                                          border="black"
+                                          type="button"
+                                          className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
+                                        >
+                                          Go Back
+                                        </button>
+
+                                        <button
+                                          style={{ backgroundColor: "black" }}
+                                          color="white"
+                                          type="button"
+                                          className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                                          onClick={handleBookingVoucher}
+                                          disabled={
+                                            bookingMode !== "useVoucher"
+                                          }
+                                        >
+                                          <RiseLoader
+                                            color={color}
+                                            loading={loading}
+                                            cssOverride={override}
+                                            size={10}
+                                            aria-label="Loading Spinner"
+                                            data-testid="loader"
+                                            className="loader"
+                                          />
+                                          <span style={{ paddingLeft: "10px" }}>
+                                            {loading
+                                              ? "Booking in progress"
+                                              : "Book Now"}
+                                          </span>
+                                        </button>
                                       </div>
                                     </>
                                   )}
                                 </div>
-
-                                {bookingMode != "pay" && (
-                                  <>
-                                    <div
-                                      className="sc-eldPxv efrIaS justify-content-end"
-                                      width="1714"
-                                    >
-                                      <button
-                                        data-bs-dismiss="modal"
-                                        border="black"
-                                        type="button"
-                                        className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
-                                      >
-                                        Go Back
-                                      </button>
-
-                                      <button
-                                        style={{ backgroundColor: "black" }}
-                                        color="white"
-                                        type="button"
-                                        className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
-                                        onClick={handleBookingVoucher}
-                                        disabled={bookingMode !== "useVoucher"}
-                                      >
-                                        <RiseLoader
-                                          color={color}
-                                          loading={loading}
-                                          cssOverride={override}
-                                          size={10}
-                                          aria-label="Loading Spinner"
-                                          data-testid="loader"
-                                          className="loader"
-                                        />
-                                        <span style={{paddingLeft: "10px"}}>{loading ? "Booking in progress" : "Book Now"}</span>
-                                      </button>
-                                    </div>
-                                  </>
-                                )}
                               </div>
                             </div>
-                          </div>
-                         )}
+                          )}
                         </div>
                       </div>
                     </>

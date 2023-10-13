@@ -12,7 +12,9 @@ function SideMenu() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_role');
+    localStorage.removeItem('userId');
     navigate("/signIn");
   };
 
@@ -216,7 +218,7 @@ function SideMenu() {
               </p>
             </Link>
           ))}
-          <Link
+          <a
             onClick={handleLogout}
             aria-label="Logout"
             className="item"
@@ -257,7 +259,7 @@ function SideMenu() {
             <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
               Logout
             </p>
-          </Link>
+          </a>
         </div>
       </div>
     </>

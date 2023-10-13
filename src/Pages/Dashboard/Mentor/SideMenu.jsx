@@ -12,8 +12,9 @@ function SideMenu() {
   const [profileImage, setProfileImage] = useState("")
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('user_role')
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_role');
+    localStorage.removeItem('userId');
     navigate("/signIn")
   };
   const token = localStorage.getItem("access_token");
