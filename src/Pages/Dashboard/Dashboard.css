@@ -697,3 +697,34 @@
     border-radius: 10px;
     font-weight: 600;
 }
+.p-datatable-header h5{
+  font-family: 'Circular';
+}
+.p-datatable-header label {
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #4e4e4e;
+  width: 100%;
+  font-size: 15px;
+  font-family: 'Circular';
+  font-weight: 500;
+}
+.p-datatable-header .css-1jqq78o-placeholder {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Circular';
+}
+.p-datatable-header .css-w9q2zk-Input2{
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Circular';
+}
+.p-datatable-header .css-1dimb5e-singleValue{
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Circular';
+}
+.p-datatable-header .form-control {
+  font-size: 14px;
+  font-family: 'Circular';
+}

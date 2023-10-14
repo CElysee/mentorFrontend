@@ -37,7 +37,6 @@ function UserInfo(props) {
         ...userDetails,
         profile_picture: e.target.files[0],
       });
-      console.log(userDetails.profile_picture)
     }
      else {
       setUserDetails({

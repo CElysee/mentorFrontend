@@ -50,7 +50,7 @@ function UserRegistration() {
   const [expertiseData, setExpertiseData] = useState([]);
   const [targetMenteeData, setTargetMenteeData] = useState([]);
   const [bioCharCount, setBioCharCount] = useState(500);
-
+ 
   const [userDetails, setUserDetails] = useState({
     profile_picture: null,
     name: "",

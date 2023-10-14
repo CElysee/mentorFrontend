@@ -7,7 +7,7 @@ import Logo from "../../../assets/images/mentorlogo.svg"
 
 function SideMenu() {
   const location = useLocation();
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(localStorage.removeItem('userId'));
   const [userProfile, setUserProfile] = useState("");
   const [profileImage, setProfileImage] = useState("")
   const navigate = useNavigate();
@@ -28,18 +28,10 @@ function SideMenu() {
         navigate("/signIn");
       } else {
         try {
-          const response = await axiosInstance.get("/auth/users/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUserId(response.data.id);
-          if (response.status == 200 && response.data.id) {
-            const requestUrl = `auth/users/mentor_profile/${response.data.id}`
+          const requestUrl = `auth/users/mentor_profile/${userId}`
             const responseProfile = await axiosInstance.post(requestUrl);
             setUserProfile(responseProfile.data);
             setProfileImage(responseProfile.data.profile.profile_picture)
-          }
         } catch (error) {
           console.error('Error fetching data:', error);
         }

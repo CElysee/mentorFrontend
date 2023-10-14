@@ -6,7 +6,7 @@ import Logo from "../../../assets/images/mentorlogo.svg";
 
 function SideMenu() {
   const location = useLocation();
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(localStorage.removeItem('userId'));
   const [userProfile, setUserProfile] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ function SideMenu() {
     localStorage.removeItem('userId');
     navigate("/signIn");
   };
-
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
@@ -28,28 +27,20 @@ function SideMenu() {
         navigate("/signIn");
       } else {
         try {
-          const response = await axiosInstance.get("/auth/users/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUserId(response.data.id);
-          if (response.status == 200 && response.data.id) {
-            const dataRequest = {
-              user_id: response.data.id,
-            };
-            const responseProfile = await axiosInstance.post(
-              "auth/users/profile",
-              null,
-              {
-                params: dataRequest,
-              }
-            );
-            setUserProfile(responseProfile.data);
-            setProfileImage(
-              responseProfile.data.user_profile[0].profile_picture
-            );
-          }
+          const dataRequest = {
+            user_id: userId,
+          };
+          const responseProfile = await axiosInstance.post(
+            "auth/users/profile",
+            null,
+            {
+              params: dataRequest,
+            }
+          );
+          setUserProfile(responseProfile.data);
+          setProfileImage(
+            responseProfile.data.user_profile[0].profile_picture
+          );
         } catch (error) {
           console.error("Error fetching data:", error);
         }

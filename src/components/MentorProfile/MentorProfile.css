@@ -653,12 +653,14 @@ a:-webkit-any-link {
   height: 45px;
   border-color: #077f80 !important;
   border-radius: 8px !important;
+  font-family: 'Circular';
 }
 .gedcqL {
   height: 45px;
   background: var(--teal) !important;
   color: white !important;
   border-radius: 8px !important;
+  font-family: 'Circular';
 }
 .form-check-label {
   margin-bottom: 0;
