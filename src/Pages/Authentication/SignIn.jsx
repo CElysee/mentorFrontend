@@ -66,7 +66,7 @@ function SignIn() {
         // console.error("Error:", error.response.data.detail);
         if (error.response.data.detail == "Account is not yet Approved") {
           setFailedLoginMessage(true);
-          notify(error.response.data.detail, "error")
+          notify(error.response.data.detail, "error");
         } else if (error.response.data.detail == "Username already exist") {
           setRequestPassword(true);
         }
@@ -88,7 +88,7 @@ function SignIn() {
             },
           }
         );
-        console.log(JSON.stringify(check_username.data));
+        // console.log(JSON.stringify(check_username.data));
         const userToken = check_username.data.access_token;
         const role = check_username.data.role;
         setUserRole(role);
@@ -97,14 +97,18 @@ function SignIn() {
         localStorage.setItem("access_token", userToken);
         localStorage.setItem("user_role", role);
         localStorage.setItem("userId", check_username.data.userId);
-        if (role === "admin") {
-          navigate("/admin");
-        } else if (role === "mentee") {
-          navigate("/mentee/dashboard");
-        } else if (role === "mentor") {
-          navigate("/mentor/dashboard");
-        } else {
-          navigate("/signIn");
+        switch (role) {
+          case 'admin':
+            navigate('/admin/dashboard');
+            break;
+          case 'mentee':
+            navigate('/mentee/dashboard');
+            break;
+          case 'mentor':
+            navigate('/mentor/dashboard');
+            break;
+          default:
+            navigate('/signIn');
         }
       } catch (error) {
         notify("Oopps, something went wrong!", "error");

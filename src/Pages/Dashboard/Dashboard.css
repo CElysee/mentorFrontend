@@ -617,3 +617,83 @@
 .epgYHv{
   box-shadow: none !important;
 }
+.card {
+  background: #eff3f8;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #dee2e6;
+  border-width: 0 0 1px 0;
+  padding: 1rem 1rem;
+  font-family: 'Circular';
+}
+.p-paginator .p-paginator-first, .p-paginator .p-paginator-prev, .p-paginator .p-paginator-next, .p-paginator .p-paginator-last {
+  background-color: transparent;
+  border: 0 none;
+  color: #6c757d;
+  min-width: 3rem;
+  height: 3rem;
+  margin: 0.143rem;
+  transition: box-shadow 0.2s;
+  border-radius: 50%;
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #EEF2FF;
+  border-color: #EEF2FF;
+  color: #4338CA;
+}
+.p-paginator .p-paginator-pages .p-paginator-page {
+  background-color: transparent;
+  border: 0 none;
+  color: #6c757d;
+  min-width: 3rem;
+  height: 3rem;
+  margin: 0.143rem;
+  transition: box-shadow 0.2s;
+  border-radius: 50%;
+}
+.p-datatable .p-datatable-thead > tr > th {
+  font-family: 'Circular';
+}
+.p-datatable .p-datatable-header {
+  background: #f8f9fa;
+  color: #343a40;
+  border: 1px solid #dee2e6;
+  border-width: 1px 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 700;
+}
+.gap-2 {
+  gap: 0.5rem!important;
+}
+.datatable_search{
+  align-items: center!important;
+  justify-content: space-between!important;
+  flex-wrap: wrap!important;
+  display: flex!important;
+}
+.datatable_search h4{
+  font-family: 'Circular';
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.account_status_active{
+  font-size: 13px;
+    color: #dfdfdf;
+    background: #077f7f;
+    padding: 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+.account_status_inactive{
+  font-size: 13px;
+    color: #000;
+    background: #cd8f8f;
+    padding: 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}

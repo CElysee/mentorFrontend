@@ -20,6 +20,8 @@ import SetUpMentor from "../Pages/Authentication/SetUpMentor";
 import SignIn from "../Pages/Authentication/SignIn";
 import MenteeDashboard from "../Pages/Dashboard/Mentee/Dashboard";
 import MentorDashboard from "../Pages/Dashboard/Mentor/Dashboard";
+import AdminDashboard from "../Pages/Dashboard/Admin/Dashboard";
+import AdminUsers from "../Pages/Dashboard/Admin/Users"
 import MenteeProfile from "../Pages/Dashboard/Mentee/Profile";
 import MentorDashProfile from "../Pages/Dashboard/Mentor/Profile";
 import MenteeBookings from "../Pages/Dashboard/Mentee/Bookings";
@@ -80,6 +82,10 @@ function Router() {
           <Route path="calendar/:id" element={<MentorCalendar />} />
           <Route path="connections" element={<MentorConnections />} />
           <Route path="support" element={<Support />} />
+        </Route>
+        <Route path="/admin/*">
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
         </Route>
       </Routes>
   );
