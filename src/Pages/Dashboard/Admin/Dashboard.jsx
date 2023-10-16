@@ -390,72 +390,25 @@ function Dashboard() {
                           Today’s Mentor
                         </span>
                         <div className="symbol-group symbol-hover flex-nowrap">
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-original-title="Alan Warden"
-                            data-kt-initialized="1"
-                          >
-                            <span className="symbol-label bg-warning text-inverse-warning fw-bold">
-                              A
-                            </span>
-                          </div>
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            aria-label="Michael Eberon"
-                            data-bs-original-title="Michael Eberon"
-                            data-kt-initialized="1"
-                          >
-                            <img
-                              alt="Pic"
-                              src="https://preview.keenthemes.com/metronic8/demo1/assets/media/avatars/300-11.jpg"
-                            />
-                          </div>
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-original-title="Susan Redwood"
-                            data-kt-initialized="1"
-                          >
-                            <span className="symbol-label bg-primary text-inverse-primary fw-bold">
-                              S
-                            </span>
-                          </div>
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            aria-label="Melody Macy"
-                            data-bs-original-title="Melody Macy"
-                            data-kt-initialized="1"
-                          >
-                            <img
-                              alt="Pic"
-                              src="https://preview.keenthemes.com/metronic8/demo1/assets/media/avatars/300-2.jpg"
-                            />
-                          </div>
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            data-bs-original-title="Perry Matthew"
-                            data-kt-initialized="1"
-                          >
-                            <span className="symbol-label bg-danger text-inverse-danger fw-bold">
-                              P
-                            </span>
-                          </div>
-                          <div
-                            className="symbol symbol-35px symbol-circle"
-                            data-bs-toggle="tooltip"
-                            aria-label="Barry Walter"
-                            data-bs-original-title="Barry Walter"
-                            data-kt-initialized="1"
-                          >
-                            <img
-                              alt="Pic"
-                              src="https://preview.keenthemes.com/metronic8/demo1/assets/media/avatars/300-12.jpg"
-                            />
-                          </div>
+                        {dashboardCount.today_mentors_profiles &&
+                            dashboardCount.today_mentors_profiles.length > 0 &&
+                            dashboardCount.today_mentors_profiles.slice(0, 6).map(
+                              (profile, index) => (
+                                <div
+                                  key={index}
+                                  className="symbol symbol-35px symbol-circle"
+                                  data-bs-toggle="tooltip"
+                                  aria-label="Michael Eberon"
+                                  data-bs-original-title="Michael Eberon"
+                                  data-kt-initialized="1"
+                                >
+                                  <img
+                                    alt="Pic"
+                                    src={`${imageBaseUrl}/UserProfiles/${profile}`}
+                                  />
+                                </div>
+                              )
+                            )}
                           <a
                             href="#"
                             className="symbol symbol-35px symbol-circle"
@@ -463,7 +416,8 @@ function Dashboard() {
                             data-bs-target="#kt_modal_view_users"
                           >
                             <span className="symbol-label bg-orange text-white fs-8 fw-bold">
-                              +42
+                              {dashboardCount.today_mentors_profiles &&
+                            dashboardCount.today_mentors_profiles.length == 0 ? `+${dashboardCount.today_mentors_profiles.length - 6}` : ""}
                             </span>
                           </a>
                         </div>

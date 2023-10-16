@@ -72,6 +72,7 @@ function Router() {
         <Route path="/FeelEmpowered" element={<FeelEmpowered />} />
         <Route path="/ToolsToMentor" element={<ToolsToMentor />} />
         <Route path="/DiverseCommunity" element={<DiverseCommunity />} />
+        
         <Route path="/mentee/*">
           <Route path="dashboard" element={<MenteeDashboard />} />
           <Route path="profile/:id" element={<MenteeProfile />} />
