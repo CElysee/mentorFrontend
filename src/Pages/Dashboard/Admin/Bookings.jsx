@@ -14,8 +14,8 @@ function Bookings() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestUrl = `/BookMentor/listMentee/${id}`;
-        const responseProfile = await axiosInstance.post(requestUrl);
+        const requestUrl = `/BookMentor/list/all`;
+        const responseProfile = await axiosInstance.get(requestUrl);
         setBookings(responseProfile.data);
       } catch (error) {
         console.error("Error fetching data:", error);
