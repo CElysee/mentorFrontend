@@ -1,5 +1,5 @@
 import React from "react";
-import SideMenu from "../Admin/SideMenu";
+import SideMenu from "../Mentee/SideMenu";
 import HelpImage from "../../../assets/images/customerservice.png";
 import ChatImage from "../../../assets/images/bubblechat.png";
 import BugImage from "../../../assets/images/bug.png";

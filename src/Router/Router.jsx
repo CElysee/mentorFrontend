@@ -38,6 +38,7 @@ import FindMentorByInterest from "../Pages/FindMentorByInterest";
 import FeelEmpowered from "../Pages/FeelEmpowered";
 import ToolsToMentor from "../Pages/ToolsToMentor";
 import DiverseCommunity from "../Pages/DiverseCommunity";
+import LostPage from "../components/LostPage/LostPage";
 // Retrieve the token from localStorage
 
 function Router() {
@@ -72,7 +73,7 @@ function Router() {
         <Route path="/FeelEmpowered" element={<FeelEmpowered />} />
         <Route path="/ToolsToMentor" element={<ToolsToMentor />} />
         <Route path="/DiverseCommunity" element={<DiverseCommunity />} />
-        
+
         <Route path="/mentee/*">
           <Route path="dashboard" element={<MenteeDashboard />} />
           <Route path="profile/:id" element={<MenteeProfile />} />
@@ -95,6 +96,8 @@ function Router() {
           <Route path="calendar" element={<AdminCalendar />} />
           <Route path="support" element={<Support />} />
         </Route>
+
+        <Route path="*" element={<LostPage />} />
       </Routes>
   );
 }
