@@ -1,8 +1,8 @@
 import React from "react";
-import SideMenu from "./Mentor/SideMenu";
-import HelpImage from "../../assets/images/customerservice.png";
-import ChatImage from "../../assets/images/bubblechat.png";
-import BugImage from "../../assets/images/bug.png";
+import SideMenu from "../Admin/SideMenu";
+import HelpImage from "../../../assets/images/customerservice.png";
+import ChatImage from "../../../assets/images/bubblechat.png";
+import BugImage from "../../../assets/images/bug.png";
 
 function Support() {
   return (

@@ -26,10 +26,14 @@ import MenteeProfile from "../Pages/Dashboard/Mentee/Profile";
 import MentorDashProfile from "../Pages/Dashboard/Mentor/Profile";
 import MenteeBookings from "../Pages/Dashboard/Mentee/Bookings";
 import MentorBookings from "../Pages/Dashboard/Mentor/Bookings";
+import AdminBookings from "../Pages/Dashboard/Admin/Bookings";
 import MenteeConnections from "../Pages/Dashboard/Mentee/Connections";
 import MentorConnections from "../Pages/Dashboard/Mentor/Connections";
 import MentorCalendar from "../Pages/Dashboard/Mentor/Calendar";
-import Support from "../Pages/Dashboard/Support";
+import AdminCalendar from "../Pages/Dashboard/Admin/Calendar";
+import Support from "../Pages/Dashboard/Admin/Support";
+import MenteeSupport from "../Pages/Dashboard/Mentee/Support";
+import MentorSupport from "../Pages/Dashboard/Mentor/Support";
 import FindMentorByInterest from "../Pages/FindMentorByInterest";
 import FeelEmpowered from "../Pages/FeelEmpowered";
 import ToolsToMentor from "../Pages/ToolsToMentor";
@@ -73,7 +77,7 @@ function Router() {
           <Route path="profile/:id" element={<MenteeProfile />} />
           <Route path="bookings/:id" element={<MenteeBookings />} />
           <Route path="connections" element={<MenteeConnections />} />
-          <Route path="support" element={<Support />} />
+          <Route path="support" element={<MenteeSupport />} />
         </Route>
         <Route path="/mentor/*">
           <Route path="dashboard" element={<MentorDashboard />} />
@@ -81,11 +85,14 @@ function Router() {
           <Route path="bookings/:id" element={<MentorBookings />} />
           <Route path="calendar/:id" element={<MentorCalendar />} />
           <Route path="connections" element={<MentorConnections />} />
-          <Route path="support" element={<Support />} />
+          <Route path="support" element={<MentorSupport />} />
         </Route>
         <Route path="/admin/*">
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<AdminUsers />} />
+          <Route path="bookings" element={<AdminBookings />} />
+          <Route path="calendar" element={<AdminCalendar />} />
+          <Route path="support" element={<Support />} />
         </Route>
       </Routes>
   );
