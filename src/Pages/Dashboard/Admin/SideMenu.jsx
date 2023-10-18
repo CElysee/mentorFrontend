@@ -4,18 +4,17 @@ import { isTokenExpired } from "../../../../utils/tokenUtils";
 import axiosInstance from "../../../axiosInstance";
 import Logo from "../../../assets/images/mentorlogo.svg";
 
-
 function SideMenu() {
   const location = useLocation();
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [userProfile, setUserProfile] = useState("");
-  const [profileImage, setProfileImage] = useState("")
+  const [profileImage, setProfileImage] = useState("");
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user_role');
-    localStorage.removeItem('userId');
-    navigate("/signIn")
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user_role");
+    localStorage.removeItem("userId");
+    navigate("/signIn");
   };
   const token = localStorage.getItem("access_token");
   const isExpired = isTokenExpired(token);
@@ -23,7 +22,6 @@ function SideMenu() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       if (isExpired || isExpired == null) {
         navigate("/signIn");
       } else {
@@ -39,11 +37,9 @@ function SideMenu() {
             }
           );
           setUserProfile(responseProfile.data);
-          setProfileImage(
-            responseProfile.data.user_profile[0].profile_picture
-          );
+          setProfileImage(responseProfile.data.user_profile[0].profile_picture);
         } catch (error) {
-          console.error('Error fetching data:', error);
+          console.error("Error fetching data:", error);
         }
       }
     };
@@ -76,7 +72,7 @@ function SideMenu() {
       ),
     },
     {
-      path: '/admin/users',
+      path: "/admin/users",
       display: "Users",
       icon: (
         <>
@@ -113,7 +109,7 @@ function SideMenu() {
       ),
     },
     {
-      path:`/admin/bookings`,
+      path: `/admin/bookings`,
       display: "Bookings",
       icon: (
         <>
@@ -233,6 +229,39 @@ function SideMenu() {
       ),
     },
     {
+      path: `/admin/vouchers`,
+      display: "Vouchers",
+      icon: (
+        <>
+          <svg
+            fill="#000000"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <g id="coupon">
+                {" "}
+                <path d="M21,10a2.2489,2.2489,0,0,1,.4087.0415.5072.5072,0,0,0,.4111-.1074A.4992.4992,0,0,0,22,9.55V7.5A2.503,2.503,0,0,0,19.5,5H4.5A2.503,2.503,0,0,0,2,7.5V9.55a.5.5,0,0,0,.5913.4917A2.2489,2.2489,0,0,1,3,10a2,2,0,0,1,0,4,2.2489,2.2489,0,0,1-.4087-.0415.5073.5073,0,0,0-.4111.1074A.4992.4992,0,0,0,2,14.45V16.5A2.503,2.503,0,0,0,4.5,19h15A2.503,2.503,0,0,0,22,16.5V14.45a.4992.4992,0,0,0-.18-.3843.5081.5081,0,0,0-.4111-.1074A2.2489,2.2489,0,0,1,21,14a2,2,0,0,1,0-4Zm0,5v1.5A1.5017,1.5017,0,0,1,19.5,18H4.5A1.5017,1.5017,0,0,1,3,16.5V15A3,3,0,0,0,3,9V7.5A1.5017,1.5017,0,0,1,4.5,6h15A1.5017,1.5017,0,0,1,21,7.5V9a3,3,0,0,0,0,6Z" />{" "}
+                <path d="M12.5,9v1a.5.5,0,0,1-1,0V9a.5.5,0,0,1,1,0Z" />{" "}
+                <path d="M12.5,14v1a.5.5,0,0,1-1,0V14a.5.5,0,0,1,1,0Z" />{" "}
+              </g>{" "}
+            </g>
+          </svg>
+        </>
+      ),
+    },
+    {
       path: "/admin/support",
       display: "Support",
       icon: (
@@ -256,7 +285,7 @@ function SideMenu() {
         <div className="v2__sidenav__content">
           <div className="v2__sidenav__content">
             <div className="profile mb-3">
-            {profileImage ? (
+              {profileImage ? (
                 <>
                   <img
                     src={`${imageBaseUrl}/UserProfiles/${profileImage}`}
@@ -272,7 +301,7 @@ function SideMenu() {
                   <img src={Logo} className="img-fit rounded-circle" />
                 </>
               )}
-              
+
               <div className="">
                 <p className="sc-gsFSXq fJiOdH mb-1 font-weight-700">
                   {userProfile.name}
@@ -337,6 +366,60 @@ function SideMenu() {
             </span>
             <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
               Logout
+            </p>
+          </a>
+          <a className="item" role="button">
+            <span className="item__icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <path
+                    d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+                    stroke="#292D32"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />{" "}
+                  <path
+                    d="M15.9965 12H16.0054"
+                    stroke="#292D32"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />{" "}
+                  <path
+                    d="M11.9955 12H12.0045"
+                    stroke="#292D32"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />{" "}
+                  <path
+                    d="M7.99451 12H8.00349"
+                    stroke="#292D32"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />{" "}
+                </g>
+              </svg>
+            </span>
+            <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
+              More
             </p>
           </a>
         </div>

@@ -692,6 +692,15 @@
   border-radius: 10px;
   font-weight: 600;
 }
+.active-cell{
+  font-size: 13px;
+  color: #dfdfdf;
+  background: #077f7f;
+  padding: 6px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-flex;
+}
 .account_status_inactive {
   font-size: 13px;
   color: #000;
@@ -700,6 +709,17 @@
   border-radius: 10px;
   font-weight: 600;
 }
+.used-cell{
+  font-size: 13px;
+  color: #000;
+  background: #cd8f8f;
+  padding: 6px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  text-align: center;
+}
+
 .p-datatable-header h5 {
   font-family: "Circular";
 }

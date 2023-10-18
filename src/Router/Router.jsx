@@ -39,6 +39,7 @@ import FeelEmpowered from "../Pages/FeelEmpowered";
 import ToolsToMentor from "../Pages/ToolsToMentor";
 import DiverseCommunity from "../Pages/DiverseCommunity";
 import LostPage from "../components/LostPage/LostPage";
+import AdminVoucher from "../Pages/Dashboard/Admin/Vouchers"
 // Retrieve the token from localStorage
 
 function Router() {
@@ -94,6 +95,7 @@ function Router() {
           <Route path="users" element={<AdminUsers />} />
           <Route path="bookings" element={<AdminBookings />} />
           <Route path="calendar" element={<AdminCalendar />} />
+          <Route path="vouchers" element={<AdminVoucher />} />
           <Route path="support" element={<Support />} />
         </Route>
 
