@@ -58,17 +58,49 @@ function Users() {
     fetchData();
   }, []);
 
-  const getStatusColor = (accountStatus) => {
-    return accountStatus ? "account_status_active" : "account_status_inactive";
-  };
-  const statusBodyTemplate = (rowData) => {
-    const color = getStatusColor(rowData.account_status);
-    return (
-      <span className={color}>
-        {rowData.account_status ? "Active" : "Inactive"}
-      </span>
+  // const getStatusColor = (accountStatus) => {
+  //   return accountStatus ? "account_status_active" : "account_status_inactive";
+  // };
+  // const statusBodyTemplate = (rowData) => {
+  //   const color = getStatusColor(rowData.account_status);
+  //   return (
+  //     <span className={color}>
+  //       {rowData.account_status ? "Active" : "Inactive"}
+  //     </span>
+  //   );
+  // };
+
+  const profileBodyTemplate = (rowData) => {
+    return rowData.role === "mentor" ? (
+      <Link
+        to={`/mentorProfile/${rowData.id}`}
+        target="_blank"
+        className="sc-jlZhew cKRinY text-truncate w-100 btn--default btn btn-default"
+      >
+        View Profile
+      </Link>
+    ) : (
+      ""
     );
   };
+
+  const getCellClass = (value) => {
+    return value === true ? "account_status_active" : "account_status_inactive";
+  };
+
+  const columns = [
+    {
+      field: "account_status",
+      header: "Account Status",
+      body: (rowData) => (
+        <div className={getCellClass(rowData.account_status)}>
+          {rowData.account_status == true ? "Active" : "Inactive"}
+        </div>
+      ),
+    },
+    // Other columns...
+  ];
+
   function handleShowPassword(e) {
     setShowPassword(!showpassword);
   }
@@ -89,16 +121,16 @@ function Users() {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsSubmitDisabled(
       userDetails.email.trim() === "" ||
         userDetails.name.trim() === "" ||
         userDetails.password.trim() === "" ||
         userDetails.phone_number.trim() === "" ||
-        userDetails.country_id.length > 0 || 
+        userDetails.country_id.length > 0 ||
         userDetails.profile_picture.length > 0
     );
-  },[userDetails])
+  }, [userDetails]);
 
   const countryOptions = countryData.map((country) => ({
     value: country.id,
@@ -508,15 +540,110 @@ function Users() {
                   header="Phone Number"
                 ></Column>
                 <Column field="role" sortable header="Role"></Column>
-                <Column
+                {/* <Column
                   field="account_status"
                   sortable
                   header="Account status"
                   body={statusBodyTemplate}
                   style={{ textAlign: "center" }}
-                ></Column>
+                  
+                ></Column> */}
+                {columns.map((col) => (
+                  <Column
+                    key={col.field}
+                    field={col.field}
+                    header={col.header}
+                    body={col.body}
+                  />
+                ))}
                 <Column field="last_login" header="Last login"></Column>
+                <Column
+                  field=""
+                  header="Profile"
+                  body={profileBodyTemplate}
+                ></Column>
               </DataTable>
+            </div>
+            <div
+              className="modal fade addNewAdmin"
+              id="addNewAdmin"
+              tabIndex="-1"
+              aria-labelledby="addSchedulesLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="addSchedulesLabel">
+                      Add new voucher
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <form
+                    className="py-lg mx-auto"
+                    style={{ width: "100%" }}
+                  >
+                    <div className="modal-body">
+                      <div className="form-group">
+                        <label className="form-label" htmlFor="voucher_number">
+                          Account status
+                        </label>
+                        <select className="form-control">
+                          <option>Select Status</option>
+                          <option>Approve</option>
+                          <option>Reject</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      className="sc-eldPxv efrIaS justify-content-end"
+                      width="1714"
+                      style={{ padding: "15px" }}
+                    >
+                      <button
+                        data-bs-dismiss="modal"
+                        border="black"
+                        type="button"
+                        className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
+                      >
+                        Go Back
+                      </button>
+
+                      <button
+                        style={{ backgroundColor: "black" }}
+                        color="white"
+                        type="submit"
+                        className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                        disabled={isSubmitDisabled}
+                      >
+                        <span style={{ paddingLeft: "10px" }}>
+                          {loading ? (
+                            <>
+                              <RiseLoader
+                                color={color}
+                                loading={loading}
+                                cssOverride={override}
+                                size={10}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                              />
+                            </>
+                          ) : loading ? (
+                            "Changing Status"
+                          ) : (
+                            "Change Status"
+                          )}
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

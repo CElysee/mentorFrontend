@@ -691,6 +691,7 @@
   padding: 6px;
   border-radius: 10px;
   font-weight: 600;
+  display: inline-flex;
 }
 .active-cell{
   font-size: 13px;
@@ -708,6 +709,7 @@
   padding: 6px;
   border-radius: 10px;
   font-weight: 600;
+  display: inline-flex;
 }
 .used-cell{
   font-size: 13px;

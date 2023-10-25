@@ -327,47 +327,6 @@ function SideMenu() {
               </p>
             </Link>
           ))}
-          <a
-            onClick={handleLogout}
-            aria-label="Logout"
-            className="item"
-            role="button"
-          >
-            <span className="item_icon">
-              <svg
-                fill="none"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.4361 11.8778L3.39511 11.8778"
-                  stroke="var(--grey-2)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M12.5084 8.96179L15.4364 11.8778L12.5084 14.7938"
-                  stroke="var(--grey-2)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M8.12802 7.245L8.12802 6.312C8.12802 4.277 9.77702 2.628 11.813 2.628L16.697 2.628C18.727 2.628 20.372 4.273 20.372 6.303L20.372 17.443C20.372 19.478 18.722 21.128 16.687 21.128L11.802 21.128C9.77302 21.128 8.12802 19.482 8.12802 17.453L8.12802 16.511"
-                  stroke="var(--grey-2)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
-            </span>
-            <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
-              Logout
-            </p>
-          </a>
           <a className="item" role="button">
             <span className="item__icon">
               <svg
@@ -420,6 +379,47 @@ function SideMenu() {
             </span>
             <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
               More
+            </p>
+          </a>
+          <a
+            onClick={handleLogout}
+            aria-label="Logout"
+            className="item"
+            role="button"
+          >
+            <span className="item_icon">
+              <svg
+                fill="none"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.4361 11.8778L3.39511 11.8778"
+                  stroke="var(--grey-2)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+                <path
+                  d="M12.5084 8.96179L15.4364 11.8778L12.5084 14.7938"
+                  stroke="var(--grey-2)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+                <path
+                  d="M8.12802 7.245L8.12802 6.312C8.12802 4.277 9.77702 2.628 11.813 2.628L16.697 2.628C18.727 2.628 20.372 4.273 20.372 6.303L20.372 17.443C20.372 19.478 18.722 21.128 16.687 21.128L11.802 21.128C9.77302 21.128 8.12802 19.482 8.12802 17.453L8.12802 16.511"
+                  stroke="var(--grey-2)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+              </svg>
+            </span>
+            <p className="sc-gsFSXq fJiOdH font-weight-500 text-truncate">
+              Logout
             </p>
           </a>
         </div>
