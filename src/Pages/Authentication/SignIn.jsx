@@ -91,12 +91,15 @@ function SignIn() {
         // console.log(JSON.stringify(check_username.data));
         const userToken = check_username.data.access_token;
         const role = check_username.data.role;
+        const user_id = check_username.data.userId;
+        console.log(user_id)
         setUserRole(role);
         setToken(userToken);
         setIsLoggedIn(true);
         localStorage.setItem("access_token", userToken);
-        localStorage.setItem("user_role", role);
-        localStorage.setItem("userId", check_username.data.userId);
+        localStorage.setItem("user_role", user_id);
+        localStorage.setItem("userId", user_id);
+        localStorage.setItem("user_id", user_id);
         switch (role) {
           case 'admin':
             navigate('/admin/dashboard');

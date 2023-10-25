@@ -7,7 +7,7 @@ import Logo from "../../../assets/images/mentorlogo.svg"
 
 function SideMenu() {
   const location = useLocation();
-  const [userId, setUserId] = useState(localStorage.removeItem('userId'));
+  const [userId, setUserId] = useState(localStorage.getItem('userId'));
   const [userProfile, setUserProfile] = useState("");
   const [profileImage, setProfileImage] = useState("")
   const navigate = useNavigate();
