@@ -26,6 +26,9 @@ function FindMentorByInterest() {
     };
     fetchData();
   }, [id]);
+  const handleFilter = (value) =>{
+    console.log(value)
+  }
   return (
     <>
       {profileMentor.length > 0 ? (
@@ -134,6 +137,7 @@ function FindMentorByInterest() {
                                 border="var(--grey-3)"
                                 type="button"
                                 className="sc-jlZhew fjUACt text-truncate font-weight-400 btn btn-default"
+                                onClick={()=>{handleFilter(item.id)}}
                               >
                                 <span className="ml-12 d-none d-md-block">
                                   {item.category_name}

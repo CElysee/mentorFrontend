@@ -9,6 +9,7 @@ import axiosInstance from "../../axiosInstance";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BulletList } from "react-content-loader";
 
 const override = {
   display: "block",
@@ -50,7 +51,7 @@ function UserRegistration() {
   const [expertiseData, setExpertiseData] = useState([]);
   const [targetMenteeData, setTargetMenteeData] = useState([]);
   const [bioCharCount, setBioCharCount] = useState(500);
- 
+
   const [userDetails, setUserDetails] = useState({
     profile_picture: null,
     name: "",
@@ -140,6 +141,7 @@ function UserRegistration() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const countryApi = await axiosInstance.get("country/list");
         setCountryData(countryApi.data);
@@ -158,8 +160,13 @@ function UserRegistration() {
 
         const targetMenteeApi = await axiosInstance.get("targetmentees/list");
         setTargetMenteeData(targetMenteeApi.data);
+
+        // Set loading to false once all data is fetched
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data", error);
+        // Set loading to false once all data is fetched
+        setLoading(false);
       }
     };
     fetchData();
@@ -281,81 +288,85 @@ function UserRegistration() {
         <div width="1440" className="sc-iLWXdy bTdCxR">
           <div width="1440" className="sc-DWsrX bslUKk">
             <ToastContainer autoClose={false} />
-            <form
-              className="py-lg-5 mx-auto"
-              style={{ maxWidth: "382px" }}
-              onSubmit={handleSubmit}
-            >
-              {steps?.map((item, index) => (
-                <div
-                  key={index}
-                  className={
-                    currentStep === index + 1 ? "active" : "not_active"
-                  }
-                >
-                  {React.cloneElement(item, {
-                    userDetails, // Pass the userDetails prop
-                    setUserDetails, // Pass the setUserDetails function
-                    countryData,
-                    languageData,
-                    industryData,
-                    interestData,
-                    expertiseData,
-                    targetMenteeData,
-                    bioCharCount,
-                    setBioCharCount,
-                    preserveState: true,
-                  })}
-                </div>
-              ))}
-              <div className="d-flex align-items-center justify-content-between mt-32">
-                <div className="d-flex align-items-center">
-                  <button
-                    type="button" // Set the type to "button"
-                    className="d-flex align-items-center font-weight-700 grey-1-text btn text-decoration-none mr-28"
-                    onClick={handlePrevSteps}
-                    disabled={currentStep === 1}
+            {loading ? (
+              <BulletList className="py-lg-5 mx-auto bullet_loader" style={{ maxWidth: "600px", display: "block" }} />
+            ) : (
+              <form
+                className="py-lg-5 mx-auto"
+                style={{ maxWidth: "382px" }}
+                onSubmit={handleSubmit}
+              >
+                {steps?.map((item, index) => (
+                  <div
+                    key={index}
+                    className={
+                      currentStep === index + 1 ? "active" : "not_active"
+                    }
                   >
-                    <svg
-                      fill="none"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+                    {React.cloneElement(item, {
+                      userDetails, // Pass the userDetails prop
+                      setUserDetails, // Pass the setUserDetails function
+                      countryData,
+                      languageData,
+                      industryData,
+                      interestData,
+                      expertiseData,
+                      targetMenteeData,
+                      bioCharCount,
+                      setBioCharCount,
+                      preserveState: true,
+                    })}
+                  </div>
+                ))}
+                <div className="d-flex align-items-center justify-content-between mt-32">
+                  <div className="d-flex align-items-center">
+                    <button
+                      type="button" // Set the type to "button"
+                      className="d-flex align-items-center font-weight-700 grey-1-text btn text-decoration-none mr-28"
+                      onClick={handlePrevSteps}
+                      disabled={currentStep === 1}
                     >
-                      <path
-                        d="M15.5 19L8.5 12L15.5 5"
-                        stroke="var(--black)"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                    <span className="ml-2">Back</span>
+                      <svg
+                        fill="none"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M15.5 19L8.5 12L15.5 5"
+                          stroke="var(--black)"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                      <span className="ml-2">Back</span>
+                    </button>
+                  </div>
+                  <button
+                    className="sc-jlZhew cKRinY text-truncate px-5 btn--default btn btn-default"
+                    onClick={handleNextSteps}
+                    disabled={isButtonDisabled[currentStep - 1]}
+                    {...(completed ? { type: "submit" } : { type: "button" })}
+                  >
+                    <RiseLoader
+                      color={color}
+                      loading={loading}
+                      cssOverride={override}
+                      size={10}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                    {currentStep === steps.length
+                      ? loading
+                        ? "Creating account"
+                        : "Create account"
+                      : "Continue"}
                   </button>
                 </div>
-                <button
-                  className="sc-jlZhew cKRinY text-truncate px-5 btn--default btn btn-default"
-                  onClick={handleNextSteps}
-                  disabled={isButtonDisabled[currentStep - 1]}
-                  {...(completed ? { type: "submit" } : { type: "button" })}
-                >
-                  <RiseLoader
-                    color={color}
-                    loading={loading}
-                    cssOverride={override}
-                    size={10}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                  {currentStep === steps.length
-                    ? loading
-                      ? "Creating account"
-                      : "Create account"
-                    : "Continue"}
-                </button>
-              </div>
-            </form>
+              </form>
+            )}
           </div>
         </div>
       </div>
