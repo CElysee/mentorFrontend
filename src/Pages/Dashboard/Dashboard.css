@@ -687,13 +687,17 @@
 .account_status_active {
   font-size: 13px;
   color: #dfdfdf;
-  background: #077f7f;
-  padding: 6px;
+  background-color: #0e4749 !important;
+  border-color: #0e4749;
+  padding: 10px;
   border-radius: 10px;
   font-weight: 600;
   display: inline-flex;
+  cursor: pointer;
+  height: 35px;
+  border-radius: 8px !important;
 }
-.active-cell{
+.active-cell {
   font-size: 13px;
   color: #dfdfdf;
   background: #077f7f;
@@ -706,12 +710,15 @@
   font-size: 13px;
   color: #000;
   background: #cd8f8f;
-  padding: 6px;
+  padding: 10px;
   border-radius: 10px;
   font-weight: 600;
   display: inline-flex;
+  cursor: pointer;
+  height: 35px;
+  border-radius: 8px !important;
 }
-.used-cell{
+.used-cell {
   font-size: 13px;
   color: #000;
   background: #cd8f8f;
@@ -917,8 +924,8 @@
   width: 80px !important;
 }
 .me-6 {
-  margin-right: 1.5rem!important;
+  margin-right: 1.5rem !important;
 }
-.bg-orange{
+.bg-orange {
   background-color: #e65813 !important;
 }

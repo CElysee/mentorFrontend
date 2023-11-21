@@ -29,6 +29,9 @@ function Users() {
   const [showpassword, setShowPassword] = useState(false);
   const [countryData, setCountryData] = useState([]);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [userStatus, setUserStatus] = useState("");
+  const [userId, setUserId] = useState("");
+  const [dataSubmit, setDataSubmit] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
     password: "",
@@ -38,7 +41,6 @@ function Users() {
     profile_picture: null,
     country_id: "",
   });
-
   useEffect(() => {
     // Fetch data from your API endpoint
     // Replace 'API_ENDPOINT' with your actual API endpoint
@@ -56,26 +58,14 @@ function Users() {
       }
     };
     fetchData();
-  }, []);
-
-  // const getStatusColor = (accountStatus) => {
-  //   return accountStatus ? "account_status_active" : "account_status_inactive";
-  // };
-  // const statusBodyTemplate = (rowData) => {
-  //   const color = getStatusColor(rowData.account_status);
-  //   return (
-  //     <span className={color}>
-  //       {rowData.account_status ? "Active" : "Inactive"}
-  //     </span>
-  //   );
-  // };
+  }, [dataSubmit]);
 
   const profileBodyTemplate = (rowData) => {
     return rowData.role === "mentor" ? (
       <Link
         to={`/mentorProfile/${rowData.id}`}
         target="_blank"
-        className="sc-jlZhew cKRinY text-truncate w-100 btn--default btn btn-default"
+        className="account_status_active sc-jlZhew cKRinY text-truncate w-100 btn--default btn btn-default"
       >
         View Profile
       </Link>
@@ -93,7 +83,12 @@ function Users() {
       field: "account_status",
       header: "Account Status",
       body: (rowData) => (
-        <div className={getCellClass(rowData.account_status)}>
+        <div
+          className={getCellClass(rowData.account_status)}
+          data-bs-toggle="modal"
+          data-bs-target="#UpdateUserStatusLabel"
+          onClick={() => setUserId(rowData.id)}
+        >
           {rowData.account_status == true ? "Active" : "Inactive"}
         </div>
       ),
@@ -222,7 +217,32 @@ function Users() {
       });
     }
   };
-  console.log(isSubmitDisabled);
+  const handleUserStatus = (e) => {
+    setUserStatus(e.target.value);
+  };
+
+  const handleUserStatusChange = async (e) => {
+    e.preventDefault();
+    const url = `/auth/users/change_status?id=${userId}&status=${userStatus}`;
+    console.log(url);
+    if (userStatus != ""){
+      try {
+        const response = await axiosInstance.post(url, {
+          headers: { "Content-Type": "application/json" },
+        });
+        console.log(response.data);
+        notify("User status changed successfully", "success");
+        setDataSubmit(true);
+        document.querySelector(".modal-backdrop").style.display = "none";
+        document.querySelector(".UpdateUserStatusLabel").style.display = "none";
+      } catch (error) {
+        console.error(error);
+      }
+    }else{
+      notify("Please select a status", "error");
+    }
+  };
+
   const header = (
     <div className="datatable_search gap-2">
       <button
@@ -565,17 +585,17 @@ function Users() {
               </DataTable>
             </div>
             <div
-              className="modal fade addNewAdmin"
-              id="addNewAdmin"
+              className="modal fade UpdateUserStatusLabel"
+              id="UpdateUserStatusLabel"
               tabIndex="-1"
-              aria-labelledby="addSchedulesLabel"
+              aria-labelledby="UpdateUserStatusLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="addSchedulesLabel">
-                      Add new voucher
+                    <h5 className="modal-title" id="UpdateUserStatusLabel">
+                      Update user status
                     </h5>
                     <button
                       type="button"
@@ -584,16 +604,17 @@ function Users() {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <form
-                    className="py-lg mx-auto"
-                    style={{ width: "100%" }}
-                  >
+                  <form className="py-lg mx-auto" style={{ width: "100%" }}>
                     <div className="modal-body">
                       <div className="form-group">
                         <label className="form-label" htmlFor="voucher_number">
                           Account status
                         </label>
-                        <select className="form-control">
+                        <select
+                          className="form-control"
+                          value={userStatus}
+                          onChange={handleUserStatus}
+                        >
                           <option>Select Status</option>
                           <option>Approve</option>
                           <option>Reject</option>
@@ -619,7 +640,8 @@ function Users() {
                         color="white"
                         type="submit"
                         className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
-                        disabled={isSubmitDisabled}
+                        onClick={handleUserStatusChange}
+                        disabled={userStatus === "" && "disabled"} 
                       >
                         <span style={{ paddingLeft: "10px" }}>
                           {loading ? (
