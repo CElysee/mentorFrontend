@@ -169,6 +169,7 @@ function Users() {
       document.querySelector(".editProfile").style.display = "none";
     } catch (error) {
       setLoading(false);
+      notify(error.response.data.detail, "error");
       console.error(error);
     }
   };
