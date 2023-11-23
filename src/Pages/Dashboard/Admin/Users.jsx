@@ -223,6 +223,7 @@ function Users() {
 
   const handleUserStatusChange = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const url = `/auth/users/change_status?id=${userId}&status=${userStatus}`;
     console.log(url);
     if (userStatus != ""){

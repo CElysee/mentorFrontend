@@ -59,9 +59,8 @@ function SignIn() {
         const responseMsg = check_username.data.message;
         notify(responseMsg, "error");
         setRedirectToSignUp(true);
-        // setRequestPassword(false);
-        // setFailedLoginMessage(false);
       } catch (error) {
+        setRedirectToSignUp(false)
         // Handle error
         // console.error("Error:", error.response.data.detail);
         if (error.response.data.detail == "Account is not yet Approved") {
