@@ -32,6 +32,10 @@ function Users() {
   const [userStatus, setUserStatus] = useState("");
   const [userId, setUserId] = useState("");
   const [dataSubmit, setDataSubmit] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [role, setRole] = useState("");
 
   const [userDetails, setUserDetails] = useState({
     password: "",
@@ -74,6 +78,100 @@ function Users() {
     );
   };
 
+  const editProfileBodyTemplate = (rowData) => {
+    return (
+      <button
+        target="_blank"
+        className="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#editProfile"
+        onClick={() => editProfile(rowData.id)}
+      >
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z"
+            stroke="#000000"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13"
+            stroke="#000000"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    );
+  };
+
+  const editProfile = (id) => {
+    // filter data by id
+    const user = data.filter((user) => user.id === id);
+    setName(user[0].name);
+    setEmail(user[0].email);
+    setPhoneNumber(user[0].phone_number);
+    setRole(user[0].role);
+    setUserId(user[0].id);
+  };
+
+  const handleChangeEditProfile = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "name":
+        setName(value);
+        break;
+
+      case "email":
+        setEmail(value);
+        break;
+      case "phone_number":
+        setPhoneNumber(value);
+        break;
+      case "role":
+        setRole(value);
+        break;
+    }
+  };
+
+  const submitEditProfile = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const data = new FormData();
+    data.append("name", name);
+    data.append("email", email);
+    data.append("phone_number", phoneNumber);
+    data.append("role", role);
+    data.append("user_id", userId);
+
+    try {
+      const response = await axiosInstance.post(
+        "/auth/users/profile/update_user",
+        data,
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        }
+      );
+      console.log(response.data);
+      notify(response.data.message, "success");
+      setDataSubmit(true);
+      setLoading(false);
+      document.querySelector(".modal-backdrop").style.display = "none";
+      document.querySelector(".editProfile").style.display = "none";
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  };
   const getCellClass = (value) => {
     return value === true ? "account_status_active" : "account_status_inactive";
   };
@@ -226,7 +324,7 @@ function Users() {
     setLoading(true);
     const url = `/auth/users/change_status?id=${userId}&status=${userStatus}`;
     console.log(url);
-    if (userStatus != ""){
+    if (userStatus != "") {
       try {
         const response = await axiosInstance.post(url, {
           headers: { "Content-Type": "application/json" },
@@ -239,7 +337,7 @@ function Users() {
       } catch (error) {
         console.error(error);
       }
-    }else{
+    } else {
       notify("Please select a status", "error");
     }
   };
@@ -561,14 +659,6 @@ function Users() {
                   header="Phone Number"
                 ></Column>
                 <Column field="role" sortable header="Role"></Column>
-                {/* <Column
-                  field="account_status"
-                  sortable
-                  header="Account status"
-                  body={statusBodyTemplate}
-                  style={{ textAlign: "center" }}
-                  
-                ></Column> */}
                 {columns.map((col) => (
                   <Column
                     key={col.field}
@@ -582,6 +672,11 @@ function Users() {
                   field=""
                   header="Profile"
                   body={profileBodyTemplate}
+                ></Column>
+                <Column
+                  field=""
+                  header="Action"
+                  body={editProfileBodyTemplate}
                 ></Column>
               </DataTable>
             </div>
@@ -642,7 +737,7 @@ function Users() {
                         type="submit"
                         className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
                         onClick={handleUserStatusChange}
-                        disabled={userStatus === "" && "disabled"} 
+                        disabled={userStatus === "" && "disabled"}
                       >
                         <span style={{ paddingLeft: "10px" }}>
                           {loading ? (
@@ -660,6 +755,143 @@ function Users() {
                             "Changing Status"
                           ) : (
                             "Change Status"
+                          )}
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              className="modal fade editProfile"
+              id="editProfile"
+              tabIndex="-1"
+              aria-labelledby="editProfile"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="editProfile">
+                      Update user info
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <form className="py-lg mx-auto" style={{ width: "100%" }} onSubmit={submitEditProfile}>
+                    <div className="modal-body">
+                      <div className="form-group">
+                        <label className="form-label" htmlFor="voucher_number">
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="name"
+                          value={name}
+                          onChange={handleChangeEditProfile}
+                        />
+                      </div>
+                      <div className="row pb-3">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label
+                              className="form-label"
+                              htmlFor="voucher_number"
+                            >
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              className="form-control"
+                              name="email"
+                              value={email}
+                              onChange={handleChangeEditProfile}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label
+                              className="form-label"
+                              htmlFor="voucher_number"
+                            >
+                              Phone Number
+                            </label>
+                            <input
+                              type="number"
+                              className="form-control"
+                              name="phone_number"
+                              value={phoneNumber}
+                              onChange={handleChangeEditProfile}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row pb-3">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <label
+                              className="form-label"
+                              htmlFor="voucher_number"
+                            >
+                              Role
+                            </label>
+                            <select
+                              className="form-control"
+                              value={role}
+                              onChange={handleChangeEditProfile}
+                            >
+                              <option value="admin">Admin</option>
+                              <option value="mentor">Mentor</option>
+                              <option value="mentee">Mentee</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="sc-eldPxv efrIaS justify-content-end"
+                      width="1714"
+                      style={{ padding: "15px" }}
+                    >
+                      <button
+                        data-bs-dismiss="modal"
+                        border="black"
+                        type="button"
+                        className="sc-jlZhew dSkGVF text-truncate px-3 undefined btn btn-default"
+                      >
+                        Go Back
+                      </button>
+
+                      <button
+                        style={{ backgroundColor: "black" }}
+                        color="white"
+                        type="submit"
+                        className="sc-jlZhew gedcqL text-truncate px-3 undefined btn btn-default"
+                      >
+                        <span style={{ paddingLeft: "10px" }}>
+                          {loading ? (
+                            <>
+                              <RiseLoader
+                                color={color}
+                                loading={loading}
+                                cssOverride={override}
+                                size={10}
+                                aria-label="Loading Spinner"
+                                data-testid="loader"
+                              />
+                            </>
+                          ) : loading ? (
+                            "Updating Profile"
+                          ) : (
+                            "Update Profile"
                           )}
                         </span>
                       </button>
