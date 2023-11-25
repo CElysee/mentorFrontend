@@ -240,3 +240,7 @@ textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus {
 .mentor_articles p{
   padding-bottom: 20px;
 }
+.modal-dialog-centered.modal-dialog-scrollable .modal-content {
+  max-height: none;
+  overflow: scroll;
+}

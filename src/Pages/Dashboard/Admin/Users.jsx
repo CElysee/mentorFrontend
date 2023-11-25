@@ -35,6 +35,7 @@ function Users() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
   const [userDetails, setUserDetails] = useState({
@@ -139,6 +140,9 @@ function Users() {
       case "role":
         setRole(value);
         break;
+      case "password":
+        setPassword(value);
+        break;
     }
   };
 
@@ -152,6 +156,7 @@ function Users() {
     data.append("phone_number", phoneNumber);
     data.append("role", role);
     data.append("user_id", userId);
+    data.append("password", password);
 
     try {
       const response = await axiosInstance.post(
@@ -222,7 +227,7 @@ function Users() {
         userDetails.password.trim() === "" ||
         userDetails.phone_number.trim() === "" ||
         userDetails.country_id.length > 0 ||
-        userDetails.profile_picture.length > 0
+        userDetails.profile_picture === null
     );
   }, [userDetails]);
 
@@ -784,7 +789,11 @@ function Users() {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <form className="py-lg mx-auto" style={{ width: "100%" }} onSubmit={submitEditProfile}>
+                  <form
+                    className="py-lg mx-auto"
+                    style={{ width: "100%" }}
+                    onSubmit={submitEditProfile}
+                  >
                     <div className="modal-body">
                       <div className="form-group">
                         <label className="form-label" htmlFor="voucher_number">
@@ -853,6 +862,58 @@ function Users() {
                               <option value="mentor">Mentor</option>
                               <option value="mentee">Mentee</option>
                             </select>
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <label
+                            className="form-label"
+                            htmlFor="voucher_number"
+                          >
+                            Password
+                          </label>
+                          <div className="position-relative d-flex align-items-center input-container">
+                            <input
+                              name="password"
+                              className="form-control password"
+                              placeholder="••••••••"
+                              title="••••••••"
+                              type={showpassword ? "text" : "password"}
+                              aria-required="true"
+                              value={password}
+                              onChange={handleChangeEditProfile}
+                              autoComplete=""
+                            />
+                            <div
+                              className="cursor-pointer grey-2-text"
+                              onClick={handleShowPassword}
+                            >
+                              <svg
+                                fill="none"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M15.1615 12.0531C15.1615 13.7991 13.7455 15.2141 11.9995 15.2141C10.2535 15.2141 8.8385 13.7991 8.8385 12.0531C8.8385 10.3061 10.2535 8.89105 11.9995 8.89105C13.7455 8.89105 15.1615 10.3061 15.1615 12.0531Z"
+                                  stroke="var(--black)"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                ></path>
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M11.998 19.3549C15.806 19.3549 19.289 16.6169 21.25 12.0529C19.289 7.48891 15.806 4.75092 11.998 4.75092H12.002C8.194 4.75092 4.711 7.48891 2.75 12.0529C4.711 16.6169 8.194 19.3549 12.002 19.3549H11.998Z"
+                                  stroke="var(--black)"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                ></path>
+                              </svg>
+                            </div>
                           </div>
                         </div>
                       </div>
